@@ -22,3 +22,7 @@ Sandro ist ein großer Lappen
   * Annoncen durchsuchen
   * Annoncen löschen
   * Annoncen ändern
+
+Datenbank:
+
+!(https://s12.postimg.org/y052ta5j1/Unbenannt.png)
