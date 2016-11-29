@@ -22,7 +22,3 @@ Sandro ist ein großer Lappen
   * Annoncen durchsuchen
   * Annoncen löschen
   * Annoncen ändern
-
-Datenbank:
-
-!(file:///C:/Users/heiko.goehler/Downloads/Projekt/images/ERModellKleinanzeigen.svg)
