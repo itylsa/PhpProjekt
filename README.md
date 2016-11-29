@@ -5,19 +5,19 @@ Sandro ist ein großer Lappen
 
 ## Was das Programm alles können soll
 
-* Login-Seite
+* __Login-Seite__
  * Account erstellen
  * Anmelden
  * Passwort zurücksetzen
  * Account löschen
 * Angemeldet
- * Persönliche Daten verwalten
+ * __Persönliche Daten verwalten__
   * Vor- und Nachname ändern
   * Passwort ändern
   * Email ändern
   * Straße und Hausnummer ändern
   * Wohnort ändern
- * Annoncen verwalten
+ * __Annoncen verwalten__
   * Annonce erstellen
   * Annoncen durchsuchen
   * Annoncen löschen
