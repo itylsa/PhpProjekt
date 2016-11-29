@@ -1,3 +1,3 @@
 # PhpProjekt
 
-Sandro ist ein Lappen
+Sandro ist ein großer Lappen
