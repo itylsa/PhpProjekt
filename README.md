@@ -25,4 +25,4 @@ Sandro ist ein großer Lappen
 
 Datenbank:
 
-!(https://s12.postimg.org/y052ta5j1/Unbenannt.png "Datenbank")
+![alt](https://s12.postimg.org/y052ta5j1/Unbenannt.png "Datenbank")
