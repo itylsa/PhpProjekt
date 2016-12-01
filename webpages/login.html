@@ -7,8 +7,58 @@ Best License EU
         <title>Login</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../styles/style.css">
     </head>
     <body>
-
+        <div style="width: 100%; text-align: center">
+            <div style="width: 25%; position: relative; left: 38%; text-align: center">
+                <h1>Loginseite</h1>
+                <form action="main.php" method="POST" style="margin: auto; width: 220px;">
+                    <table>
+                        <tr>
+                            <td colspan="4" style="text-align: center"><h2>Einloggen</h2></td>
+                        </tr>
+                        <tr>
+                            <td>Email:</td><td><input type="text" name="email" /><br></td>
+                        </tr>
+                        <tr>
+                            <td>Passwort:</td><td><input type="password" name="password" /><br></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" style="text-align: right"><input type="submit" value="Login" /></td>
+                        </tr>
+                    </table>
+                </form>
+                <form action="createAccount.php" method="POST" style="margin: auto; width: 410px;">
+                    <table>
+                        <tr>
+                            <td colspan="4" style="text-align: center"><h2>Anmelden</h2></td>
+                        </tr>
+                        <tr>
+                            <td>Email:</td><td colspan="3"><input type="text" name="email" size="50" /></td>
+                        </tr>
+                        <tr>
+                            <td>Kennwort:</td><td colspan="3"><input type="text" name="email" size="50" /></td>
+                        </tr>
+                        <tr>
+                            <td>Vorname:</td><td colspan="3"><input type="text" name="email" size="50" /></td>
+                        </tr>
+                        <tr>
+                            <td>Nachname:</td><td colspan="3"><input type="text" name="email" size="50" /></td>
+                        </tr>
+                        <tr>
+                            <td>Straße:</td><td><input type="text" name="email" /></td>
+                            <td>Nr:</td><td><input type="text" name="email" /></td>
+                        </tr>
+                        <tr>
+                            <td>Ort:</td><td colspan="3"><input type="text" name="email" size="50" /></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" style="text-align: right"><input type="submit" value="Erstellen" /></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
     </body>
 </html>
