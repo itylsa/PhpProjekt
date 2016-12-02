@@ -2,3 +2,27 @@
 Best License EU
 */
 
+.loginForm {
+    margin: auto;
+    width: 220px;
+}
+
+.registerForm {
+    margin: auto;
+    width: 410px;
+    visibility: hidden;
+    position: relative;
+    top: -85px
+}
+
+.loginHead {
+    width: 104px;
+    cursor: pointer;
+    float: left
+}
+
+.registerHead {
+    width: 108px;
+    cursor: pointer;
+    float: right
+}

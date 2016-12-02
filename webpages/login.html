@@ -8,18 +8,35 @@ Best License EU
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../styles/style.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script>
+            function showLogin() {
+                var login = document.getElementById('loginEmail');
+                $('#loginForm').css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1.0});
+                $('#registerForm').css({opacity: 1.0, visibility: "hidden"}).animate({opacity: 0.0});
+                login.focus();
+            }
+
+            function showRegister() {
+                var register = document.getElementById('registerEmail');
+                $('#registerForm').css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1.0});
+                $('#loginForm').css({opacity: 1.0, visibility: "hidden"}).animate({opacity: 0.0});
+                register.focus();
+            }
+        </script>
     </head>
     <body>
         <div style="width: 100%; text-align: center">
             <div style="width: 25%; position: relative; left: 38%; text-align: center">
                 <h1>Loginseite</h1>
-                <form action="main.php" method="POST" style="margin: auto; width: 220px;">
+                <div style="margin: 10px auto; width: 240px;">
+                    <h2 class="loginHead" onclick="showLogin()">Einloggen</h2>
+                    <h2 class="registerHead" onclick="showRegister()">Anmelden</h2>
+                </div>
+                <form id="loginForm" action="main.php" method="POST" class="loginForm">
                     <table>
                         <tr>
-                            <td colspan="4" style="text-align: center"><h2>Einloggen</h2></td>
-                        </tr>
-                        <tr>
-                            <td>Email:</td><td><input type="text" name="email" /><br></td>
+                            <td>Email:</td><td><input id="loginEmail" type="text" name="email" /><br></td>
                         </tr>
                         <tr>
                             <td>Passwort:</td><td><input type="password" name="password" /><br></td>
@@ -29,13 +46,10 @@ Best License EU
                         </tr>
                     </table>
                 </form>
-                <form action="createAccount.php" method="POST" style="margin: auto; width: 410px;">
+                <form id="registerForm" action="createAccount.php" method="POST" class="registerForm">
                     <table>
                         <tr>
-                            <td colspan="4" style="text-align: center"><h2>Anmelden</h2></td>
-                        </tr>
-                        <tr>
-                            <td>Email:</td><td colspan="3"><input type="text" name="email" size="50" /></td>
+                            <td>Email:</td><td colspan="3"><input id="registerEmail" type="text" name="email" size="50" /></td>
                         </tr>
                         <tr>
                             <td>Kennwort:</td><td colspan="3"><input type="text" name="email" size="50" /></td>
