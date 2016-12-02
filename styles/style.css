@@ -18,7 +18,8 @@ Best License EU
 .loginHead {
     width: 104px;
     cursor: pointer;
-    float: left
+    float: left;
+    background-color: lightgrey;
 }
 
 .registerHead {
