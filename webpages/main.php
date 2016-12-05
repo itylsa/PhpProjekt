@@ -9,6 +9,7 @@ Best License EU
     </head>
     <body>
         <?php
+        echo 'test';
         ?>
     </body>
 </html>

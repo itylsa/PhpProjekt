@@ -7,8 +7,74 @@ Best License EU
         <title>Login</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../styles/style.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script>
+            function showLogin() {
+                $('#loginForm').css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1.0});
+                $('#registerForm').css({opacity: 1.0, visibility: "hidden"}).animate({opacity: 0.0});
+                document.getElementById('loginHead').style.backgroundColor = 'lightgrey';
+                document.getElementById('registerHead').style.backgroundColor = 'white';
+                document.getElementById('loginEmail').focus();
+            }
+
+            function showRegister() {
+                $('#registerForm').css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1.0});
+                $('#loginForm').css({opacity: 1.0, visibility: "hidden"}).animate({opacity: 0.0});
+                document.getElementById('registerHead').style.backgroundColor = 'lightgrey';
+                document.getElementById('loginHead').style.backgroundColor = 'white';
+                document.getElementById('registerEmail').focus();
+            }
+        </script>
     </head>
     <body>
-
+        <div style="width: 100%; text-align: center">
+            <div style="width: 25%; position: relative; left: 38%; text-align: center">
+                <h1>Loginseite</h1>
+                <div style="margin: 10px auto; width: 240px;">
+                    <h2 id="loginHead" class="loginHead" onclick="showLogin()">Einloggen</h2>
+                    <h2 id="registerHead" class="registerHead" onclick="showRegister()">Registrieren</h2>
+                </div>
+                <form id="loginForm" action="login.php" method="POST" class="loginForm">
+                    <table>
+                        <tr>
+                            <td>Email:</td><td><input id="loginEmail" type="text" name="email" /><br></td>
+                        </tr>
+                        <tr>
+                            <td>Passwort:</td><td><input type="password" name="password" /><br></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" style="text-align: right"><input type="submit" value="Login" /></td>
+                        </tr>
+                    </table>
+                </form>
+                <form id="registerForm" action="createAccount.php" method="POST" class="registerForm">
+                    <table>
+                        <tr>
+                            <td>Email:</td><td colspan="3"><input id="registerEmail" type="text" name="email" size="50" /></td>
+                        </tr>
+                        <tr>
+                            <td>Kennwort:</td><td colspan="3"><input type="text" name="email" size="50" /></td>
+                        </tr>
+                        <tr>
+                            <td>Vorname:</td><td colspan="3"><input type="text" name="email" size="50" /></td>
+                        </tr>
+                        <tr>
+                            <td>Nachname:</td><td colspan="3"><input type="text" name="email" size="50" /></td>
+                        </tr>
+                        <tr>
+                            <td>Straße:</td><td><input type="text" name="email" /></td>
+                            <td>Nr:</td><td><input type="text" name="email" /></td>
+                        </tr>
+                        <tr>
+                            <td>Ort:</td><td colspan="3"><input type="text" name="email" size="50" /></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" style="text-align: right"><input type="submit" value="Erstellen" /></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
     </body>
 </html>
