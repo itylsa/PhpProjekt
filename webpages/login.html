@@ -11,19 +11,19 @@ Best License EU
         <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
         <script>
             function showLogin() {
-                var login = document.getElementById('loginEmail').focus();
                 $('#loginForm').css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1.0});
                 $('#registerForm').css({opacity: 1.0, visibility: "hidden"}).animate({opacity: 0.0});
                 document.getElementById('loginHead').style.backgroundColor = 'lightgrey';
                 document.getElementById('registerHead').style.backgroundColor = 'white';
+                document.getElementById('loginEmail').focus();
             }
 
             function showRegister() {
-                var register = document.getElementById('registerEmail').focus();
                 $('#registerForm').css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1.0});
                 $('#loginForm').css({opacity: 1.0, visibility: "hidden"}).animate({opacity: 0.0});
                 document.getElementById('registerHead').style.backgroundColor = 'lightgrey';
                 document.getElementById('loginHead').style.backgroundColor = 'white';
+                document.getElementById('registerEmail').focus();
             }
         </script>
     </head>
@@ -33,9 +33,9 @@ Best License EU
                 <h1>Loginseite</h1>
                 <div style="margin: 10px auto; width: 240px;">
                     <h2 id="loginHead" class="loginHead" onclick="showLogin()">Einloggen</h2>
-                    <h2 id="registerHead" class="registerHead" onclick="showRegister()">Anmelden</h2>
+                    <h2 id="registerHead" class="registerHead" onclick="showRegister()">Registrieren</h2>
                 </div>
-                <form id="loginForm" action="main.php" method="POST" class="loginForm">
+                <form id="loginForm" action="login.php" method="POST" class="loginForm">
                     <table>
                         <tr>
                             <td>Email:</td><td><input id="loginEmail" type="text" name="email" /><br></td>

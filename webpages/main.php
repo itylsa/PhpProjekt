@@ -9,9 +9,7 @@ Best License EU
     </head>
     <body>
         <?php
-//        Just for testing
-        $test = $_POST['test'];
-        echo $test;
+        echo 'test';
         ?>
     </body>
 </html>
