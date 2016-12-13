@@ -16,13 +16,13 @@ SET client_min_messages = warning;
 DROP DATABASE "phpProject";
 --
 -- TOC entry 1974 (class 1262 OID 1298952)
--- Name: phpProject; Type: DATABASE; Schema: -; Owner: postgres
+-- Name: phpProject; Type: DATABASE; Schema: -; Owner: admin
 --
 
 CREATE DATABASE "phpProject" WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'German_Germany.1252' LC_CTYPE = 'German_Germany.1252';
 
 
-ALTER DATABASE "phpProject" OWNER TO postgres;
+ALTER DATABASE "phpProject" OWNER TO admin;
 
 \connect "phpProject"
 
@@ -35,18 +35,18 @@ SET client_min_messages = warning;
 
 --
 -- TOC entry 5 (class 2615 OID 2200)
--- Name: public; Type: SCHEMA; Schema: -; Owner: postgres
+-- Name: public; Type: SCHEMA; Schema: -; Owner: admin
 --
 
 CREATE SCHEMA public;
 
 
-ALTER SCHEMA public OWNER TO postgres;
+ALTER SCHEMA public OWNER TO admin;
 
 --
 -- TOC entry 1975 (class 0 OID 0)
 -- Dependencies: 5
--- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: postgres
+-- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: admin
 --
 
 COMMENT ON SCHEMA public IS 'standard public schema';
@@ -77,7 +77,7 @@ SET default_with_oids = false;
 
 --
 -- TOC entry 172 (class 1259 OID 1298959)
--- Name: annonce; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: annonce; Type: TABLE; Schema: public; Owner: admin; Tablespace: 
 --
 
 CREATE TABLE annonce (
@@ -88,11 +88,11 @@ CREATE TABLE annonce (
 );
 
 
-ALTER TABLE public.annonce OWNER TO postgres;
+ALTER TABLE public.annonce OWNER TO admin;
 
 --
 -- TOC entry 174 (class 1259 OID 1298965)
--- Name: label; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: label; Type: TABLE; Schema: public; Owner: admin; Tablespace: 
 --
 
 CREATE TABLE label (
@@ -103,11 +103,11 @@ CREATE TABLE label (
 );
 
 
-ALTER TABLE public.label OWNER TO postgres;
+ALTER TABLE public.label OWNER TO admin;
 
 --
 -- TOC entry 171 (class 1259 OID 1298956)
--- Name: ort; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: ort; Type: TABLE; Schema: public; Owner: admin; Tablespace: 
 --
 
 CREATE TABLE ort (
@@ -117,11 +117,11 @@ CREATE TABLE ort (
 );
 
 
-ALTER TABLE public.ort OWNER TO postgres;
+ALTER TABLE public.ort OWNER TO admin;
 
 --
 -- TOC entry 173 (class 1259 OID 1298962)
--- Name: picture; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: picture; Type: TABLE; Schema: public; Owner: admin; Tablespace: 
 --
 
 CREATE TABLE picture (
@@ -132,11 +132,11 @@ CREATE TABLE picture (
 );
 
 
-ALTER TABLE public.picture OWNER TO postgres;
+ALTER TABLE public.picture OWNER TO admin;
 
 --
 -- TOC entry 170 (class 1259 OID 1298953)
--- Name: user; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: user; Type: TABLE; Schema: public; Owner: admin; Tablespace: 
 --
 
 CREATE TABLE "user" (
@@ -150,12 +150,12 @@ CREATE TABLE "user" (
 );
 
 
-ALTER TABLE public."user" OWNER TO postgres;
+ALTER TABLE public."user" OWNER TO admin;
 
 --
 -- TOC entry 1967 (class 0 OID 1298959)
 -- Dependencies: 172
--- Data for Name: annonce; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: annonce; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
 COPY annonce ("column", text, "annonceId", "fsUser") FROM stdin;
@@ -165,7 +165,7 @@ COPY annonce ("column", text, "annonceId", "fsUser") FROM stdin;
 --
 -- TOC entry 1969 (class 0 OID 1298965)
 -- Dependencies: 174
--- Data for Name: label; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: label; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
 COPY label (type, text, language, "idLabel") FROM stdin;
@@ -175,7 +175,7 @@ COPY label (type, text, language, "idLabel") FROM stdin;
 --
 -- TOC entry 1966 (class 0 OID 1298956)
 -- Dependencies: 171
--- Data for Name: ort; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: ort; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
 COPY ort ("oId", plz, "ortName") FROM stdin;
@@ -185,7 +185,7 @@ COPY ort ("oId", plz, "ortName") FROM stdin;
 --
 -- TOC entry 1968 (class 0 OID 1298962)
 -- Dependencies: 173
--- Data for Name: picture; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: picture; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
 COPY picture ("dataName", label, "idPicture", "fsAnnonce") FROM stdin;
@@ -195,7 +195,7 @@ COPY picture ("dataName", label, "idPicture", "fsAnnonce") FROM stdin;
 --
 -- TOC entry 1965 (class 0 OID 1298953)
 -- Dependencies: 170
--- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
 COPY "user" ("userId", "eMail", password, "lastName", "firstName", "streetNumber", "fsOid") FROM stdin;
@@ -204,7 +204,7 @@ COPY "user" ("userId", "eMail", password, "lastName", "firstName", "streetNumber
 
 --
 -- TOC entry 1848 (class 2606 OID 1298993)
--- Name: AnnonceId; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: AnnonceId; Type: CONSTRAINT; Schema: public; Owner: admin; Tablespace: 
 --
 
 ALTER TABLE ONLY annonce
@@ -213,7 +213,7 @@ ALTER TABLE ONLY annonce
 
 --
 -- TOC entry 1854 (class 2606 OID 1298988)
--- Name: label_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: label_pkey; Type: CONSTRAINT; Schema: public; Owner: admin; Tablespace: 
 --
 
 ALTER TABLE ONLY label
@@ -222,7 +222,7 @@ ALTER TABLE ONLY label
 
 --
 -- TOC entry 1846 (class 2606 OID 1298977)
--- Name: ort_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: ort_pkey; Type: CONSTRAINT; Schema: public; Owner: admin; Tablespace: 
 --
 
 ALTER TABLE ONLY ort
@@ -231,7 +231,7 @@ ALTER TABLE ONLY ort
 
 --
 -- TOC entry 1852 (class 2606 OID 1299004)
--- Name: picture_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: picture_pkey; Type: CONSTRAINT; Schema: public; Owner: admin; Tablespace: 
 --
 
 ALTER TABLE ONLY picture
@@ -240,7 +240,7 @@ ALTER TABLE ONLY picture
 
 --
 -- TOC entry 1844 (class 2606 OID 1298972)
--- Name: user_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: user_pkey; Type: CONSTRAINT; Schema: public; Owner: admin; Tablespace: 
 --
 
 ALTER TABLE ONLY "user"
@@ -249,7 +249,7 @@ ALTER TABLE ONLY "user"
 
 --
 -- TOC entry 1850 (class 1259 OID 1299010)
--- Name: fki_fsAnnoce; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+-- Name: fki_fsAnnoce; Type: INDEX; Schema: public; Owner: admin; Tablespace: 
 --
 
 CREATE INDEX "fki_fsAnnoce" ON picture USING btree ("fsAnnonce");
@@ -257,7 +257,7 @@ CREATE INDEX "fki_fsAnnoce" ON picture USING btree ("fsAnnonce");
 
 --
 -- TOC entry 1849 (class 1259 OID 1298999)
--- Name: fki_fsUser; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+-- Name: fki_fsUser; Type: INDEX; Schema: public; Owner: admin; Tablespace: 
 --
 
 CREATE INDEX "fki_fsUser" ON annonce USING btree ("fsUser");
@@ -265,7 +265,7 @@ CREATE INDEX "fki_fsUser" ON annonce USING btree ("fsUser");
 
 --
 -- TOC entry 1842 (class 1259 OID 1298983)
--- Name: fki_oId; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+-- Name: fki_oId; Type: INDEX; Schema: public; Owner: admin; Tablespace: 
 --
 
 CREATE INDEX "fki_oId" ON "user" USING btree ("fsOid");
@@ -273,7 +273,7 @@ CREATE INDEX "fki_oId" ON "user" USING btree ("fsOid");
 
 --
 -- TOC entry 1857 (class 2606 OID 1299005)
--- Name: fsAnnoce; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: fsAnnoce; Type: FK CONSTRAINT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY picture
@@ -282,7 +282,7 @@ ALTER TABLE ONLY picture
 
 --
 -- TOC entry 1856 (class 2606 OID 1298994)
--- Name: fsUser; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: fsUser; Type: FK CONSTRAINT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY annonce
@@ -291,7 +291,7 @@ ALTER TABLE ONLY annonce
 
 --
 -- TOC entry 1855 (class 2606 OID 1298978)
--- Name: oId; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: oId; Type: FK CONSTRAINT; Schema: public; Owner: admin
 --
 
 ALTER TABLE ONLY "user"
@@ -301,7 +301,7 @@ ALTER TABLE ONLY "user"
 --
 -- TOC entry 1976 (class 0 OID 0)
 -- Dependencies: 5
--- Name: public; Type: ACL; Schema: -; Owner: postgres
+-- Name: public; Type: ACL; Schema: -; Owner: admin
 --
 
 REVOKE ALL ON SCHEMA public FROM PUBLIC;
