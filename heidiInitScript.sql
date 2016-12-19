@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `ort` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
 
 -- Daten Export vom Benutzer nicht ausgewählt
--- Exportiere Struktur von Tabelle phpproject.pictures
+-- Exportiere Struktur von Tabelle phpproject.picture
 CREATE TABLE IF NOT EXISTS `pictures` (
   `pictureId` bigint(20) NOT NULL AUTO_INCREMENT,
   `fileName` varchar(50) COLLATE utf8_german2_ci NOT NULL DEFAULT '0',

@@ -9,14 +9,11 @@
 /**
  * Description of database
  *
- * @author heiko.goehler
+ * @author Joerg.Gulde der Spast
  */
-$config = parse_ini_file('../config.ini');
-$connection = mysqli_connect('localhost', $config['username'], $config['password'], $config['dbname']);
-
 class database {
 
-    function db_connect() {
+    private function db_connect() {
 
         static $connection;
 
@@ -33,8 +30,17 @@ class database {
         return $connection;
     }
 
-    function login($email, $pwd) {
-        return false;
+    private function db_close($connection) {
+        mysqli_close($connection);
+    }
+
+    public function login($email, $pwd) {
+        $connection = $this->db_connect();
+        $q = "SELECT password FROM user WHERE email = '" . $email . "'";
+        $data = mysqli_query($connection, $q);
+        if($pwd == $data['password']) {
+            
+        }
     }
 
 }
