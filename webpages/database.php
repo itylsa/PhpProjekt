@@ -37,10 +37,10 @@ class database {
 
     public function login($email, $pwd) {
 //        Call the connect function of this class
-        $connection = $this->db_connect();
+        $conn = $this->db_connect();
 //        Get the password from the database for given email
         $q = "SELECT password FROM user WHERE email = '" . $email . "'";
-        $data = mysqli_query($connection, $q);
+        $data = mysqli_query($conn, $q);
         $pass;
         if($data->num_rows > 0) {
             while($row = mysqli_fetch_assoc($data)) {
@@ -52,7 +52,23 @@ class database {
         } else {
             return false;
         }
-        $this->db_close($connection);
+        $this->db_close($conn);
+    }
+
+    public function createUser($email, $pwd, $fName, $lName, $ort, $strasse) {
+        $conn = $this->db_connect();
+        $q = "SELECT * FROM user WHERE email = '" . $email . "';";
+        $data = mysqli_query($conn, $q);
+        if($data->num_rows > 0) {
+            $this->db_close($conn);
+            return false;
+        } else {
+            $q = "INSERT INTO user (email, password, fistName, lastName, fsOrt, streetNr) "
+                    . "VALUES ('" . $email . "','" . $pwd . "','" . $fName . "','" . $lName . "','" . $ort . "','" . $strasse . "')";
+            mysqli_query($conn, $q);
+            $this->db_close($conn);
+            return true;
+        }
     }
 
 }
