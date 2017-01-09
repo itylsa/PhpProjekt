@@ -23,7 +23,7 @@ class database {
             $connection = mysqli_connect($config['host'], $config['username'], $config['password'], $config['dbname']);
         }
 
-        // If connection was not successful, do something !!!!ö
+        // If connection was not successful, return error
         if($connection === false) {
             return mysqli_connect_error();
         }
@@ -31,16 +31,22 @@ class database {
     }
 
     private function db_close($connection) {
+//        Close connection
         mysqli_close($connection);
     }
 
     public function login($email, $pwd) {
+//        Call the connect function of this class
         $connection = $this->db_connect();
+//        Get the password from the database for given email
         $q = "SELECT password FROM user WHERE email = '" . $email . "'";
         $data = mysqli_query($connection, $q);
         if($pwd == $data['password']) {
-            
+            return true;
+        } else {
+            return false;
         }
+        $this->db_close($connection);
     }
 
 }
