@@ -41,7 +41,13 @@ class database {
 //        Get the password from the database for given email
         $q = "SELECT password FROM user WHERE email = '" . $email . "'";
         $data = mysqli_query($connection, $q);
-        if($pwd == $data['password']) {
+        $pass;
+        if($data->num_rows > 0) {
+            while($row = mysqli_fetch_assoc($data)) {
+                $pass = $row['password'];
+            }
+        }
+        if($pwd == $pass) {
             return true;
         } else {
             return false;
