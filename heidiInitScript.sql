@@ -41,8 +41,8 @@ CREATE TABLE IF NOT EXISTS `label` (
 -- Exportiere Struktur von Tabelle phpproject.ort
 CREATE TABLE IF NOT EXISTS `ort` (
   `oId` bigint(20) NOT NULL AUTO_INCREMENT,
-  `plz` bigint(20) DEFAULT NULL,
-  `ortName` bigint(20) DEFAULT NULL,
+  `plz` varchar(20) DEFAULT NULL,
+  `ortName` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`oId`),
   UNIQUE KEY `plz` (`plz`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
@@ -66,8 +66,8 @@ CREATE TABLE IF NOT EXISTS `user` (
   `email` varchar(50) COLLATE utf8_german2_ci NOT NULL DEFAULT '0',
   `lastName` varchar(50) COLLATE utf8_german2_ci NOT NULL DEFAULT '0',
   `fistName` varchar(50) COLLATE utf8_german2_ci NOT NULL DEFAULT '0',
-  `fsOrt` bigint(20) NOT NULL DEFAULT '0',
-  `streetNr` bigint(20) NOT NULL DEFAULT '0',
+  `fsOrt` varchar(20) NOT NULL DEFAULT '0',
+  `streetNr` varchar(20) NOT NULL DEFAULT '0',
   `password` varchar(50) COLLATE utf8_german2_ci NOT NULL DEFAULT '0',
   PRIMARY KEY (`uId`),
   KEY `fsOrt` (`fsOrt`),
