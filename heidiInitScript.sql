@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` varchar(50) COLLATE utf8_german2_ci NOT NULL DEFAULT '0',
   PRIMARY KEY (`uId`),
   KEY `fsOrt` (`fsOrt`),
-  CONSTRAINT `fsOrt` FOREIGN KEY (`fsOrt`) REFERENCES `ort` (`oId`)
+  CONSTRAINT `fsOrt` FOREIGN KEY (`fsOrt`) REFERENCES `ort` (`plz`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
 
 -- Daten Export vom Benutzer nicht ausgewählt
