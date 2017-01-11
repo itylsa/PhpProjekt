@@ -66,12 +66,12 @@ CREATE TABLE IF NOT EXISTS `user` (
   `email` varchar(50) COLLATE utf8_german2_ci NOT NULL DEFAULT '0',
   `lastName` varchar(50) COLLATE utf8_german2_ci NOT NULL DEFAULT '0',
   `fistName` varchar(50) COLLATE utf8_german2_ci NOT NULL DEFAULT '0',
-  `fsOrt` varchar(20) NOT NULL DEFAULT '0',
+  `fsOrt` bigint(20) NOT NULL DEFAULT '0',
   `streetNr` varchar(20) NOT NULL DEFAULT '0',
   `password` varchar(50) COLLATE utf8_german2_ci NOT NULL DEFAULT '0',
   PRIMARY KEY (`uId`),
   KEY `fsOrt` (`fsOrt`),
-  CONSTRAINT `fsOrt` FOREIGN KEY (`fsOrt`) REFERENCES `ort` (`plz`)
+  CONSTRAINT `fsOrt` FOREIGN KEY (`fsOrt`) REFERENCES `ort` (`oId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
 
 -- Daten Export vom Benutzer nicht ausgewählt

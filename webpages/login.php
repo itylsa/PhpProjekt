@@ -18,7 +18,7 @@ and open the template in the editor.
         $valid = $db->login($email, $pwd);
 
         if($valid) {
-            header('Location: main.php');
+            header('Location: overview.html');
         } else {
             header('Location: failedLogin.php');
         }

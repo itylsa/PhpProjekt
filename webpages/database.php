@@ -9,7 +9,7 @@
 /**
  * Description of database
  *
- * @author Joerg.Gulde der Spast
+ * @author Joerg.Gulde das Genie !
  */
 class database {
 
@@ -21,6 +21,7 @@ class database {
         if(!isset($connection)) {
             $config = parse_ini_file('../config.ini'); // Load configuration
             $connection = mysqli_connect($config['host'], $config['username'], $config['password'], $config['dbname']);
+            mysqli_set_charset($connection, "UTF-8");
         }
 
         // If connection was not successful, return error

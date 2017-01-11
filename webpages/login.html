@@ -38,7 +38,7 @@ Best License EU
                 <form id="loginForm" action="login.php" method="POST" class="loginForm">
                     <table>
                         <tr>
-                            <td>Email:</td><td><input id="loginEmail" type="text" name="email" required /><br></td>
+                            <td>Email:</td><td><input id="loginEmail" type="email" name="email" required /><br></td>
                         </tr>
                         <tr>
                             <td>Passwort:</td><td><input type="password" name="password" required /><br></td>
@@ -65,10 +65,12 @@ Best License EU
                         <tr>
                             <td>Straße:</td><td><input type="text" name="strasse" required /></td>
                             <td>Nr:</td><td><input type="text" name="hausnummer" required /></td>
-                        </tr>
+                        </tr>    
                         <tr>
-                            <td>Ort:</td><td colspan="3"><input type="text" name="ort" size="50" required/></td>
-                        </tr>
+                            <td>Ort:</td><td><input type="text" name="ort"  required /></td>
+                            <td>Plz:</td><td><input type="text" name="plz"  required /></td>                           
+                        </tr>  
+                       
                         <tr>
                             <td colspan="4" style="text-align: right"><input type="submit" value="Erstellen" /></td>
                         </tr>
