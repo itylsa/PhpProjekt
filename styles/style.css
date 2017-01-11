@@ -27,3 +27,45 @@ Best License EU
     cursor: pointer;
     float: right
 }
+
+
+nav li {
+   list-style-type:none;
+   margin-bottom:1px; 
+}
+
+nav ul {
+  padding: 0px;
+}
+
+
+nav li a:link {
+   text-decoration: none;
+   font-weight: bold;
+   display: block;
+   background: #6C6;
+   width: 125px;
+   padding: 0.2em;
+}
+
+.nav {
+    background: #cccccc;
+    float: left;
+    padding: 5px 30px 650px 30px
+}
+
+.header{
+    background: #cccccc;
+    text-align: center;
+    margin: 0px;
+    height: 80px;
+    padding: 10px
+}
+
+.content{
+    position: relative;
+    background: #99ff66;
+    float: left;
+    width: auto;
+
+}
