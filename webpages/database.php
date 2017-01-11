@@ -46,6 +46,8 @@ class database {
             while($row = mysqli_fetch_assoc($data)) {
                 $pass = $row['password'];
             }
+        } else {
+            return false;
         }
         if($pwd == $pass) {
             return true;
