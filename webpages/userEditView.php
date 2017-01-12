@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
+Baguette au Crossait
 -->
 <html>
     <head>
@@ -12,6 +10,20 @@ and open the template in the editor.
          <link rel="stylesheet" href="../styles/style.css">
     </head>
     <body>
+        
+        <?php
+        $db = new database();  
+        $result= $db->loadUserById($_SESSION['uId']);
+        $result2= $db->loadOrtById($result['oId']);
+        $fistName= $result['fistName'] ;
+        $lastName= $result['lastName'] ;
+        $eMail= $result['email'] ;
+        $pw= $result['password'] ;
+        $plz= $result2['plz'] ;
+        $location= $result2['ortName'] ;
+        $street= $result['streetNr'] ;
+        
+        ?>
         <div class="header">
             <?php include 'templates/header.php'; ?>
         </div>
@@ -31,7 +43,7 @@ and open the template in the editor.
                 <tbody>
                     <tr>
                         <td>Emaul:</td>
-                        <td> <input type="email" name="email" </td>
+                        <td> <input type="email"  name="email" </td>
                     </tr>
                     <tr>
                         <td>Password:</td>

@@ -14,9 +14,8 @@ and open the template in the editor.
         require_once('database.php');
         $email = $_POST['email'];
         $pwd = $_POST['password'];
-        $db = new database();
+        $db = new database();      
         $valid = $db->login($email, $pwd);
-
         if($valid) {
             header('Location: overview.php');
         } else {
