@@ -82,5 +82,40 @@ CONTENT
     background: #99ff66;
     float: left;
     width: auto;
+    padding: 5px 10px 5px 10px;
 
+}
+
+tr:last-child td:last-child{
+    float: right;
+    
+}
+
+/*
+CRUD BUTTONS
+*/
+
+.button{
+   font-size: 15px;
+   border: 0px;
+}
+
+.save {
+     background-color: green;
+      color: white; 
+}
+
+.reset{
+   background-color: grey;
+    color: white;   
+}
+
+.abort{
+     background-color: red;
+    color: white; 
+}
+
+.delete{
+     background-color: red;
+    color: white; 
 }
