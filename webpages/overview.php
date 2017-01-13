@@ -18,7 +18,7 @@ Mit dieser Lizens wird Heiko Göhler offiziel zum Mongo erkärt.
             <?php include 'templates/navi.php'; ?>          
         </div>
         <div class="content" >
-            <h2> test </h2>
+            <h2> Sanrdo mach jetzt endlich mal was! </h2>
         </div>
     </body>
 </html>

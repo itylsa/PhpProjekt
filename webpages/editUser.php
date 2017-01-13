@@ -12,18 +12,22 @@ and open the template in the editor.
     <body>
         <?php
         require_once('database.php');
+        session_start();
+        $db = new database();
         $email = $_POST['email'];
-        $pw = $_POST['password'];
+        $pw = $_POST['pw'];
         $fistName= $_POST['fistName'];
         $lastName= $_POST['lastName'];
         $street= $_POST['street'];
         $ort= $_POST['ort'];
         $plz= $_POST['plz'];
-        $db = new database();
-        $valid = $db->editUser($email, $pw, $fistName, $lastName, $ort, $street, $plz);
+      
+        $valid = $db->editUser($email, $pw, $fistName, $lastName, $ort, $street, $plz , $_SESSION['uId']);
+        
+        echo ''+$fistName;
 
-            header('Location: userEditView.php');
-            ?>
-
+//            header('Location: userEditView.php');
+//            ?>
+        
     </body>
 </html>

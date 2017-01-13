@@ -115,9 +115,19 @@ class database {
         
     }
     
-    public function editUser($email, $pw, $fName, $lName, $ort, $street){ 
+    public function editUser($email, $pw, $fName, $lName, $ort, $street, $uId){ 
+          $conn = $this->db_connect();
+          $q = "UPDATE user SET email='$email', password='$pw', fistName='$fName', lastName='$lName', fsOrt= 1 , streetNr='$street' WHERE uId = '$uId'";
+          $data = mysqli_query($conn, $q);
+          $this->db_close($conn);
+          return true;
     }
     
+    public function editOrt(){
+        
+    }
+
+
     /**
      * 
      * @param type $fsOrt

@@ -34,7 +34,7 @@ Baguette au Crossait
             <?php include 'templates/navi.php'; ?>          
         </div>
         <div class="content" >
-            <form method="post" action="editUser.php"  >
+            <form method="POST" action="editUser.php"  >
             <h2> User bearbeiten: </h2>
              <table >
                 <thead>
@@ -46,31 +46,31 @@ Baguette au Crossait
                 <tbody>
                     <tr>
                         <td>Emaul:</td>
-                        <td> <input type="email"  name="email" value="<?php echo ($eMail);  ?>" </td>
+                        <td> <input type="email"  name="email" value="<?php echo ($eMail);  ?>" required > </td>
                     </tr>
                     <tr>
                         <td>Password:</td>
-                        <td> <input type="password" name="pw" value="<?php echo ($pw);  ?>" > </td>
+                        <td> <input type="password" name="pw" value="<?php echo ($pw);  ?>" required> </td>
                     </tr>
                     <tr>
                         <td>Vorname:</td>
-                        <td> <input type="text" name="fistName" value="<?php echo ($fistName);  ?>"> </td>
+                        <td> <input type="text" name="fistName" value="<?php echo ($fistName);  ?>" required> </td>
                     </tr>
                     <tr>
                         <td>Nachname:</td>
-                        <td> <input type="text" name="lastName" value="<?php echo ($lastName);  ?>"> </td>
+                        <td> <input type="text" name="lastName" value="<?php echo ($lastName);  ?>" required> </td>
                     </tr>
                     <tr>
                         <td>Straße:</td>
-                        <td> <input type="text" name="street" value="<?php echo ($street);  ?>"> </td>
+                        <td> <input type="text" name="street" value="<?php echo ($street);  ?>" required> </td>
                     </tr>
                     <tr>
                         <td>Ort:</td>
-                        <td> <input type="text" name="ort" value="<?php echo ($ort);  ?>"> </td>
+                        <td> <input type="text" name="ort" value="<?php echo ($ort);  ?>" required> </td>
                     </tr>
                      <tr>
                         <td>Plz:</td>
-                        <td> <input type="text" name="plz" value="<?php echo ($plz);  ?>"> </td>
+                        <td> <input type="text" name="plz" value="<?php echo ($plz);  ?>" required> </td>
                     </tr>
                      <tr>
                          <td> </td>
