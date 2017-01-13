@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
+Baguette au Crossait
 -->
 <html>
     <head>
@@ -12,6 +10,23 @@ and open the template in the editor.
          <link rel="stylesheet" href="../styles/style.css">
     </head>
     <body>
+        
+        <?php
+        require_once 'database.php';
+        session_start();
+        $db = new database();  
+        $result= $db->loadUserById($_SESSION['uId']);
+        $fsOrt = $result['fsOrt'];
+        $result2= $db->loadOrtById($fsOrt);
+        $fistName= $result['fistName'] ;
+        $lastName= $result['lastName'] ;
+        $eMail= $result['email'] ;
+        $pw= $result['password'] ;
+        $plz= $result2['plz'] ;
+        $ort= $result2['ortName'] ;
+        $street= $result['streetNr'] ;
+        
+        ?>
         <div class="header">
             <?php include 'templates/header.php'; ?>
         </div>
@@ -19,7 +34,7 @@ and open the template in the editor.
             <?php include 'templates/navi.php'; ?>          
         </div>
         <div class="content" >
-            <form>
+            <form method="post" action="editUser.php"  >
             <h2> User bearbeiten: </h2>
              <table >
                 <thead>
@@ -31,39 +46,35 @@ and open the template in the editor.
                 <tbody>
                     <tr>
                         <td>Emaul:</td>
-                        <td> <input type="email" name="email" </td>
+                        <td> <input type="email"  name="email" value="<?php echo ($eMail);  ?>" </td>
                     </tr>
                     <tr>
                         <td>Password:</td>
-                        <td> <input type="password" name="pw" > </td>
+                        <td> <input type="password" name="pw" value="<?php echo ($pw);  ?>" > </td>
                     </tr>
                     <tr>
                         <td>Vorname:</td>
-                        <td> <input type="text" name="fistName"> </td>
+                        <td> <input type="text" name="fistName" value="<?php echo ($fistName);  ?>"> </td>
                     </tr>
                     <tr>
                         <td>Nachname:</td>
-                        <td> <input type="text" name="lastName"> </td>
+                        <td> <input type="text" name="lastName" value="<?php echo ($lastName);  ?>"> </td>
                     </tr>
                     <tr>
                         <td>Straße:</td>
-                        <td> <input type="text" name="street"> </td>
-                    </tr>
-                    <tr>
-                        <td>Nummer:</td>
-                        <td> <input type="text" name="streetNr"> </td>
+                        <td> <input type="text" name="street" value="<?php echo ($street);  ?>"> </td>
                     </tr>
                     <tr>
                         <td>Ort:</td>
-                        <td> <input type="text" name="city"> </td>
+                        <td> <input type="text" name="ort" value="<?php echo ($ort);  ?>"> </td>
                     </tr>
                      <tr>
                         <td>Plz:</td>
-                        <td> <input type="text" name="plz"> </td>
+                        <td> <input type="text" name="plz" value="<?php echo ($plz);  ?>"> </td>
                     </tr>
                      <tr>
-                         <td> <input type="reset" name="reset" class="reset button">  </td>
-                         <td> <input type="submit" name="save" title="Speichern" value="Speichern" class="save button"> </td>
+                         <td> </td>
+                         <td> <input type="submit" name="save" title="Speichern" value="Speichern" class="save button" > </td>
                     </tr>
                 </tbody>
             </table>
@@ -71,3 +82,4 @@ and open the template in the editor.
         </div>
     </body>
 </html>
+
