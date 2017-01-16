@@ -5,27 +5,30 @@
     </head>
     <body>
         <?php
-        require_once('database.php');
-        $email = $_POST['email'];
-        $pwd = $_POST['password'];
-        $fName = $_POST['vorname'];
-        $lName = $_POST['nachname'];
-        $ort = $_POST['ort'];
-        $strasse = $_POST['strasse'];
-        $hausnummer = $_POST['hausnummer'];
-
-
-        if($email != "" && $pwd != "" && $fName != "" && $lName != "" && $ort != "" && $strasse != "" && $hausnummer != "") {
-            $strasse = $strasse . " " . $hausnummer;
-            $db = new database();
-            $valid = $db->createUser($email, $pwd, $fName, $lName, $ort, $strasse);
-            if($valid) {
-                echo "Benutzer wurde erfolgreich angelegt";
+        if(isset($_POST['email']) && isset($_POST['password']) && isset($_POST['vorname']) && isset($_POST['nachname']) &&
+                isset($_POST['ort']) && isset($_POST['plz']) && isset($_POST['strasse']) && isset($_POST['hausnummer'])) {
+            require_once('database.php');
+            $email = $_POST['email'];
+            $pwd = $_POST['password'];
+            $fName = $_POST['vorname'];
+            $lName = $_POST['nachname'];
+            $ort = $_POST['ort'];
+            $plz = $_POST['plz'];
+            $strasse = $_POST['strasse'];
+            $hausnummer = $_POST['hausnummer'];
+            
+            if($email != "" && $pwd != "" && $fName != "" && $lName != "" && $ort != "" && $plz != "" && $strasse != "" && $hausnummer != "") {
+                $strasse = $strasse . " " . $hausnummer;
+                $db = new database();
+                $valid = $db->createUser($email, $pwd, $fName, $lName, $plz, $strasse);
+                if($valid) {
+                    echo "Benutzer wurde erfolgreich angelegt";
+                } else {
+                    echo "Benutzer konnte nicht angelegt werden, Email bereits vorhanden";
+                }
             } else {
-                echo "Benutzer konnte nicht angelegt werden, Email bereits vorhanden";
+                echo "Bitte alle Felder ausfüllen";
             }
-        } else {
-            echo "Bitte alle Felder ausfüllen";
         }
         ?>
     </body>

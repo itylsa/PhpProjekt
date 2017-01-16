@@ -65,7 +65,7 @@ class database {
         }
         if($pwd == $pass) {
             session_start();
-            $_SESSION['uId']= $uId;
+            $_SESSION['uId'] = $uId;
             return true;
         } else {
             return false;
@@ -100,31 +100,57 @@ class database {
             return true;
         }
     }
-    
 
     public function loadUserById($userId) {
         $conn = $this->db_connect();
         $q = "SELECT * FROM user WHERE uId = '" . $uId . "';";
         $data = mysqli_query($conn, $q);
-         $this->db_close($conn);
+        $this->db_close($conn);
         return $row = mysqli_fetch_assoc($data);
-        
     }
-    
-    public function editUser($email, $pw, $fName, $lName, $ort, $street){ 
-        $data;       
-         $conn = $this->db_connect();
-         $q = "SELECT * FROM user WHERE email = '" . $uId . "';";
-         $data = mysqli_query($conn, $q);
-          $this->db_close($conn);
+
+    public function editUser($email, $pw, $fName, $lName, $ort, $street) {
+        $data;
+        $conn = $this->db_connect();
+        $q = "SELECT * FROM user WHERE email = '" . $uId . "';";
+        $data = mysqli_query($conn, $q);
+        $this->db_close($conn);
     }
-    
-    public function loadOrtById($oId){
-         $data;
-         $conn = $this->db_connect();
-         $q = "SELECT * FROM ort WHERE oId = '" . $oId . "';";
-         $data = mysqli_query($conn, $q);
-          $this->db_close($conn);
+
+    public function loadOrtById($oId) {
+        $data;
+        $conn = $this->db_connect();
+        $q = "SELECT * FROM ort WHERE oId = '" . $oId . "';";
+        $data = mysqli_query($conn, $q);
+        $this->db_close($conn);
+    }
+
+    public function newPassword($email, $password) {
+        $conn = $this->db_connect();
+        $q = "SELECT * FROM user WHERE email = '" . $email . "';";
+        $data = mysqli_query($conn, $q);
+        if($data->num_rows > 0) {
+            $q = "UPDATE user SET password = '" . $password . "' WHERE email = '" . $email . "'";
+            return mysqli_query($conn, $q);
+        } else {
+            return false;
+        }
+    }
+
+    public function getAllPlaces() {
+        $conn = $this->db_connect();
+        $q = "SELECT * FROM ort";
+        $data = mysqli_query($conn, $q);
+        $this->db_close($conn);
+        return $data;
+    }
+
+    public function getOrtWithId($id) {
+        $conn = $this->db_connect();
+        $data = mysqli_query($conn, "SELECT ortName FROM ort WHERE oId = '" . $id . "';");
+        if($data->num_rows > 0) {
+            return mysqli_fetch_assoc($data)['ortName'];
+        }
     }
 
 }
