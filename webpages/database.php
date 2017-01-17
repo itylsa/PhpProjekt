@@ -116,9 +116,11 @@ class database {
         return $row = mysqli_fetch_assoc($data);
     }
 
-    public function editUser($email, $pw, $fName, $lName, $ort, $street, $uId) {
+    public function editUser($email, $pw, $fName, $lName, $street, $ort, $plz, $uId) {
         $conn = $this->db_connect();
-        $q = "UPDATE user SET email='$email', password='$pw', fistName='$fName', lastName='$lName', fsOrt= 1 , streetNr='$street' WHERE uId = '$uId'";
+        $oid = $this->loadOrtByPlzOrt($plz, $ort);
+        $q = "UPDATE user SET email='" . $email . "', password='" . $pw . "', fistName='" . $fName . "', lastName='" . $lName . "', "
+                . "fsOrt= '" . $oid . "' , streetNr='" . $street . "' WHERE uId = '" . $uId . "'";
         $data = mysqli_query($conn, $q);
         $this->db_close($conn);
         return true;
