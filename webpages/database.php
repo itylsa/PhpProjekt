@@ -14,7 +14,7 @@
 class database {
 
     /**
-     * 
+     *
      * @staticvar type $connection
      * @return type
      */
@@ -42,7 +42,7 @@ class database {
     }
 
     /**
-     * 
+     *
      * @param type $email
      * @param type $pwd
      * @return boolean
@@ -53,30 +53,31 @@ class database {
 //        Get the password from the database for given email
         $q = "SELECT password, uId FROM user WHERE email = '" . $email . "'";
         $data = mysqli_query($conn, $q);
-        $pass;
-        $uid;
+        $pass = '';
+        $uid = '';
         if($data->num_rows > 0) {
-            while($row = mysqli_fetch_assoc($data)) {
-                $pass = $row['password'];
-                $uid = $row['uId'];
-            }
+            $row = mysqli_fetch_assoc($data);
+            $pass = $row['password'];
+            $uid = $row['uId'];
         } else {
+            $this->db_close($conn);
             return false;
         }
         if($pwd == $pass) {
             session_start();
-            $_SESSION['uId'] = $uId;
+            $_SESSION['uid'] = $uid;
+            $this->db_close($conn);
             return true;
         } else {
+            $this->db_close($conn);
             return false;
         }
-        $this->db_close($conn);
     }
 
     /**
-     * 
+     *
      * this function creates a new user in database | das auch sandro sowas versteht
-     * 
+     *
      * @param type $email
      * @param type $pwd
      * @param type $fName
@@ -144,10 +145,10 @@ class database {
         $this->db_close($conn);
         return $data;
     }
-    
+
     public function checkIfEmailExists($email) {
         $conn = $this->db_connect();
-        $q = "SELECT email FROM user WHERE email = '".$email."';";
+        $q = "SELECT email FROM user WHERE email = '" . $email . "';";
         $data = mysqli_query($conn, $q);
         if($data->num_rows > 0) {
             return true;
@@ -155,4 +156,5 @@ class database {
             return false;
         }
     }
+
 }

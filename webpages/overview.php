@@ -15,10 +15,19 @@ Mit dieser Lizens wird Heiko Göhler offiziel zum Mongo erkärt.
             <?php include 'templates/header.php'; ?>
         </div>
         <div class="nav" >
-            <?php include 'templates/navi.php'; ?>          
+            <?php include 'templates/navi.php'; ?>
         </div>
-        <div class="content" >
-            <h2> test </h2>
-        </div>
+        <?php
+        session_start();
+        if(!isset($_SESSION['uid'])) {
+            header('Location: login.php');
+        } else {
+            ?>
+            <div class="content" >
+                <h2> test </h2>
+            </div>
+            <?php
+        }
+        ?>
     </body>
 </html>
