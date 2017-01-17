@@ -16,20 +16,29 @@
             $plz = $_POST['plz'];
             $strasse = $_POST['strasse'];
             $hausnummer = $_POST['hausnummer'];
-            
+
             if($email != "" && $pwd != "" && $fName != "" && $lName != "" && $ort != "" && $plz != "" && $strasse != "" && $hausnummer != "") {
                 $strasse = $strasse . " " . $hausnummer;
                 $db = new database();
-                $valid = $db->createUser($email, $pwd, $fName, $lName, $plz, $strasse);
-                if($valid) {
-                    echo "Benutzer wurde erfolgreich angelegt";
+                $exists = $db->checkIfEmailExists($email);
+                if(!$exists) {
+                    $valid = $db->createUser($email, $pwd, $fName, $lName, $plz, $strasse);
+                    if($valid) {
+                        echo "Benutzer wurde erfolgreich angelegt";
+                    } else {
+                        echo "Benutzer konnte nicht angelegt werden";
+                    }
                 } else {
-                    echo "Benutzer konnte nicht angelegt werden, Email bereits vorhanden";
+                    echo "Email ist bereits vorhanden";
                 }
             } else {
                 echo "Bitte alle Felder ausfüllen";
             }
+        } else {
+            echo "Bitte alle Felder ausfüllen";
         }
         ?>
+        <br>
+        <input type="button" value="Zurück" onclick="window.location.href = 'login.php'" />
     </body>
 </html>

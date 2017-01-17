@@ -144,13 +144,15 @@ class database {
         $this->db_close($conn);
         return $data;
     }
-
-    public function getOrtWithId($id) {
+    
+    public function checkIfEmailExists($email) {
         $conn = $this->db_connect();
-        $data = mysqli_query($conn, "SELECT ortName FROM ort WHERE oId = '" . $id . "';");
+        $q = "SELECT email FROM user WHERE email = '".$email."';";
+        $data = mysqli_query($conn, $q);
         if($data->num_rows > 0) {
-            return mysqli_fetch_assoc($data)['ortName'];
+            return true;
+        } else {
+            return false;
         }
     }
-
 }
