@@ -41,7 +41,6 @@ Best License EU
             <?php include 'templates/navi.php'; ?>
         </div>
         <?php
-        session_start();
         if(isset($_SESSION['uid'])) {
             header('Location: overview.php');
         } else {

@@ -22,7 +22,8 @@
                 $db = new database();
                 $exists = $db->checkIfEmailExists($email);
                 if(!$exists) {
-                    $valid = $db->createUser($email, $pwd, $fName, $lName, $plz, $strasse);
+                    $oId = $db->loadOrtByPlzOrt($plz, $ort);
+                    $valid = $db->createUser($email, $pwd, $fName, $lName, $oId, $strasse);
                     if($valid) {
                         echo "Benutzer wurde erfolgreich angelegt";
                     } else {

@@ -102,9 +102,9 @@ class database {
         }
     }
 
-    public function loadUserById($userId) {
+    public function loadUserById($uid) {
         $conn = $this->db_connect();
-        $q = "SELECT * FROM user WHERE uId = '" . $uId . "';";
+        $q = "SELECT * FROM user WHERE uId = '" . $uid . "';";
         $data = mysqli_query($conn, $q);
         $this->db_close($conn);
         return $row = mysqli_fetch_assoc($data);
@@ -121,9 +121,16 @@ class database {
     public function loadOrtById($oId) {
         $data;
         $conn = $this->db_connect();
-        $q = "SELECT * FROM ort WHERE oId = '" . $oId . "';";
+        $q = "SELECT * FROM ort WHERE oId = " . $oId . ";";
         $data = mysqli_query($conn, $q);
         $this->db_close($conn);
+    }
+
+    public function loadOrtByPlzOrt($plz, $ort) {
+        $conn = $this->db_connect();
+        $q = "SELECT oId FROM ort WHERE plz = '" . $plz . "' and ortName = '" . $ort . "';";
+        $data = mysqli_query($conn, $q);
+        return mysqli_fetch_assoc($data)['oId'];
     }
 
     public function newPassword($email, $password) {

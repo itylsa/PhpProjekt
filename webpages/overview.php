@@ -18,7 +18,6 @@ Mit dieser Lizens wird Heiko Göhler offiziel zum Mongo erkärt.
             <?php include 'templates/navi.php'; ?>
         </div>
         <?php
-        session_start();
         if(!isset($_SESSION['uid'])) {
             header('Location: login.php');
         } else {

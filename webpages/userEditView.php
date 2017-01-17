@@ -10,11 +10,18 @@ Baguette au Crossait
         <link rel="stylesheet" href="../styles/style.css">
     </head>
     <body>
-
+        <div class="header">
+            <?php include 'templates/header.php'; ?>
+        </div>
+        <div class="nav" >
+            <?php include 'templates/navi.php'; ?>
+        </div>
         <?php
+        require_once 'database.php';
         $db = new database();
-        $result = $db->loadUserById($_SESSION['uId']);
-        $result2 = $db->loadOrtById($result['oId']);
+        $uid = $_SESSION['uid'];
+        $result = $db->loadUserById($uid);
+        $result2 = $db->loadOrtById($result['fsOrt']);
         $fistName = $result['fistName'];
         $lastName = $result['lastName'];
         $eMail = $result['email'];
@@ -23,12 +30,6 @@ Baguette au Crossait
         $location = $result2['ortName'];
         $street = $result['streetNr'];
         ?>
-        <div class="header">
-            <?php include 'templates/header.php'; ?>
-        </div>
-        <div class="nav" >
-            <?php include 'templates/navi.php'; ?>
-        </div>
         <div class="content" >
             <form>
                 <h2> User bearbeiten: </h2>
