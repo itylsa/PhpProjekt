@@ -15,12 +15,13 @@ class database {
 
     /**
      *
+     * 
      * @staticvar type $connection
      * @return type
      */
     private function db_connect() {
 
-        static $connection;
+        $connection;
 
         // Try and connect to the database, if a connection has not been established yet
         if(!isset($connection)) {
@@ -42,7 +43,7 @@ class database {
     }
 
     /**
-     *
+     * 
      * @param type $email
      * @param type $pwd
      * @return boolean
@@ -56,15 +57,15 @@ class database {
         $pass = '';
         $uid = '';
         if($data->num_rows > 0) {
-            $row = mysqli_fetch_assoc($data);
-            $pass = $row['password'];
-            $uid = $row['uId'];
         } else {
             $this->db_close($conn);
             return false;
         }
         if($pwd == $pass) {
             session_start();
+            $row = mysqli_fetch_assoc($data);
+            $pass = $row['password'];
+            $uid = $row['uId'];
             $_SESSION['uid'] = $uid;
             $this->db_close($conn);
             return true;
@@ -75,9 +76,9 @@ class database {
     }
 
     /**
+     * 
      *
      * this function creates a new user in database | das auch sandro sowas versteht
-     *
      * @param type $email
      * @param type $pwd
      * @param type $fName
@@ -101,29 +102,45 @@ class database {
             return true;
         }
     }
-
-    public function loadUserById($uid) {
+    
+/**
+ * 
+ * @param type $uId
+ * @return type
+ */
+    public function loadUserById($uId) {
         $conn = $this->db_connect();
-        $q = "SELECT * FROM user WHERE uId = '" . $uid . "';";
+        $q = "SELECT * FROM user WHERE uId = '" . $uId . "';";
         $data = mysqli_query($conn, $q);
         $this->db_close($conn);
         return $row = mysqli_fetch_assoc($data);
+        
+    }
+    
+    public function editUser($email, $pw, $fName, $lName, $ort, $street, $uId){ 
+          $conn = $this->db_connect();
+          $q = "UPDATE user SET email='$email', password='$pw', fistName='$fName', lastName='$lName', fsOrt= 1 , streetNr='$street' WHERE uId = '$uId'";
+          $data = mysqli_query($conn, $q);
+          $this->db_close($conn);
+          return true;
+    }
+    
+    public function editOrt(){
+        
     }
 
-    public function editUser($email, $pw, $fName, $lName, $ort, $street) {
-        $data;
-        $conn = $this->db_connect();
-        $q = "SELECT * FROM user WHERE email = '" . $uId . "';";
-        $data = mysqli_query($conn, $q);
-        $this->db_close($conn);
-    }
 
-    public function loadOrtById($oId) {
-        $data;
-        $conn = $this->db_connect();
-        $q = "SELECT * FROM ort WHERE oId = " . $oId . ";";
-        $data = mysqli_query($conn, $q);
-        $this->db_close($conn);
+    /**
+     * 
+     * @param type $fsOrt
+     * @return type
+     */
+    public function loadOrtById($fsOrt){
+         $conn = $this->db_connect();
+         $q = "SELECT plz, ortName FROM ort WHERE oId = '" . $fsOrt . "';";
+         $data= mysqli_query($conn, $q);
+         $this->db_close($conn);
+         return $row = mysqli_fetch_assoc($data);
     }
 
     public function loadOrtByPlzOrt($plz, $ort) {
