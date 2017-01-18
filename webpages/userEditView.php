@@ -31,21 +31,7 @@ Baguette au Crossait
         $ort = $result2['ortName'];
         $street = $result['streetNr'];
         ?>
-
-        <?php
-        require_once 'database.php';
-        $db = new database();
-        $uid = $_SESSION['uid'];
-        $result = $db->loadUserById($uid);
-        $result2 = $db->loadOrtById($result['fsOrt']);
-        $fistName = $result['fistName'];
-        $lastName = $result['lastName'];
-        $eMail = $result['email'];
-        $pw = $result['password'];
-        $plz = $result2['plz'];
-        $location = $result2['ortName'];
-        $street = $result['streetNr'];
-        ?>
+      
         <div class="content" >
             <form method="POST" action="editUser.php"  >
                 <h2> User bearbeiten: </h2>
