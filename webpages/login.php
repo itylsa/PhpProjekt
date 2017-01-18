@@ -34,6 +34,7 @@ Best License EU
         </script>
     </head>
     <body>
+        <?php include 'templates/movingObject.php'; ?>
         <div class="header">
             <?php include 'templates/header.php'; ?>
         </div>
