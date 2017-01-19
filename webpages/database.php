@@ -180,5 +180,11 @@ class database {
             return false;
         }
     }
-
+    
+    public function addOrt($plz, $ort) {
+        $conn = $this->db_connect();
+        $q = "INSERT INTO ort (plz, ortName) VALUES ('".$plz."', '".$ort."');";
+        mysqli_query($conn, $q);
+        $this->db_close($conn);
+    }
 }
