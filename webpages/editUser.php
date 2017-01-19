@@ -22,11 +22,11 @@ and open the template in the editor.
         $ort= $_POST['ort'];
         $plz= $_POST['plz'];
       
-        $valid = $db->editUser($email, $pw, $fistName, $lastName, $street, $ort, $plz , $_SESSION['uid']);
+        $valid = $db->editUser($email, $pw, $fistName, $lastName, $street, $ort, $plz , $_SESSION['uId']);
 
 
-//            header('Location: userEditView.php');
-//            ?>
+            header('Location: userEditView.php');
+            ?>
         
     </body>
 </html>

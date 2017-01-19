@@ -20,7 +20,7 @@ Baguette au Crossait
         <?php
         require_once 'database.php';
         $db = new database();
-        $result = $db->loadUserById($_SESSION['uid']);
+        $result = $db->loadUserById($_SESSION['uId']);
         $fsOrt = $result['fsOrt'];
         $result2 = $db->loadOrtById($fsOrt);
         $fistName = $result['fistName'];
