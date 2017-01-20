@@ -74,7 +74,7 @@ Baguette au Crossait
                        <td>Ort:</td><td><input id="ort" readonly="true" type="text" value="<?php echo ($ort); ?>" name="ort" style="background-color: lightgray; pointer-events: none" required /></td>
                                     <td>Plz:</td>
                                     <td style="float: right">
-                                        <select id="plz" onchange="selectPlz(this)" onload="selectPlz(this)" >
+                                        <select id="plz" onchange="selectPlz(this)" >
                                             <?php
                                             echo '<option value="' . $ort . '">' .  $plz . '</option>';
                                             $data = $db->getAllPlaces(); 
