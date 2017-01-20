@@ -87,14 +87,14 @@ Best License EU
                                     <td>Kennwort:</td><td colspan="3"><input type="password" name="password" size="50" required  /></td>
                                 </tr>
                                 <tr>
-                                    <td>Vorname:</td><td colspan="3"><input type="text" name="vorname" size="50" required /></td>
+                                    <td>Vorname:</td><td colspan="3"><input type="text" name="vorname" pattern="[a-zA-Z]{1,20}" title="Buchstaben, 1-20" size="50" required /></td>
                                 </tr>
                                 <tr>
-                                    <td>Nachname:</td><td colspan="3"><input type="text" name="nachname" size="50" required /></td>
+                                    <td>Nachname:</td><td colspan="3"><input type="text" name="nachname" pattern="[a-zA-Z]{1,20}" title="Buchstaben, 1-20" size="50" required /></td>
                                 </tr>
                                 <tr>
-                                    <td>Straße:</td><td><input type="text" name="strasse" required /></td>
-                                    <td>Nr:</td><td><input type="text" name="hausnummer" required /></td>
+                                    <td>Straße:</td><td><input type="text" name="strasse" pattern="[a-zA-Z]{1,40}" title="Buchstaben, 1-40" required /></td>
+                                    <td>Nr:</td><td><input type="text" name="hausnummer" pattern="[0-9]{1,4}" title="Zahlen, 1-4" required /></td>
                                 </tr>
                                 <tr>
                                     <td>Ort:</td><td><input id="ort" readonly="true" type="text" name="ort" class="deactivated" required /></td>
