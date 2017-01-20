@@ -18,8 +18,10 @@ and open the template in the editor.
         <div class="nav" >
             <?php include 'templates/navi.php'; ?>
         </div>
-        <?php
-        echo 'Login failed Mongo';
-        ?>
+        <div class="content">
+            <?php
+            echo 'Login failed Mongo';
+            ?>
+        </div>
     </body>
 </html>
