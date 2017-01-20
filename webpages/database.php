@@ -55,18 +55,18 @@ class database {
         $q = "SELECT password, uId FROM user WHERE email = '" . $email . "'";
         $data = mysqli_query($conn, $q);
         $pass = '';
-        $uid = '';
+        $uId = '';
         if($data->num_rows > 0) {
             $row = mysqli_fetch_assoc($data);
             $pass = $row['password'];
-            $uid = $row['uId'];
+            $uId = $row['uId'];
         } else {
             $this->db_close($conn);
             return false;
         }
         if($pwd == $pass) {
             session_start();
-            $_SESSION['uid'] = $uid;
+            $_SESSION['uId'] = $uId;
             $this->db_close($conn);
             return true;
         } else {

@@ -3,7 +3,7 @@
     <ul>
         <?php
         session_start();
-        if(isset($_SESSION['uid'])) {
+        if(isset($_SESSION['uId'])) {
             ?>
             <li><a href="userEditView.php">Account</a></li>
             <li><a href="createAnnonce.php">Annonce erstellen</a></li>

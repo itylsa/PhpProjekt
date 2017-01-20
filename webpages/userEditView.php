@@ -10,18 +10,25 @@ Baguette au Crossait
         <link rel="stylesheet" href="../styles/style.css">
     </head>
     <body>
+        <script>
+            function selectPlz(val) {
+                document.getElementById('ort').value = val.value;
+                var e = document.getElementById('plz');
+                document.getElementById('plzHidden').value = e.options[e.selectedIndex].text;
+            }
+        </script>
         <div class="header">
             <?php include 'templates/header.php'; ?>
         </div>
         <div class="nav" >
             <?php include 'templates/navi.php'; ?>
         </div>
-
         <?php
         if(isset($_SESSION['uid'])) {
             require_once 'database.php';
+            require_once 'database.php';
             $db = new database();
-            $result = $db->loadUserById($_SESSION['uid']);
+            $result = $db->loadUserById($_SESSION['uId']);
             $fsOrt = $result['fsOrt'];
             $result2 = $db->loadOrtById($fsOrt);
             $fistName = $result['fistName'];
@@ -65,12 +72,22 @@ Baguette au Crossait
                                 <td> <input type="text" name="street" value="<?php echo ($street); ?>" required> </td>
                             </tr>
                             <tr>
-                                <td>Ort:</td>
-                                <td> <input type="text" name="ort" value="<?php echo ($ort); ?>" required> </td>
-                            </tr>
-                            <tr>
+                                <td>Ort:</td><td><input id="ort" readonly="true" type="text" value="<?php echo ($ort); ?>" name="ort" style="background-color: lightgray; pointer-events: none" required /></td>
                                 <td>Plz:</td>
-                                <td> <input type="text" name="plz" value="<?php echo ($plz); ?>" required> </td>
+                                <td style="float: right">
+                                    <select id="plz" onchange="selectPlz(this)" >
+                                        <?php
+                                        echo '<option value="' . $ort . '">' . $plz . '</option>';
+                                        $data = $db->getAllPlaces();
+                                        while($rs = mysqli_fetch_assoc($data)) {
+                                            if($rs['plz'] != $plz) {
+                                                echo '<option value="' . $rs['ortName'] . '">' . $rs['plz'] . '</option>';
+                                            }
+                                        }
+                                        ?>
+                                    </select>
+                                    <input id="plzHidden" type="hidden" name="plz" />
+                                </td>
                             </tr>
                             <tr>
                                 <td> </td>

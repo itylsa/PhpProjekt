@@ -41,7 +41,7 @@ Best License EU
             <?php include 'templates/navi.php'; ?>
         </div>
         <?php
-        if(isset($_SESSION['uid'])) {
+        if(isset($_SESSION['uId'])) {
             header('Location: overview.php');
         } else {
             if(isset($_POST['email']) && isset($_POST['password'])) {
