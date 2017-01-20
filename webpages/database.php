@@ -52,7 +52,7 @@ class database {
 //        Call the connect function of this class
         $conn = $this->db_connect();
 //        Get the password from the database for given email
-        $q = "SELECT password, uId FROM user WHERE email = '" . $email . "'";
+        $q = "SELECT password, uId FROM user WHERE email = '" . $email . "';";
         $data = mysqli_query($conn, $q);
         $pass = '';
         $uId = '';
@@ -203,5 +203,4 @@ class database {
         return "Ort wurde erfolgreich hinzugefügt";
         $this->db_close($conn);
     }
-
 }
