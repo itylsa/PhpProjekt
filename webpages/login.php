@@ -14,7 +14,7 @@ Best License EU
                 $('#loginForm').css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1.0});
                 $('#registerForm').css({opacity: 1.0, visibility: "hidden"}).animate({opacity: 0.0});
                 document.getElementById('loginHead').style.backgroundColor = 'lightgrey';
-                document.getElementById('registerHead').style.backgroundColor = 'white';
+                document.getElementById('registerHead').style.backgroundColor = 'transparent';
                 document.getElementById('loginEmail').focus();
             }
 
@@ -22,7 +22,7 @@ Best License EU
                 $('#registerForm').css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1.0});
                 $('#loginForm').css({opacity: 1.0, visibility: "hidden"}).animate({opacity: 0.0});
                 document.getElementById('registerHead').style.backgroundColor = 'lightgrey';
-                document.getElementById('loginHead').style.backgroundColor = 'white';
+                document.getElementById('loginHead').style.backgroundColor = 'transparent';
                 document.getElementById('registerEmail').focus();
             }
 
@@ -57,14 +57,14 @@ Best License EU
                 }
             } else {
                 ?>
-                <div style="width: 100%; text-align: center">
-                    <div style="width: 410px; position: relative; text-align: center; margin: 10px auto;">
+                <div id="loginWrapper">
+                    <div id="loginInnerWrapper">
                         <h1>Loginseite</h1>
-                        <div style="margin: 10px auto; width: 240px;">
-                            <h2 id="loginHead" class="loginHead" onclick="showLogin()">Einloggen</h2>
-                            <h2 id="registerHead" class="registerHead" onclick="showRegister()">Registrieren</h2>
+                        <div id="loginHeaderWrapper">
+                            <h2 id="loginHead" onclick="showLogin()">Einloggen</h2>
+                            <h2 id="registerHead" onclick="showRegister()">Registrieren</h2>
                         </div>
-                        <form id="loginForm" action="" method="POST" class="loginForm">
+                        <form id="loginForm" action="" method="POST">
                             <table>
                                 <tr>
                                     <td>Email:</td><td><input id="loginEmail" type="email" name="email" required /><br></td>
@@ -73,13 +73,12 @@ Best License EU
                                     <td>Passwort:</td><td><input type="password" name="password" required /><br></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="1" style="text-align: right"><input type="submit" value="Login" /></td>
-                                    <td colspan="2" style="text-align: right"><input type="button" value="Passwort vergessen"
-                                                                                     onclick="window.location.href = 'forgotPassword.php'" /></td>
+                                    <td colspan="1"><input type="submit" value="Login" /></td>
+                                    <td colspan="2"><input type="button" value="Passwort vergessen" onclick="window.location.href = 'forgotPassword.php'" /></td>
                                 </tr>
                             </table>
                         </form>
-                        <form id="registerForm" action="createUser.php" method="POST" class="registerForm">
+                        <form id="registerForm" action="createUser.php" method="POST">
                             <table>
                                 <tr>
                                     <td>Email:</td><td colspan="3"><input id="registerEmail" type="email" name="email" size="50" required /></td>
@@ -98,9 +97,9 @@ Best License EU
                                     <td>Nr:</td><td><input type="text" name="hausnummer" required /></td>
                                 </tr>
                                 <tr>
-                                    <td>Ort:</td><td><input id="ort" readonly="true" type="text" name="ort" style="background-color: lightgray; pointer-events: none" required /></td>
+                                    <td>Ort:</td><td><input id="ort" readonly="true" type="text" name="ort" class="deactivated" required /></td>
                                     <td>Plz:</td>
-                                    <td style="float: right">
+                                    <td>
                                         <select id="plz" onchange="selectPlz(this)">
                                             <option value=""></option>
                                             <?php

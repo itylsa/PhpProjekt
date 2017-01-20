@@ -6,32 +6,42 @@ and open the template in the editor.
 -->
 <html>
     <head>
+        <title>Passwort vergessen</title>
         <meta charset="UTF-8">
-        <title></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../styles/style.css">
     </head>
     <body>
-        <?php
-        if(isset($_POST['email']) && isset($_POST['password'])) {
-            $email = $_POST['email'];
-            $password = $_POST['password'];
-            require_once './database.php';
-            $db = new database();
-            $success = $db->newPassword($email, $password);
-            if($success) {
-                echo "<h1 style='color: blue;'>Passwort erfolgreich geändert</h1>";
-            } else {
-                echo "<h1 style='color: red;'>Passwort konnte nicht geändert werden. Falsche Email?</h1>";
-            }
-            ?>
-            <br><input type="button" value="Zurück zum Login" onclick="window.location.href = 'login.html'" />
+        <div class="header">
+            <?php include 'templates/header.php'; ?>
+        </div>
+        <div class="nav" >
+            <?php include 'templates/navi.php'; ?>
+        </div>
+        <div class="content">
             <?php
-        } else {
-            ?>
-            <form action="forgotPassword.php" method="POST">
-                Email: <input type="email" required="true" name="email" /><br>
-                Neues Passwort: <input type="password" required="true" name="password" /><br>
-                <input type="submit" value="Neues Passwort anfordern" />
-            </form>
+            if(isset($_POST['email']) && isset($_POST['password'])) {
+                $email = $_POST['email'];
+                $password = $_POST['password'];
+                require_once './database.php';
+                $db = new database();
+                $success = $db->newPassword($email, $password);
+                if($success) {
+                    echo "<h1 style='color: blue;'>Passwort erfolgreich geändert</h1>";
+                } else {
+                    echo "<h1 style='color: red;'>Passwort konnte nicht geändert werden. Falsche Email?</h1>";
+                }
+                ?>
+                <br><input type="button" value="Zurück zum Login" onclick="window.location.href = 'login.php'" />
+                <?php
+            } else {
+                ?>
+                <form action="forgotPassword.php" method="POST">
+                    Email: <input type="email" required="true" name="email" /><br>
+                    Neues Passwort: <input type="password" required="true" name="password" /><br>
+                    <input type="submit" value="Neues Passwort anfordern" />
+                </form>
+            </div>
             <?php
         }
         ?>
