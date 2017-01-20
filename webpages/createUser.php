@@ -1,9 +1,19 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title></title>
+        <title>Login</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../styles/style.css">
     </head>
     <body>
+        <div class="header">
+            <?php include 'templates/header.php'; ?>
+        </div>
+        <div class="nav" >
+            <?php include 'templates/navi.php'; ?>
+        </div>
+        <div class="content">
+            <div style="color: black;">
         <?php
         if(isset($_POST['email']) && isset($_POST['password']) && isset($_POST['vorname']) && isset($_POST['nachname']) &&
                 isset($_POST['ort']) && isset($_POST['plz']) && isset($_POST['strasse']) && isset($_POST['hausnummer'])) {
@@ -39,7 +49,9 @@
             echo "Bitte alle Felder ausfüllen";
         }
         ?>
+            </div>
         <br>
         <input type="button" value="Zurück" onclick="window.location.href = 'login.php'" />
+        </div>
     </body>
 </html>

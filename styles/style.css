@@ -2,16 +2,49 @@
 Best License EU
 */
 
+.header{
+    background: #cccccc none repeat scroll 0 0;
+    margin: 0;
+    padding: 0.5%;
+    text-align: center;
+    min-width: 500px;
+}
+
+body{
+    background-color: #00ff00;
+    margin: 0;
+}
+
+.content{
+    min-width: 500px;
+    padding: 50px;
+    text-align: center;
+    margin: auto;
+}
+
 /*
-LOGIN 
+LOGIN/REGISTER
 */
 
-.loginForm {
+#loginHead {
+    width: 104px;
+    cursor: pointer;
+    float: left;
+    background-color: lightgrey;
+}
+
+#loginForm {
     margin: auto;
     width: 220px;
 }
 
-.registerForm {
+#registerHead {
+    width: 128px;
+    cursor: pointer;
+    float: right
+}
+
+#registerForm {
     margin: auto;
     width: 410px;
     visibility: hidden;
@@ -19,17 +52,21 @@ LOGIN
     top: -85px
 }
 
-.loginHead {
-    width: 104px;
-    cursor: pointer;
-    float: left;
-    background-color: lightgrey;
+#loginWrapper {
+    width: 100%;
+    text-align: center;
 }
 
-.registerHead {
-    width: 128px;
-    cursor: pointer;
-    float: right
+#loginInnerWrapper {
+    width: 410px;
+    position: relative;
+    text-align: center;
+    margin: 10px auto;
+}
+
+#loginHeaderWrapper {
+    margin: 10px auto;
+    width: 240px;
 }
 
 /*
@@ -37,58 +74,40 @@ NAVIGATION
 */
 
 nav li {
-   list-style-type:none;
-   margin-bottom:1px; 
+    list-style-type:none;
+    margin-bottom:1px;
 }
 
 nav ul {
-  padding: 0px;
+    padding: 0px;
 }
 
 
 nav li a:link {
-   text-decoration: none;
-   font-weight: bold;
-   display: block;
-   background: #6C6;
-   width: 125px;
-   padding: 0.2em;
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+    background: #00ff00;
+    width: 125px;
+    padding: 0.2em;
 }
 
 .nav {
     background: #cccccc;
-    float: left;
-    padding: 5px 30px 650px 30px
+    padding: 0px 50px;
+    position: fixed;
+    height: 100%;
 }
 
-/*
-HEADER 
-*/
-
-.header{
-    background: #cccccc;
-    text-align: center;
-    margin: 0px;
-    height: 80px;
-    padding: 10px
-}
-
-/*
-CONTENT 
-*/
-
-.content{
-    position: relative;
-    background: #99ff66;
-    float: left;
-    width: auto;
-    padding: 5px 20px 5px 20px;
-
-}
 
 tr:last-child td:last-child{
     float: right;
-    
+
+}
+
+.deactivated {
+    background-color: lightgray;
+    pointer-events: none;
 }
 
 /*
@@ -96,26 +115,26 @@ CRUD BUTTONS
 */
 
 .button{
-   font-size: 15px;
-   border: 0px;
+    font-size: 15px;
+    border: 0px;
 }
 
 .save {
-     background-color: green;
-      color: white; 
+    background-color: green;
+    color: white;
 }
 
 .reset{
-   background-color: grey;
+    background-color: grey;
     color: white;   
 }
 
 .abort{
-     background-color: red;
+    background-color: red;
     color: white; 
 }
 
 .delete{
-     background-color: red;
+    background-color: red;
     color: white; 
 }
