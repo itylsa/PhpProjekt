@@ -36,7 +36,7 @@ Baguette au Crossait
             <div class="content" >
                 <form method="POST" action="editUser.php"  >
                     <h2> User bearbeiten: </h2>
-                    <table >
+                    <table style="margin: auto;">
                         <thead>
                             <tr>
                                 <th></th>
