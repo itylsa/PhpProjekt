@@ -10,6 +10,13 @@ Baguette au Crossait
         <link rel="stylesheet" href="../styles/style.css">
     </head>
     <body>
+        <script>
+           function selectPlz(val) {
+                document.getElementById('ort').value = val.value;
+                var e = document.getElementById('plz');
+                document.getElementById('plzHidden').value = e.options[e.selectedIndex].text;
+            }
+            </script>
         <div class="header">
             <?php include 'templates/header.php'; ?>
         </div>
@@ -64,12 +71,22 @@ Baguette au Crossait
                             <td> <input type="text" name="street" value="<?php echo ($street); ?>" required> </td>
                         </tr>
                         <tr>
-                            <td>Ort:</td>
-                            <td> <input type="text" name="ort" value="<?php echo ($ort); ?>" required> </td>
-                        </tr>
-                        <tr>
-                            <td>Plz:</td>
-                            <td> <input type="text" name="plz" value="<?php echo ($plz); ?>" required> </td>
+                       <td>Ort:</td><td><input id="ort" readonly="true" type="text" value="<?php echo ($ort); ?>" name="ort" style="background-color: lightgray; pointer-events: none" required /></td>
+                                    <td>Plz:</td>
+                                    <td style="float: right">
+                                        <select id="plz" onchange="selectPlz(this)" onload="selectPlz(this)" >
+                                            <?php
+                                            echo '<option value="' . $ort . '">' .  $plz . '</option>';
+                                            $data = $db->getAllPlaces(); 
+                                            while($rs = mysqli_fetch_assoc($data)) {
+                                                if($rs['plz'] != $plz){
+                                                echo '<option value="' . $rs['ortName'] . '">' . $rs['plz'] . '</option>';
+                                                }
+                                            }
+                                            ?>
+                                        </select>
+                                        <input id="plzHidden" type="hidden" name="plz" />
+                                    </td>
                         </tr>
                         <tr>
                             <td> </td>
