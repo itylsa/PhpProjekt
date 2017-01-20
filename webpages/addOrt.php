@@ -19,20 +19,27 @@ and open the template in the editor.
             <?php include 'templates/navi.php'; ?>
         </div>
         <div class="content">
+            <form action="addOrt.php" method="POST">
+                Plz: <input type="text" name="plz" required="true" pattern="[0-9]{5}" title="Muss aus genau 5 Zahlen bestehen" /><br>
+                Ort: <input type="text" name="ort" required="true" pattern="[a-zA-Z]{1,30}" title="Muss aus bis zu 30 Buchstaben bestehen" /><br>
+                <input type="submit" value="Ort anlegen" />
+            </form>
             <?php
             if(isset($_POST['plz']) && isset($_POST['ort'])) {
                 $ort = $_POST['ort'];
                 $plz = $_POST['plz'];
                 require_once './database.php';
                 $db = new database();
-                echo $db->addOrt($plz, $ort);
+                require_once './messagePage.php';
+                $valid = $db->addOrt($plz, $ort);
+                $m = new messagePage();
+                if($valid) {
+                    echo $m->showInfoMessage('Ort wurde erfolgreich angelegt');
+                } else {
+                    echo $m->showErrorMessage('Ort ist schon vorhanden');
+                }
             }
             ?>
-            <form action="addOrt.php" method="POST">
-                Plz: <input type="text" name="plz" required="true" pattern="[0-9]{5}" title="Muss aus genau 5 Zahlen bestehen" /><br>
-                Ort: <input type="text" name="ort" required="true" pattern="[a-zA-Z]{1,30}" title="Muss aus bis zu 30 Buchstaben bestehen" /><br>
-                <input type="submit" value="Ort anlegen" />
-            </form>
         </div>
     </body>
 </html>

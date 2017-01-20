@@ -196,11 +196,11 @@ class database {
         $q = "SELECT * FROM ort WHERE plz = '" . $plz . "' and ortName = '" . $ort . "';";
         $data = mysqli_query($conn, $q);
         if($data->num_rows > 0) {
-            return "Ort existiert bereits";
+            return false;
         }
         $q = "INSERT INTO ort (plz, ortName) VALUES ('" . $plz . "', '" . $ort . "');";
         mysqli_query($conn, $q);
-        return "Ort wurde erfolgreich hinzugefügt";
         $this->db_close($conn);
+        return true;
     }
 }

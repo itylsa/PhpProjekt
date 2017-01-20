@@ -110,6 +110,14 @@ tr:last-child td:last-child{
     pointer-events: none;
 }
 
+.errorMessage h2 {
+    color: red;
+}
+
+.infoMessage h2 {
+    color: blue;
+}
+
 /*
 CRUD BUTTONS
 */
