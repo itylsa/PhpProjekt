@@ -24,8 +24,7 @@ Baguette au Crossait
             <?php include 'templates/navi.php'; ?>
         </div>
         <?php
-        if(isset($_SESSION['uid'])) {
-            require_once 'database.php';
+        if(isset($_SESSION['uId'])) {
             require_once 'database.php';
             $db = new database();
             $result = $db->loadUserById($_SESSION['uId']);
