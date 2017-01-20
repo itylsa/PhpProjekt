@@ -118,6 +118,10 @@ tr:last-child td:last-child{
     color: blue;
 }
 
+table{
+    margin: auto;
+}
+
 /*
 CRUD BUTTONS
 */

@@ -39,9 +39,22 @@ and open the template in the editor.
             } else {
                 ?>
                 <form action="forgotPassword.php" method="POST">
-                    Email: <input type="email" required="true" name="email" /><br>
-                    Neues Passwort: <input type="password" required="true" name="password" /><br>
-                    <input type="submit" value="Neues Passwort anfordern" />
+                    <table border="0">                          
+                            <tbody>
+                                <tr>
+                                    <td> Email:</td>
+                                    <td><input type="email" required="true" name="email" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Neues Passwort: </td>
+                                    <td><input type="password" required="true" name="password" /></td>
+                                </tr>
+                                 <tr>
+                                    <td></td>
+                                    <td>  <input type="submit" value="Neues Passwort anfordern" /></td>
+                                </tr>
+                            </tbody>
+                        </table>               
                 </form>
             </div>
             <?php
