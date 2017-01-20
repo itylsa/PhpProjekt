@@ -23,8 +23,11 @@ and open the template in the editor.
         $plz= $_POST['plz'];
       
         $valid = $db->editUser($email, $pw, $fistName, $lastName, $street, $ort, $plz , $_SESSION['uId']);
-
-
+        if($valid === TRUE){
+           $_SESSION['userEditSuccesMessage']='Speichern erfolgreich!';
+        }else{
+           $_SESSION['userEditSuccesMessage']=$valid; 
+        }
             header('Location: userEditView.php');
             ?>
         

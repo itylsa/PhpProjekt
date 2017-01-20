@@ -37,6 +37,10 @@ Baguette au Crossait
             $plz = $result2['plz'];
             $ort = $result2['ortName'];
             $street = $result['streetNr'];
+            
+            function phpAlert($msg) {
+              echo '<script type="text/javascript">alert("' . $msg . '")</script>';
+                }
             ?>
 
             <div class="content" >
@@ -85,7 +89,7 @@ Baguette au Crossait
                                         }
                                         ?>
                                     </select>
-                                    <input id="plzHidden" type="hidden" name="plz" />
+                                    <input id="plzHidden" type="hidden" name="plz" value="<?php echo ($plz); ?>" />
                                 </td>
                             </tr>
                             <tr>
@@ -95,6 +99,13 @@ Baguette au Crossait
                         </tbody>
                     </table>
                 </form>
+                <?php 
+                if(isset($_SESSION['userEditSuccesMessage'])){                   
+
+                    phpAlert($_SESSION['userEditSuccesMessage']);
+                }
+                unset($_SESSION['userEditSuccesMessage']);               
+                ?>
             </div>
             <?php
         } else {

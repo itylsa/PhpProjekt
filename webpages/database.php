@@ -119,6 +119,16 @@ class database {
     public function editUser($email, $pw, $fName, $lName, $street, $ort, $plz, $uId) {
         $conn = $this->db_connect();
         $oid = $this->loadOrtByPlzOrt($plz, $ort);
+        if(!isset($oid)){
+           $this->db_close($conn);
+           return "Fehler! Ort nicht gefunden";
+        }
+        $q = "SELECT uId FROM user WHERE email = '" . $email . "' AND uId != '" . $uId . "' ;";
+        $data = mysqli_query($conn, $q);
+        if($data->num_rows > 0) {
+            $this->db_close($conn);
+            return "Fehler! Mail schon vergeben";
+        }
         $q = "UPDATE user SET email='" . $email . "', password='" . $pw . "', fistName='" . $fName . "', lastName='" . $lName . "', "
                 . "fsOrt= '" . $oid . "' , streetNr='" . $street . "' WHERE uId = '" . $uId . "'";
         $data = mysqli_query($conn, $q);
