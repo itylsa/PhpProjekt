@@ -68,7 +68,7 @@ Baguette au Crossait
                         </tr>
                         <tr>
                             <td>Straße:</td>
-                            <td> <input type="text" name="street" value="<?php echo ($street); ?>" required> </td>
+                            <td> <input type="text" name="street" value="$plz" required> </td>
                         </tr>
                         <tr>
                        <td>Ort:</td><td><input id="ort" readonly="true" type="text" value="<?php echo ($ort); ?>" name="ort" style="background-color: lightgray; pointer-events: none" required /></td>
@@ -85,7 +85,7 @@ Baguette au Crossait
                                             }
                                             ?>
                                         </select>
-                                        <input id="plzHidden" type="hidden" name="plz" />
+                                        <input id="plzHidden" type="hidden" name="plz" value="<?php echo ($plz); ?>" />
                                     </td>
                         </tr>
                         <tr>
