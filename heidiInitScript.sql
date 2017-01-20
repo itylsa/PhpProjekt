@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `ort` (
   `plz` varchar(20) DEFAULT NULL,
   `ortName` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`oId`),
-  UNIQUE KEY `plz` (`plz`)
+  UNIQUE INDEX `plz` (`plz`, `ortName`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
 
 -- Daten Export vom Benutzer nicht ausgewählt

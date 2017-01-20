@@ -26,18 +26,16 @@ and open the template in the editor.
                 require_once './database.php';
                 $db = new database();
                 echo $db->addOrt($plz, $ort);
-                
             } else {
                 ?>
                 <form action="addOrt.php" method="POST">
-                    Plz: <input type="text" name="plz" required="true" /><br>
-                    Ort: <input type="text" name="ort" required="true" /><br>
+                    Plz: <input type="text" name="plz" required="true" pattern="[0-9]{5}" title="Muss aus genau 5 Zahlen bestehen" /><br>
+                    Ort: <input type="text" name="ort" required="true" pattern="[a-zA-Z]{1,30}" title="Muss aus bis zu 30 Buchstaben bestehen" /><br>
                     <input type="submit" value="Ort anlegen" />
                 </form>
-                <button onclick="window.location.href = 'login.php'">Zurück zum Login</button>
                 <?php
             }
             ?>
         </div>
-    </body>
+        <    /body>
 </html>
