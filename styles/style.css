@@ -110,6 +110,10 @@ tr:last-child td:last-child{
     pointer-events: none;
 }
 
+table{
+    margin: auto;
+}
+
 /*
 CRUD BUTTONS
 */
