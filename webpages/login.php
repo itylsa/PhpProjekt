@@ -8,7 +8,7 @@ Best License EU
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../styles/style.css">
-        <script src="../core.js"></script>
+        <script src="../scripts/core.js"></script>
         <script>
             function showLogin() {
                 $('#loginForm').css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1.0});
