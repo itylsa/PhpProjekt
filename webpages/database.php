@@ -65,7 +65,6 @@ class database {
             return false;
         }
         if($pwd == $pass) {
-            session_start();
             $_SESSION['uId'] = $uId;
             $this->db_close($conn);
             return true;

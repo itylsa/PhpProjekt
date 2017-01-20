@@ -118,7 +118,7 @@ Best License EU
                     $db = new database();
                     $valid = $db->login($email, $pwd);
                     if($valid) {
-                        header('Location: overview.php');
+                        echo "<script>window.location.href = 'overview.php'</script>";
                     } else {
                         echo "<div class='content'>";
                         echo $m->showErrorMessage('Account nicht vorhanden oder Passwort falsch');
