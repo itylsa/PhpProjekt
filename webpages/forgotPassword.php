@@ -26,10 +26,12 @@ and open the template in the editor.
                 require_once './database.php';
                 $db = new database();
                 $success = $db->newPassword($email, $password);
+                require_once './messagePage.php';
+                $m = new messagePage();
                 if($success) {
-                    echo "<h1 style='color: blue;'>Passwort erfolgreich geändert</h1>";
+                    echo $m->showInfoMessage('Passwort erfolgreich geändert');
                 } else {
-                    echo "<h1 style='color: red;'>Passwort konnte nicht geändert werden. Falsche Email?</h1>";
+                    echo $m->showErrorMessage('Passwort konnte nicht geändert werden. Falsche Email');
                 }
                 ?>
                 <br><input type="button" value="Zurück zum Login" onclick="window.location.href = 'login.php'" />
