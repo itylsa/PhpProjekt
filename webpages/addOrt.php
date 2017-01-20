@@ -23,22 +23,18 @@ and open the template in the editor.
             if(isset($_POST['plz']) && isset($_POST['ort'])) {
                 $ort = $_POST['ort'];
                 $plz = $_POST['plz'];
-                if($plz == '' || $ort == '') {
-                    echo "Sie müssen eine Plz und einen Ort eingeben";
-                    ?><button onclick="window.location.href = 'addOrt.php'">Zurück</button><?php
-                } else {
-                    require_once './database.php';
-                    $db = new database();
-                    $db->addOrt($plz, $ort);
-                    echo "Ort wurde erfolgreich angelegt";
-                }
+                require_once './database.php';
+                $db = new database();
+                echo $db->addOrt($plz, $ort);
+                
             } else {
                 ?>
                 <form action="addOrt.php" method="POST">
-                    Plz: <input type="text" name="plz" required="true" />
-                    Ort: <input type="text" name="ort" required="true" />
+                    Plz: <input type="text" name="plz" required="true" /><br>
+                    Ort: <input type="text" name="ort" required="true" /><br>
                     <input type="submit" value="Ort anlegen" />
                 </form>
+                <button onclick="window.location.href = 'login.php'">Zurück zum Login</button>
                 <?php
             }
             ?>
