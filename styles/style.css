@@ -14,6 +14,7 @@ body{
     background-color: #00ff00;
     margin: 0;
     overflow: hidden;
+    min-width: 250px;
 }
 
 .content{
@@ -83,7 +84,6 @@ nav ul {
     padding: 0px;
 }
 
-
 nav li a:link {
     text-decoration: none;
     font-weight: bold;
@@ -104,6 +104,7 @@ nav {
     position: fixed;
     top: 100px;
     padding: 9px;
+    z-index: 9999;
 }
 
 
@@ -191,4 +192,8 @@ CRUD BUTTONS
     box-sizing: border-box;
     overflow: auto;
     height: 100%;
+}
+
+#menuButton {
+    display: none;
 }

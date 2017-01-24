@@ -13,6 +13,7 @@ and open the template in the editor.
         <link rel="stylesheet" href="../styles/styleLess500px.css">
         <script src="../scripts/core.js"></script>
         <script>
+            var menuOpened = false;
             function showLogin() {
                 $('#loginForm').css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1.0});
                 $('#registerForm').css({opacity: 1.0, visibility: "hidden"}).animate({opacity: 0.0});
@@ -34,6 +35,16 @@ and open the template in the editor.
                 var e = document.getElementById('plz');
                 document.getElementById('plzHidden').value = e.options[e.selectedIndex].text;
             }
+
+            function menu() {
+                if(menuOpened) {
+                    document.getElementById('navList').style.display = 'none';
+                    menuOpened = false;
+                } else {
+                    document.getElementById('navList').style.display = 'block';
+                    menuOpened = true;
+                }
+            }
         </script>
     </head>
     <body>
@@ -41,7 +52,8 @@ and open the template in the editor.
             <div id="navBar">
                 <nav>
                     <h3>Navigation</h3>
-                    <ul>
+                    <button id="menuButton" onclick="menu()">Menü</button>
+                    <ul id="navList">
                         <?php
                         session_start();
                         if(isset($_SESSION['uId'])) {
@@ -68,7 +80,7 @@ and open the template in the editor.
             <div id="contentWrapper">
                 <?php
                 if(isset($_SESSION['page']) && $_SESSION['page'] != '') {
-
+                    
                 } else {
                     include 'login.php';
                 }

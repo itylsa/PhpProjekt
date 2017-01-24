@@ -9,7 +9,16 @@
     nav li {
         list-style-type:none;
         margin-bottom:1px;
-        display: inline-block;
+    }
+
+    nav ul {
+        padding: 0px;
+        display: none;
+        background-color: yellow;
+    }
+
+    nav li a:link {
+        background-color: yellow;
     }
 
     #navBar {
@@ -29,6 +38,7 @@
         text-align: center;
         box-sizing: border-box;
         z-index: 9999;
+        padding-left: 0px;
     }
 
     #contentWrapper {
@@ -40,5 +50,10 @@
         box-sizing: border-box;
         overflow: auto;
         height: 100%;
+        padding-left: 0px;
+    }
+
+    #menuButton {
+        display: block;
     }
 }
