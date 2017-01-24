@@ -1,0 +1,7 @@
+@media (min-width: 500px) {
+
+    nav ul {
+        padding: 0px;
+        display: block !important;
+    }
+}
