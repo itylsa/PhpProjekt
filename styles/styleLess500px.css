@@ -1,0 +1,44 @@
+@media (max-width: 500px) {
+
+    nav {
+        position: fixed;
+        top: 70px;
+        padding: 9px;
+    }
+
+    nav li {
+        list-style-type:none;
+        margin-bottom:1px;
+        display: inline-block;
+    }
+
+    #navBar {
+        position: absolute;
+        width: 100%;
+        height: 100px;
+        background-color: lightgrey;
+        padding-top: 80px;
+    }
+
+    #headerBar {
+        position: absolute;
+        width: 100%;
+        min-width: 250px;
+        height: 80px;
+        background-color: lightgrey;
+        text-align: center;
+        box-sizing: border-box;
+        z-index: 9999;
+    }
+
+    #contentWrapper {
+        position: absolute;
+        padding-top: 180px;
+        margin: 0;
+        width: 100%;
+        min-width: 250px;
+        box-sizing: border-box;
+        overflow: auto;
+        height: 100%;
+    }
+}

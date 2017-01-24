@@ -13,6 +13,7 @@ Best License EU
 body{
     background-color: #00ff00;
     margin: 0;
+    overflow: hidden;
 }
 
 .content{
@@ -58,7 +59,7 @@ LOGIN/REGISTER
 }
 
 #loginInnerWrapper {
-    width: 410px;
+    /*width: 410px;*/
     position: relative;
     text-align: center;
     margin: 10px auto;
@@ -70,7 +71,7 @@ LOGIN/REGISTER
 }
 
 /*
-NAVIGATION 
+NAVIGATION
 */
 
 nav li {
@@ -97,6 +98,12 @@ nav li a:link {
     padding: 0px 50px;
     position: fixed;
     height: 100%;
+}
+
+nav {
+    position: fixed;
+    top: 100px;
+    padding: 9px;
 }
 
 
@@ -138,15 +145,50 @@ CRUD BUTTONS
 
 .reset{
     background-color: grey;
-    color: white;   
+    color: white;
 }
 
 .abort{
     background-color: red;
-    color: white; 
+    color: white;
 }
 
 .delete{
     background-color: red;
-    color: white; 
+    color: white;
+}
+
+#pageWrapper {
+    width: 100%;
+}
+
+#navBar {
+    position: absolute;
+    height: 100%;
+    width: 150px;
+    background-color: lightgrey;
+}
+
+#headerBar {
+    position: absolute;
+    width: 100%;
+    min-width: 400px;
+    height: 80px;
+    background-color: lightgrey;
+    text-align: center;
+    padding-left: 150px;
+    box-sizing: border-box;
+    z-index: 9999;
+}
+
+#contentWrapper {
+    position: absolute;
+    padding-left: 150px;
+    padding-top: 80px;
+    margin: 0;
+    width: 100%;
+    min-width: 400px;
+    box-sizing: border-box;
+    overflow: auto;
+    height: 100%;
 }
