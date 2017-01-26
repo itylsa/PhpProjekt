@@ -13,6 +13,7 @@ and open the template in the editor.
         <link rel="stylesheet" href="../styles/styleLess500px.css">
         <link rel="stylesheet" href="../styles/styleMore500px.css">
         <script src="../scripts/core.js"></script>
+        <script src="../scripts/request.js"></script>
         <script>
             var menuOpened = false;
             function showLogin() {
@@ -32,8 +33,8 @@ and open the template in the editor.
             }
 
             function selectPlz(val) {
-                document.getElementById('ort').value = val.value;
-                var e = document.getElementById('plz');
+                document.getElementById('registerPlace').value = val.value;
+                var e = document.getElementById('registerPlz');
                 document.getElementById('plzHidden').value = e.options[e.selectedIndex].text;
             }
 
@@ -44,6 +45,13 @@ and open the template in the editor.
                 } else {
                     document.getElementById('navList').style.display = 'block';
                     menuOpened = true;
+                }
+            }
+
+            window.onload = function() {
+                var field = document.getElementById('registerPlz');
+                if(field != null) {
+                    getPlaces();
                 }
             }
         </script>
@@ -79,14 +87,11 @@ and open the template in the editor.
                 <h1 id="header"> ANNONCIATOR </h1>
             </div>
             <div id="contentWrapper">
-                <?php
-                if(isset($_SESSION['page']) && $_SESSION['page'] != '') {
-                    
-                } else {
-                    include 'login.php';
-                }
-                ?>
+
             </div>
+            <script>
+                document.getElementById('contentWrapper').innerHTML = getPageContent();
+            </script>
         </div>
     </body>
 </html>

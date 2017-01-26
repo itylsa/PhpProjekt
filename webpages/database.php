@@ -48,9 +48,11 @@ class database {
      * @param type $pwd
      * @return boolean
      */
-    public function login($email, $pwd) {
+    public function login($args) {
 //        Call the connect function of this class
         $conn = $this->db_connect();
+        $email = $args['email'];
+        $pwd = $args['pw'];
 //        Get the password from the database for given email
         $q = "SELECT password, uId FROM user WHERE email = '" . $email . "';";
         $data = mysqli_query($conn, $q);
@@ -86,8 +88,14 @@ class database {
      * @param type $strasse
      * @return boolean
      */
-    public function createUser($email, $pwd, $fName, $lName, $ort, $strasse) {
+    public function createUser($args) {
         $conn = $this->db_connect();
+        $email = $args['email'];
+        $pwd = $args['pwd'];
+        $fName = $args['firstName'];
+        $lName = $args['lastName'];
+        $ort = $this->loadOrtByPlzOrt($args['plz'], $args['place']);
+        $strasse = $args['street'];
         $q = "SELECT * FROM user WHERE email = '" . $email . "';";
         $data = mysqli_query($conn, $q);
         if($data->num_rows > 0) {
@@ -176,7 +184,7 @@ class database {
         $q = "SELECT * FROM ort";
         $data = mysqli_query($conn, $q);
         $this->db_close($conn);
-        return $data;
+        return mysqli_fetch_all($data, MYSQLI_ASSOC);
     }
 
     public function checkIfEmailExists($email) {
