@@ -184,7 +184,7 @@ class database {
         $q = "SELECT * FROM ort";
         $data = mysqli_query($conn, $q);
         $this->db_close($conn);
-        return mysqli_fetch_all($data, MYSQLI_ASSOC);
+        return mysqli_fetch_all($data, MYSQLI_NUM);
     }
 
     public function checkIfEmailExists($email) {

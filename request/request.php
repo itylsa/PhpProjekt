@@ -8,10 +8,13 @@ if(isset($_POST['functionname']) && isset($_POST['arguments'])) {
     switch($_POST['functionname']) {
         case 'login':
             $aResult = $db->login($_POST['arguments']);
+            break;
         case 'create':
             $aResult = $db->createUser($_POST['arguments']);
+            break;
         case 'getPlaces':
             $aResult = $db->getAllPlaces();
+            break;
     }
 }
 echo json_encode($aResult);

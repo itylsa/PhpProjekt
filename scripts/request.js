@@ -7,7 +7,7 @@ function doRequest(functionname, arguments) {
         async: false,
         data: {functionname: functionname, arguments: arguments},
 
-        success: function(obj, textstatus) {
+        success: function (obj, textstatus) {
             result = obj;
         }
     });
@@ -23,7 +23,7 @@ function login() {
         pw: pw
     };
     var result = doRequest('login', arguments);
-    if(result == true) {
+    if (result) {
         alert('Login erfolgreich');
     } else {
         alert('Login fehlgeschlagen');
@@ -53,7 +53,7 @@ function register() {
     }
 
     var result = doRequest('create', arguments);
-    if(result) {
+    if (result) {
         alert('Benutzer erfolgreich erstellt');
     } else {
         alert('Benutzer konnte nicht erstellt werden');
@@ -61,15 +61,12 @@ function register() {
 }
 
 function getPlaces() {
-    alert('doing');
     var result = doRequest('getPlaces', null);
-
-    for(var r in result) {
-        alert(result);
-        var select = document.getElementById('registerPlz');
+    var select = document.getElementById('registerPlz');
+    for (var i = 0; i < result.length; i++) {
         opt = document.createElement('option');
-        opt.value = r['ortName'];
-        opt.textContent = r['plz'];
+        opt.value = result[i][2];
+        opt.textContent = result[i][1];
         select.appendChild(opt);
     }
 }
@@ -82,7 +79,7 @@ function getPageContent() {
         dataType: 'json',
         async: false,
 
-        success: function(obj, textstatus) {
+        success: function (obj, textstatus) {
             result = obj;
         }
     });
