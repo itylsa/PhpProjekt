@@ -35,6 +35,8 @@ function validateForm(formName) {
 
         }
     }
+
+
     if(valid) {
         for(var i = 0; i < formFields.length; i++) {
             if(document.getElementById(formFields[i].id + 'Error') != null) {
@@ -155,6 +157,10 @@ function getPageContent() {
         }
     });
     document.getElementById('navBar').innerHTML = result;
+    var field = document.getElementById('registerPlz');
+    if(field != null) {
+        getPlaces();
+    }
 }
 
 function showLogin() {
