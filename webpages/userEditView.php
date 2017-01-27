@@ -43,7 +43,7 @@ Baguette au Crossait
                 }
             ?>
 
-            <div class="content" >
+            <div id="userEditViewWrapper" >
                 <form method="POST" action="editUser.php"  >
                     <h2> User bearbeiten: </h2>
                     <table style="margin: auto;">

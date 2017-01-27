@@ -67,6 +67,7 @@ class database {
             return false;
         }
         if($pwd == $pass) {
+            session_start();
             $_SESSION['uId'] = $uId;
             $this->db_close($conn);
             return true;
@@ -198,14 +199,16 @@ class database {
         }
     }
 
-    public function addOrt($plz, $ort) {
+    public function addPlace($args) {
+        $plz = $args['plz'];
+        $place = $args['place'];
         $conn = $this->db_connect();
-        $q = "SELECT * FROM ort WHERE plz = '" . $plz . "' and ortName = '" . $ort . "';";
+        $q = "SELECT * FROM ort WHERE plz = '" . $plz . "' and ortName = '" . $place . "';";
         $data = mysqli_query($conn, $q);
         if($data->num_rows > 0) {
             return false;
         }
-        $q = "INSERT INTO ort (plz, ortName) VALUES ('" . $plz . "', '" . $ort . "');";
+        $q = "INSERT INTO ort (plz, ortName) VALUES ('" . $plz . "', '" . $place . "');";
         mysqli_query($conn, $q);
         $this->db_close($conn);
         return true;

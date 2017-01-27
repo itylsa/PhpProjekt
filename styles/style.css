@@ -28,6 +28,10 @@ body{
 LOGIN/REGISTER
 */
 
+#loginHeaderWrapper {
+    height: 50px;
+}
+
 #loginHead {
     width: 104px;
     cursor: pointer;
@@ -38,25 +42,27 @@ LOGIN/REGISTER
 #loginForm {
     margin: auto;
     width: 220px;
+    display: block;
 }
 
 #registerHead {
     width: 128px;
     cursor: pointer;
-    float: right
+    float: right;
 }
 
 #registerForm {
     margin: auto;
     width: 410px;
-    visibility: hidden;
+    display: none;
     position: relative;
-    top: -85px
+    padding-bottom: 20px;
 }
 
 #loginWrapper {
     width: 100%;
     text-align: center;
+    display: block;
 }
 
 #loginInnerWrapper {
@@ -64,6 +70,7 @@ LOGIN/REGISTER
     position: relative;
     text-align: center;
     margin: 10px auto;
+    /*    height: 330px;*/
 }
 
 #loginHeaderWrapper {
@@ -196,4 +203,23 @@ CRUD BUTTONS
 
 #menuButton {
     display: none;
+}
+
+#addPlaceWrapper {
+    width: 100%;
+    text-align: center;
+    display: none;
+}
+
+.errorMessage {
+    color: red;
+    display: none;
+    text-align: right;
+}
+
+#errorBox {
+    color: red;
+    display: block;
+    text-align: center;
+    font-size: 30px;
 }

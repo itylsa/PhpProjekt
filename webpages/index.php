@@ -10,87 +10,27 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/styleLess500px.css">
-        <link rel="stylesheet" href="../styles/styleMore500px.css">
+        <link rel="stylesheet" href="../styles/styleLess600px.css">
+        <link rel="stylesheet" href="../styles/styleMore600px.css">
         <script src="../scripts/core.js"></script>
-        <script src="../scripts/request.js"></script>
-        <script>
-            var menuOpened = false;
-            function showLogin() {
-                $('#loginForm').css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1.0});
-                $('#registerForm').css({opacity: 1.0, visibility: "hidden"}).animate({opacity: 0.0});
-                document.getElementById('loginHead').style.backgroundColor = 'lightgrey';
-                document.getElementById('registerHead').style.backgroundColor = 'transparent';
-                document.getElementById('loginEmail').focus();
-            }
-
-            function showRegister() {
-                $('#registerForm').css({opacity: 0.0, visibility: "visible"}).animate({opacity: 1.0});
-                $('#loginForm').css({opacity: 1.0, visibility: "hidden"}).animate({opacity: 0.0});
-                document.getElementById('registerHead').style.backgroundColor = 'lightgrey';
-                document.getElementById('loginHead').style.backgroundColor = 'transparent';
-                document.getElementById('registerEmail').focus();
-            }
-
-            function selectPlz(val) {
-                document.getElementById('registerPlace').value = val.value;
-                var e = document.getElementById('registerPlz');
-                document.getElementById('plzHidden').value = e.options[e.selectedIndex].text;
-            }
-
-            function menu() {
-                if(menuOpened) {
-                    document.getElementById('navList').style.display = 'none';
-                    menuOpened = false;
-                } else {
-                    document.getElementById('navList').style.display = 'block';
-                    menuOpened = true;
-                }
-            }
-
-            window.onload = function() {
-                var field = document.getElementById('registerPlz');
-                if(field != null) {
-                    getPlaces();
-                }
-            }
-        </script>
+        <script src="../scripts/scripts.js"></script>
     </head>
     <body>
         <div id="pageWrapper">
             <div id="navBar">
-                <nav>
-                    <h3>Navigation</h3>
-                    <button id="menuButton" onclick="menu()">Menü</button>
-                    <ul id="navList">
-                        <?php
-                        session_start();
-                        if(isset($_SESSION['uId'])) {
-                            ?>
-                            <li><a href="userEditView.php">Account</a></li>
-                            <li><a href="createAnnonce.php">Annonce erstellen</a></li>
-                            <li><a href="overview.php">Übersicht</a></li>
-                            <li><a href="addOrt.php">Ort hinzufügen</a></li>
-                            <li><a href="logout.php">Logout</a></li>
-                            <?php
-                        } else {
-                            ?>
-                            <li><a href="login.php">Login</a></li>
-                            <li><a href="addOrt.php">Ort hinzufügen</a></li>
-                            <?php
-                        }
-                        ?>
-                    </ul>
-                </nav>
             </div>
             <div id="headerBar">
                 <h1 id="header"> ANNONCIATOR </h1>
             </div>
             <div id="contentWrapper">
-
+                <div id="content">
+                </div>
+                <div id="errorBox">
+                    asd
+                </div>
             </div>
             <script>
-                document.getElementById('contentWrapper').innerHTML = getPageContent();
+                getPageContent();
             </script>
         </div>
     </body>

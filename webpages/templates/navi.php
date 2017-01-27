@@ -1,23 +1,8 @@
-<h3>Navigation</h3>
 <nav>
-    <ul>
-        <?php
-        session_start();
-        if(isset($_SESSION['uId'])) {
-            ?>
-            <li><a href="userEditView.php">Account</a></li>
-            <li><a href="createAnnonce.php">Annonce erstellen</a></li>
-            <li><a href="overview.php">Übersicht</a></li>
-            <li><a href="addOrt.php">Ort hinzufügen</a></li>
-            <li><a href="logout.php">Logout</a></li>
-            <?php
-        } else {
-            ?>
-            <li><a href="login.php">Login</a></li>
-            <li><a href="addOrt.php">Ort hinzufügen</a></li>
-            <?php
-        }
-        ?>
+    <h3>Navigation</h3>
+    <button id="menuButton" onclick="menu()">Menü</button>
+    <ul id="navList">
+        <li><a href="#" onclick="showPage('loginWrapper')">Login</a></li>
+        <li><a href="#" onclick="showPage('addPlaceWrapper')">Ort hinzufügen</a></li>
     </ul>
 </nav>
-
