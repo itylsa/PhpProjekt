@@ -26,7 +26,6 @@ and open the template in the editor.
                 <div id="content">
                 </div>
                 <div id="errorBox">
-                    asd
                 </div>
             </div>
             <script>

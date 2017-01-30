@@ -211,6 +211,26 @@ CRUD BUTTONS
     display: none;
 }
 
+#forgotPasswordWrapper {
+    width: 100%;
+    text-align: center;
+    display: none;
+}
+
+#overviewWrapper {
+    width: 100%;
+    text-align: center;
+    display: block;
+}
+
+#userEditViewWrapper {
+    margin: auto;
+    width: 410px;
+    display: none;
+    position: relative;
+    padding-bottom: 20px;
+}
+
 .errorMessage {
     color: red;
     display: none;

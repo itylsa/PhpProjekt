@@ -18,6 +18,15 @@ if(isset($_POST['functionname']) && isset($_POST['arguments'])) {
         case 'addPlace':
             $aResult = $db->addPlace($_POST['arguments']);
             break;
+        case 'forgotPassword':
+            $aResult = $db->newPassword($_POST['arguments']);
+            break;
+        case 'loadUser':
+            $aResult = $db->loadUserById();
+            break;
+        case 'loadPlace':
+            $aResult = $db->loadOrtById($_POST['arguments']);
+            break;
     }
 }
 echo json_encode($aResult);

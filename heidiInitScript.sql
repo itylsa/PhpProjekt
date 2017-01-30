@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `email` varchar(50) COLLATE utf8_german2_ci NOT NULL DEFAULT '0',
   `lastName` varchar(50) COLLATE utf8_german2_ci NOT NULL DEFAULT '0',
   `fistName` varchar(50) COLLATE utf8_german2_ci NOT NULL DEFAULT '0',
-  `fsOrt` bigint(20) NOT NULL DEFAULT '0',
+  `fsOrt` bigint(20)NULL,
   `streetNr` varchar(20) NOT NULL DEFAULT '0',
   `password` varchar(50) COLLATE utf8_german2_ci NOT NULL DEFAULT '0',
   PRIMARY KEY (`uId`),

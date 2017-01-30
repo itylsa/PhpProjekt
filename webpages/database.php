@@ -1,21 +1,10 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of database
- *
- * @author Joerg.Gulde das Genie !
- */
 class database {
 
     /**
      *
-     * 
+     *
      * @staticvar type $connection
      * @return type
      */
@@ -43,7 +32,7 @@ class database {
     }
 
     /**
-     * 
+     *
      * @param type $email
      * @param type $pwd
      * @return boolean
@@ -78,7 +67,7 @@ class database {
     }
 
     /**
-     * 
+     *
      *
      * this function creates a new user in database | das auch sandro sowas versteht
      * @param type $email
@@ -95,7 +84,10 @@ class database {
         $pwd = $args['pwd'];
         $fName = $args['firstName'];
         $lName = $args['lastName'];
-        $ort = $this->loadOrtByPlzOrt($args['plz'], $args['place']);
+        $ort = null;
+        if($args['plz'] != null && $args['plz'] != '' && $args['place'] != null && $args['place'] != '') {
+            $ort = $this->loadOrtByPlzOrt($args['plz'], $args['place']);
+        }
         $strasse = $args['street'];
         $q = "SELECT * FROM user WHERE email = '" . $email . "';";
         $data = mysqli_query($conn, $q);
@@ -103,8 +95,13 @@ class database {
             $this->db_close($conn);
             return false;
         } else {
-            $q = "INSERT INTO user (email, password, fistName, lastName, fsOrt, streetNr) "
-                    . "VALUES ('" . $email . "','" . $pwd . "','" . $fName . "','" . $lName . "','" . $ort . "','" . $strasse . "')";
+            if($ort != null) {
+                $q = "INSERT INTO user (email, password, fistName, lastName, fsOrt, streetNr) "
+                        . "VALUES ('" . $email . "','" . $pwd . "','" . $fName . "','" . $lName . "','" . $ort . "','" . $strasse . "')";
+            } else {
+                $q = "INSERT INTO user (email, password, fistName, lastName, streetNr) "
+                        . "VALUES ('" . $email . "','" . $pwd . "','" . $fName . "','" . $lName . "','" . $strasse . "')";
+            }
             mysqli_query($conn, $q);
             $this->db_close($conn);
             return true;
@@ -112,24 +109,26 @@ class database {
     }
 
     /**
-     * 
+     *
      * @param type $uId
      * @return type
      */
-    public function loadUserById($uId) {
+    public function loadUserById() {
         $conn = $this->db_connect();
+        session_start();
+        $uId = $_SESSION['uId'];
         $q = "SELECT * FROM user WHERE uId = '" . $uId . "';";
         $data = mysqli_query($conn, $q);
         $this->db_close($conn);
-        return $row = mysqli_fetch_assoc($data);
+        return mysqli_fetch_array($data, MYSQLI_NUM);
     }
 
     public function editUser($email, $pw, $fName, $lName, $street, $ort, $plz, $uId) {
         $conn = $this->db_connect();
         $oid = $this->loadOrtByPlzOrt($plz, $ort);
-        if(!isset($oid)){
-           $this->db_close($conn);
-           return "Fehler! Ort nicht gefunden";
+        if(!isset($oid)) {
+            $this->db_close($conn);
+            return "Fehler! Ort nicht gefunden";
         }
         $q = "SELECT uId FROM user WHERE email = '" . $email . "' AND uId != '" . $uId . "' ;";
         $data = mysqli_query($conn, $q);
@@ -145,20 +144,21 @@ class database {
     }
 
     public function editOrt() {
-        
+
     }
 
     /**
-     * 
+     *
      * @param type $fsOrt
      * @return type
      */
-    public function loadOrtById($fsOrt) {
+    public function loadOrtById($args) {
+        $fsOrt = $args['placeId'];
         $conn = $this->db_connect();
         $q = "SELECT plz, ortName FROM ort WHERE oId = '" . $fsOrt . "';";
         $data = mysqli_query($conn, $q);
         $this->db_close($conn);
-        return $row = mysqli_fetch_assoc($data);
+        return mysqli_fetch_array($data, MYSQLI_NUM);
     }
 
     public function loadOrtByPlzOrt($plz, $ort) {
@@ -168,13 +168,16 @@ class database {
         return mysqli_fetch_assoc($data)['oId'];
     }
 
-    public function newPassword($email, $password) {
+    public function newPassword($args) {
         $conn = $this->db_connect();
+        $email = $args['email'];
+        $password = $args['pwd'];
         $q = "SELECT * FROM user WHERE email = '" . $email . "';";
         $data = mysqli_query($conn, $q);
         if($data->num_rows > 0) {
             $q = "UPDATE user SET password = '" . $password . "' WHERE email = '" . $email . "'";
-            return mysqli_query($conn, $q);
+            mysqli_query($conn, $q);
+            return true;
         } else {
             return false;
         }
@@ -213,4 +216,5 @@ class database {
         $this->db_close($conn);
         return true;
     }
+
 }
