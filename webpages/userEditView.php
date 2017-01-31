@@ -1,4 +1,5 @@
 <div id="userEditViewWrapper" >
+    <h1>Benutzer bearbeiten</h1>
     <form id="userEditViewForm" method="POST">
         <table>
             <tr>
@@ -38,6 +39,7 @@
                 </td>
             </tr>
         </table>
-        <input style="float: right;" type="button" onclick="editUser('userEditViewForm')" value="Erstellen" />
+        <input type="button" onclick="" value="Account löschen" />
+        <input style="float: right;" type="button" onclick="editUser('userEditViewForm')" value="Speichern" />
     </form>
 </div>

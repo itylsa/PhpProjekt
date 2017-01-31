@@ -5,6 +5,6 @@
         <li><a href="#" onclick="showPage('userEditViewWrapper')">Account</a></li>
         <li><a href="#" onclick="showPage('overviewWrapper')">Übersicht</a></li>
         <li><a href="#" onclick="showPage('addPlaceWrapper')">Ort hinzufügen</a></li>
-        <li><a href="logout.php">Logout</a></li>
+        <li><a href="#" onclick="logout()">Logout</a></li>
     </ul>
 </nav>

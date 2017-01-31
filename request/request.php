@@ -9,6 +9,9 @@ if(isset($_POST['functionname']) && isset($_POST['arguments'])) {
         case 'login':
             $aResult = $db->login($_POST['arguments']);
             break;
+        case 'logout':
+            $aResult = $db->logout();
+            break;
         case 'create':
             $aResult = $db->createUser($_POST['arguments']);
             break;
@@ -26,6 +29,9 @@ if(isset($_POST['functionname']) && isset($_POST['arguments'])) {
             break;
         case 'loadPlace':
             $aResult = $db->loadOrtById($_POST['arguments']);
+            break;
+        case 'edit':
+            $aResult = $db->editUser($_POST['arguments']);
             break;
     }
 }

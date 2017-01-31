@@ -150,6 +150,11 @@ function login(formName) {
     }
 }
 
+function logout() {
+    doRequest('logout', null);
+    getPageContent();
+}
+
 function register(formName) {
     var valid = validateForm(formName);
     if(valid) {
@@ -175,7 +180,6 @@ function register(formName) {
         }
 
         var result = doRequest('create', arguments);
-        alert(result);
         if(result) {
             alert('Benutzer erfolgreich erstellt');
         } else {
@@ -229,17 +233,32 @@ function forgotPassword(formName) {
 function editUser(formName) {
     var valid = validateForm(formName);
     if(valid) {
-        var email = document.getElementById('forgotPasswordEmail').value;
-        var pwd = document.getElementById('forgotPasswordPwd').value;
+        var email = document.getElementById('editEmail').value;
+        var pwd = document.getElementById('editPassword').value;
+        var firstName = document.getElementById('editFirstName').value;
+        var lastName = document.getElementById('editLastName').value;
+        var street = document.getElementById('editStreet').value;
+        var nr = document.getElementById('editNr').value;
+        var place = document.getElementById('editPlace').value;
+        e = document.getElementById('editPlz');
+        var plz = e.options[e.selectedIndex].text;
+
+        street = street + ' ' + nr;
         arguments = {
             email: email,
-            pwd: pwd
+            pwd: pwd,
+            firstName: firstName,
+            lastName: lastName,
+            street: street,
+            place: place,
+            plz: plz
         }
-        var result = doRequest('forgotPassword', arguments);
+
+        var result = doRequest('edit', arguments);
         if(result) {
-            alert('Passwort geändert');
+            alert('Benutzerdaten erfolgreich gespeichert');
         } else {
-            alert('Passwort nicht geändert');
+            alert('Benutzerdaten konnten nicht gespeichert werden');
         }
     } else {
         return false;
@@ -322,16 +341,16 @@ function getPageContent() {
 }
 
 function showLogin() {
-    $('#registerForm').fadeOut(500);
-    $('#loginForm').delay(500).fadeIn(500);
+    $('#registerForm').fadeOut(200);
+    $('#loginForm').delay(200).fadeIn(200);
     document.getElementById('loginHead').style.backgroundColor = 'lightgrey';
     document.getElementById('registerHead').style.backgroundColor = 'transparent';
     document.getElementById('loginEmail').focus();
 }
 
 function showRegister() {
-    $('#loginForm').fadeOut(500);
-    $('#registerForm').delay(500).fadeIn(500);
+    $('#loginForm').fadeOut(200);
+    $('#registerForm').delay(200).fadeIn(200);
     document.getElementById('registerHead').style.backgroundColor = 'lightgrey';
     document.getElementById('loginHead').style.backgroundColor = 'transparent';
     document.getElementById('registerEmail').focus();
@@ -373,30 +392,30 @@ function showPage(page) {
     if(loginPage != null) {
         for(var i = 0; i < notLogged.length; i++) {
             if(notLogged[i].style.display == 'block') {
-                $('#' + notLogged[i].id).slideToggle(500);
+                $('#' + notLogged[i].id).slideToggle(200);
             }
         }
     } else {
         for(var i = 0; i < logged.length; i++) {
             if(logged[i].style.display == 'block') {
-                $('#' + logged[i].id).slideToggle(500);
+                $('#' + logged[i].id).slideToggle(200);
             }
         }
     }
     if(page == 'userEditViewWrapper') {
         getUserData();
     }
-    $('#' + page).delay(500).slideToggle(500);
+    $('#' + page).delay(200).slideToggle(200);
 }
 
 function showErrorBox(message) {
     document.getElementById('errorBox').innerHTML = message;
-    $('#errorBoxWrapper').fadeIn(1000);
+    $('#errorBoxWrapper').fadeIn(500);
 }
 
 function closeErrorBox() {
-    $('#errorBoxWrapper').fadeOut(1000);
-    $('#errorBox').delay(1000, "clear").queue("clear", function(next) {
+    $('#errorBoxWrapper').fadeOut(500);
+    $('#errorBox').delay(500, "clear").queue("clear", function(next) {
         $(this).html('');
         next();
     });

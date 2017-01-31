@@ -123,28 +123,40 @@ class database {
         return mysqli_fetch_array($data, MYSQLI_NUM);
     }
 
-    public function editUser($email, $pw, $fName, $lName, $street, $ort, $plz, $uId) {
+    public function editUser($args) {
         $conn = $this->db_connect();
-        $oid = $this->loadOrtByPlzOrt($plz, $ort);
-        if(!isset($oid)) {
-            $this->db_close($conn);
-            return "Fehler! Ort nicht gefunden";
+        $email = $args['email'];
+        $pwd = $args['pwd'];
+        $fName = $args['firstName'];
+        $lName = $args['lastName'];
+        $ort = null;
+        if($args['plz'] != null && $args['plz'] != '' && $args['place'] != null && $args['place'] != '') {
+            $ort = $this->loadOrtByPlzOrt($args['plz'], $args['place']);
         }
+        $street = $args['street'];
+        $q = null;
+        session_start();
+        $uId = $_SESSION['uId'];
         $q = "SELECT uId FROM user WHERE email = '" . $email . "' AND uId != '" . $uId . "' ;";
         $data = mysqli_query($conn, $q);
         if($data->num_rows > 0) {
             $this->db_close($conn);
             return "Fehler! Mail schon vergeben";
         }
-        $q = "UPDATE user SET email='" . $email . "', password='" . $pw . "', fistName='" . $fName . "', lastName='" . $lName . "', "
-                . "fsOrt= '" . $oid . "' , streetNr='" . $street . "' WHERE uId = '" . $uId . "'";
+        if($ort != null) {
+            $q = "UPDATE user SET email='" . $email . "', password='" . $pwd . "', fistName='" . $fName . "', lastName='" . $lName . "', "
+                    . "fsOrt= '" . $ort . "' , streetNr='" . $street . "' WHERE uId = '" . $uId . "'";
+        } else {
+            $q = "UPDATE user SET email='" . $email . "', password='" . $pwd . "', fistName='" . $fName . "', lastName='" . $lName . "', "
+                    . "streetNr='" . $street . "' WHERE uId = '" . $uId . "'";
+        }
         $data = mysqli_query($conn, $q);
         $this->db_close($conn);
         return true;
     }
 
     public function editOrt() {
-
+        
     }
 
     /**
@@ -215,6 +227,12 @@ class database {
         mysqli_query($conn, $q);
         $this->db_close($conn);
         return true;
+    }
+    
+    public function logout() {
+        session_start();
+        session_unset();
+        session_destroy();
     }
 
 }
