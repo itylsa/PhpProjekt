@@ -26,7 +26,7 @@ and open the template in the editor.
                 <div id="content">
                 </div>
                 <div id="errorBoxWrapper">
-                    <input id="errorBoxCloser" type="image" src="../pictures/disc_kpackage_cd_package_cd_disk_packaging.png" value=""/> 
+                    <input id="errorBoxCloser" type="image" onclick="closeErrorBox()" src="../pictures/disc_kpackage_cd_package_cd_disk_packaging.png" value=""/>
                     <div id="errorBox">
                     </div>
                 </div>

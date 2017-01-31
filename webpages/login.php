@@ -1,4 +1,4 @@
-<div id="loginWrapper">
+<div id="loginWrapper" style="display: block;">
     <div id="loginInnerWrapper">
         <h1>Loginseite</h1>
         <div id="loginHeaderWrapper">

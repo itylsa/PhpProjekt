@@ -248,6 +248,7 @@ CRUD BUTTONS
 #errorBoxWrapper {
     width: 400px;
     margin: auto;
+    display: none;
 }
 
 #errorBoxCloser {

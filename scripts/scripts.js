@@ -141,12 +141,9 @@ function login(formName) {
         };
         var result = doRequest('login', arguments);
         if(result) {
-            document.getElementById('errorBox').value = '';
-            document.getElementById('errorBox').style.display = 'none';
             getPageContent();
         } else {
-            document.getElementById('errorBox').innerHTML = 'Email und/oder Passwort falsch';
-            document.getElementById('errorBox').style.display = 'block';
+            showErrorBox('Email oder Passwort falsch')
         }
     } else {
         return false;
@@ -325,16 +322,16 @@ function getPageContent() {
 }
 
 function showLogin() {
-    $('#loginForm').css({opacity: 0.0, display: "block"}).animate({opacity: 1.0});
-    $('#registerForm').css({opacity: 1.0, display: "none"}).animate({opacity: 0.0});
+    $('#registerForm').fadeOut(500);
+    $('#loginForm').delay(500).fadeIn(500);
     document.getElementById('loginHead').style.backgroundColor = 'lightgrey';
     document.getElementById('registerHead').style.backgroundColor = 'transparent';
     document.getElementById('loginEmail').focus();
 }
 
 function showRegister() {
-    $('#registerForm').css({opacity: 0.0, display: "block"}).animate({opacity: 1.0});
-    $('#loginForm').css({opacity: 1.0, display: "none"}).animate({opacity: 0.0});
+    $('#loginForm').fadeOut(500);
+    $('#registerForm').delay(500).fadeIn(500);
     document.getElementById('registerHead').style.backgroundColor = 'lightgrey';
     document.getElementById('loginHead').style.backgroundColor = 'transparent';
     document.getElementById('registerEmail').focus();
@@ -363,17 +360,44 @@ function showPage(page) {
     var addPlacePage = document.getElementById('addPlaceWrapper');
     var forgotPasswordPage = document.getElementById('forgotPasswordWrapper');
     var userEditViewPage = document.getElementById('userEditViewWrapper');
+    var notLogged = [
+        loginPage,
+        addPlacePage,
+        forgotPasswordPage
+    ]
+    var logged = [
+        addPlacePage,
+        userEditViewPage,
+        overviewPage
+    ]
     if(loginPage != null) {
-        loginPage.style.display = 'none';
-        addPlacePage.style.display = 'none';
-        forgotPasswordPage.style.display = 'none';
+        for(var i = 0; i < notLogged.length; i++) {
+            if(notLogged[i].style.display == 'block') {
+                $('#' + notLogged[i].id).slideToggle(500);
+            }
+        }
     } else {
-        overviewPage.style.display = 'none';
-        addPlacePage.style.display = 'none';
-        userEditViewPage.style.display = 'none';
+        for(var i = 0; i < logged.length; i++) {
+            if(logged[i].style.display == 'block') {
+                $('#' + logged[i].id).slideToggle(500);
+            }
+        }
     }
     if(page == 'userEditViewWrapper') {
         getUserData();
     }
-    document.getElementById(page).style.display = 'block';
+    $('#' + page).delay(500).slideToggle(500);
+}
+
+function showErrorBox(message) {
+    document.getElementById('errorBox').innerHTML = message;
+    $('#errorBoxWrapper').fadeIn(1000);
+}
+
+function closeErrorBox() {
+    $('#errorBoxWrapper').fadeOut(1000);
+    $('#errorBox').delay(1000, "clear").queue("clear", function(next) {
+        $(this).html('');
+        next();
+    });
 }
