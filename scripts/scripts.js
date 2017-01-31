@@ -140,7 +140,14 @@ function login(formName) {
             pw: pw
         };
         var result = doRequest('login', arguments);
-        getPageContent();
+        if(result) {
+            document.getElementById('errorBox').value = '';
+            document.getElementById('errorBox').style.display = 'none';
+            getPageContent();
+        } else {
+            document.getElementById('errorBox').innerHTML = 'Email und/oder Passwort falsch';
+            document.getElementById('errorBox').style.display = 'block';
+        }
     } else {
         return false;
     }

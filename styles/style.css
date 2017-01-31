@@ -242,4 +242,15 @@ CRUD BUTTONS
     display: block;
     text-align: center;
     font-size: 30px;
+    padding-top: 40px;
+}
+
+#errorBoxWrapper {
+    width: 400px;
+    margin: auto;
+}
+
+#errorBoxCloser {
+    width: 40px;
+    float: right;
 }

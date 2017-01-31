@@ -25,7 +25,10 @@ and open the template in the editor.
             <div id="contentWrapper">
                 <div id="content">
                 </div>
-                <div id="errorBox">
+                <div id="errorBoxWrapper">
+                    <input id="errorBoxCloser" type="image" src="../pictures/disc_kpackage_cd_package_cd_disk_packaging.png" value=""/> 
+                    <div id="errorBox">
+                    </div>
                 </div>
             </div>
             <script>
