@@ -33,6 +33,9 @@ if(isset($_POST['functionname']) && isset($_POST['arguments'])) {
         case 'edit':
             $aResult = $db->editUser($_POST['arguments']);
             break;
+        case 'deleteUser':
+            $aResult = $db->deleteUser();
+            break;
     }
 }
 echo json_encode($aResult);

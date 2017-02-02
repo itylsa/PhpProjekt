@@ -11,17 +11,34 @@ Best License EU
 }
 
 body{
-    background-color: #00ff00;
     margin: 0;
     overflow: hidden;
     min-width: 250px;
 }
 
-.content{
-    min-width: 606px;
-    padding: 50px;
+#content{
     text-align: center;
     margin: auto;
+    padding-bottom: 20px;
+}
+
+
+input[type="button"],input[type="submit"] {
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+    background: #959595;
+    opacity: 0.7;
+    min-width: 125px;
+    padding: 0.2em;
+    color: black;
+    border: solid 1px grey;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="button"]:hover,input[type="submit"]:hover {
+    opacity: 1.0;
 }
 
 /*
@@ -36,12 +53,18 @@ LOGIN/REGISTER
     width: 104px;
     cursor: pointer;
     float: left;
-    background-color: lightgrey;
+    background-color: #959595;
+    opacity: 0.7;
+    border-radius: 5px;
+}
+
+#loginHead:hover, #registerHead:hover {
+    opacity: 1.0;
 }
 
 #loginForm {
     margin: auto;
-    width: 220px;
+    width: 300px;
     display: block;
 }
 
@@ -49,6 +72,8 @@ LOGIN/REGISTER
     width: 128px;
     cursor: pointer;
     float: right;
+    opacity: 0.7;
+    border-radius: 5px;
 }
 
 #registerForm {
@@ -66,11 +91,9 @@ LOGIN/REGISTER
 }
 
 #loginInnerWrapper {
-    /*width: 410px;*/
     position: relative;
     text-align: center;
-    margin: 10px auto;
-    /*    height: 330px;*/
+    margin: auto;
 }
 
 #loginHeaderWrapper {
@@ -95,9 +118,17 @@ nav li a:link {
     text-decoration: none;
     font-weight: bold;
     display: block;
-    background: #00ff00;
+    background: #959595;
+    opacity: 0.55;
     width: 125px;
     padding: 0.2em;
+    color: black;
+    border: solid 1px grey;
+    border-radius: 5px;
+}
+
+nav li a:link:hover {
+    opacity: 1.0;
 }
 
 .nav {
@@ -228,7 +259,6 @@ CRUD BUTTONS
     width: 410px;
     display: none;
     position: relative;
-    padding-bottom: 20px;
 }
 
 .errorMessage {
@@ -237,21 +267,68 @@ CRUD BUTTONS
     text-align: right;
 }
 
-#errorBox {
-    color: red;
-    display: block;
-    text-align: center;
-    font-size: 30px;
-    padding-top: 40px;
-}
-
-#errorBoxWrapper {
+#errorBoxWrapper, #successBoxWrapper, #userDeleteBoxWrapper, #infoBoxWrapper {
     width: 400px;
     margin: auto;
     display: none;
+    border-radius: 5px;
+    min-height: 40px;
 }
 
-#errorBoxCloser {
+#errorBoxCloser, #successBoxCloser, #userDeleteBoxCloser, #infoBoxCloser {
     width: 40px;
     float: right;
+    opacity: 0.2;
+}
+
+#errorBoxCloser:hover, #successBoxCloser:hover, #userDeleteBoxCloser:hover, #infoBoxCloser {
+    opacity: 0.6;
+}
+
+#errorBox, #successBox, #userDeleteBox, #infoBox {
+    display: block;
+    text-align: center;
+    font-size: 20px;
+    padding: 8px 0px;
+}
+
+#errorBox {
+    color: #a94442;
+}
+
+#errorBoxWrapper {
+    background-color: #f2dede;
+    border: 1px solid #ebccd1;
+}
+
+#successBox {
+    color: #3c763d;
+}
+
+#successBoxWrapper {
+    background-color: #dff0d8;
+    border: 1px solid #d6e9c6;
+}
+
+#userDeleteBox {
+    color: #8a6d3b;
+}
+
+#userDeleteBoxWrapper {
+    background-color: #fcf8e3;
+    border: 1px solid #faebcc;
+}
+
+#infoBox {
+    color: #31708f;
+}
+
+#infoBoxWrapper {
+    background-color: #d9edf7;
+    border: 1px solid #bce8f1;
+}
+
+#addPlaceForm {
+    width: 190px;
+    margin: auto;
 }

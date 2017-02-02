@@ -6,7 +6,7 @@
             <h2 id="registerHead" onclick="showRegister()">Registrieren</h2>
         </div>
         <div id="loginFormWrapper">
-            <form id="loginForm" method="POST">
+            <form onsubmit="login('loginForm');event.preventDefault()" id="loginForm" novalidate>
                 <table>
                     <tr>
                         <td>Email:</td><td><input id="loginEmail" type="email" name="loginEmail" required /></td>
@@ -17,12 +17,12 @@
                     </tr>
                     <tr><td colspan="2"><div class="errorMessage" id="loginPasswordError"></div></td></tr>
                     <tr>
-                        <td colspan="1"><input type="button" value="Login" onclick="login('loginForm')" /></td>
+                        <td colspan="1"><input type="submit" value="Login" onclick="login('loginForm')" /></td>
                         <td colspan="2"><input type="button" value="Passwort vergessen" onclick="showPage('forgotPasswordWrapper')" /></td>
                     </tr>
                 </table>
             </form>
-            <form id="registerForm" method="POST">
+            <form onsubmit="register('registerForm'); event.preventDefault()" novalidate id="registerForm" method="POST">
                 <table>
                     <tr>
                         <td>Email:</td><td colspan="3"><input id="registerEmail" type="email" name="email" size="50" required /></td>
@@ -61,7 +61,7 @@
                         </td>
                     </tr>
                 </table>
-                <input style="float: right;" type="button" onclick="register('registerForm')" value="Erstellen" />
+                <input style="float: right;" type="submit" onclick="register('registerForm')" value="Erstellen" />
             </form>
         </div>
     </div>

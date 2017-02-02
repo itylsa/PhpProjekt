@@ -5,6 +5,20 @@ window.onload = function() {
     }
 }
 
+$(document).keypress(function(e) {
+    if(e.keyCode == 27) {
+        if(document.getElementById('errorBoxWrapper').style.display == 'block') {
+            closeErrorBox()
+        }
+        if(document.getElementById('successBoxWrapper').style.display == 'block') {
+            closeSuccessBox()
+        }
+        if(document.getElementById('infoBoxWrapper').style.display == 'block') {
+            closeInfoBox()
+        }
+    }
+})
+
 function doRequest(functionname, arguments) {
     var result;
     jQuery.ajax({
@@ -181,9 +195,9 @@ function register(formName) {
 
         var result = doRequest('create', arguments);
         if(result) {
-            alert('Benutzer erfolgreich erstellt');
+            showSuccessBox('Benutzer erfolgreich erstellt');
         } else {
-            alert('Benutzer konnte nicht erstellt werden');
+            showErrorBox('Email bereits vorhanden');
         }
     } else {
         return false;
@@ -201,9 +215,9 @@ function addPlace(formName) {
         }
         var result = doRequest('addPlace', arguments);
         if(result) {
-            alert('Angelegt');
+            showSuccessBox('Angelegt');
         } else {
-            alert('Nicht angelegt');
+            showErrorBox('Nicht angelegt');
         }
     } else {
         return false;
@@ -221,9 +235,9 @@ function forgotPassword(formName) {
         }
         var result = doRequest('forgotPassword', arguments);
         if(result) {
-            alert('Passwort geändert');
+            showSuccessBox('Passwort geändert');
         } else {
-            alert('Passwort nicht geändert');
+            showErrorBox('Passwort nicht geändert');
         }
     } else {
         return false;
@@ -256,9 +270,9 @@ function editUser(formName) {
 
         var result = doRequest('edit', arguments);
         if(result) {
-            alert('Benutzerdaten erfolgreich gespeichert');
+            showSuccessBox('Benutzerdaten erfolgreich gespeichert');
         } else {
-            alert('Benutzerdaten konnten nicht gespeichert werden');
+            showErrorBox('Benutzerdaten konnten nicht gespeichert werden');
         }
     } else {
         return false;
@@ -309,7 +323,9 @@ function getPlaces() {
 }
 
 function getPageContent() {
-    var result;
+    closeErrorBox();
+    closeSuccessBox();
+    var page;
     jQuery.ajax({
         type: "POST",
         url: '../request/page.php',
@@ -317,12 +333,16 @@ function getPageContent() {
         async: false,
 
         success: function(obj, textstatus) {
-            result = obj;
+            page = obj;
         }
     });
-    document.getElementById('content').innerHTML = result;
+    $('#content').slideToggle(300, function() {
+        $(this).html(page).slideToggle(300, function() {
+            $('form').find(':input').filter(':visible:first').select();
+        });
+    });
 
-    var result;
+    var nav;
     jQuery.ajax({
         type: "POST",
         url: '../request/nav.php',
@@ -330,10 +350,10 @@ function getPageContent() {
         async: false,
 
         success: function(obj, textstatus) {
-            result = obj;
+            nav = obj;
         }
     });
-    document.getElementById('navBar').innerHTML = result;
+    document.getElementById('navBar').innerHTML = nav;
     var field = document.getElementById('registerPlz');
     if(field != null) {
         getPlaces();
@@ -342,18 +362,20 @@ function getPageContent() {
 
 function showLogin() {
     $('#registerForm').fadeOut(200);
-    $('#loginForm').delay(200).fadeIn(200);
-    document.getElementById('loginHead').style.backgroundColor = 'lightgrey';
+    $('#loginForm').delay(200).fadeIn(200, function() {
+        $('#loginEmail').focus();
+    });
+    document.getElementById('loginHead').style.backgroundColor = '#959595';
     document.getElementById('registerHead').style.backgroundColor = 'transparent';
-    document.getElementById('loginEmail').focus();
 }
 
 function showRegister() {
     $('#loginForm').fadeOut(200);
-    $('#registerForm').delay(200).fadeIn(200);
-    document.getElementById('registerHead').style.backgroundColor = 'lightgrey';
+    $('#registerForm').delay(200).fadeIn(200, function() {
+        $('#registerEmail').focus();
+    });
+    document.getElementById('registerHead').style.backgroundColor = '#959595';
     document.getElementById('loginHead').style.backgroundColor = 'transparent';
-    document.getElementById('registerEmail').focus();
 }
 
 function selectPlz(val) {
@@ -374,6 +396,8 @@ function menu() {
 }
 
 function showPage(page) {
+    closeErrorBox();
+    closeSuccessBox();
     var loginPage = document.getElementById('loginWrapper');
     var overviewPage = document.getElementById('overviewWrapper');
     var addPlacePage = document.getElementById('addPlaceWrapper');
@@ -392,23 +416,31 @@ function showPage(page) {
     if(loginPage != null) {
         for(var i = 0; i < notLogged.length; i++) {
             if(notLogged[i].style.display == 'block') {
-                $('#' + notLogged[i].id).slideToggle(200);
+                $('#' + notLogged[i].id).slideToggle(300);
             }
         }
     } else {
         for(var i = 0; i < logged.length; i++) {
             if(logged[i].style.display == 'block') {
-                $('#' + logged[i].id).slideToggle(200);
+                $('#' + logged[i].id).slideToggle(300);
             }
         }
     }
     if(page == 'userEditViewWrapper') {
         getUserData();
     }
-    $('#' + page).delay(200).slideToggle(200);
+    $('#' + page).delay(300).slideToggle(300, function() {
+        $('form').find(':input').filter(':visible:first').select();
+    });
 }
 
 function showErrorBox(message) {
+    if(document.getElementById('successBoxWrapper').style.display == 'block') {
+        closeSuccessBox()
+    }
+    if(document.getElementById('infoBoxWrapper').style.display == 'block') {
+        closeInfoBox()
+    }
     document.getElementById('errorBox').innerHTML = message;
     $('#errorBoxWrapper').fadeIn(500);
 }
@@ -419,4 +451,60 @@ function closeErrorBox() {
         $(this).html('');
         next();
     });
+}
+
+function showSuccessBox(message) {
+    if(document.getElementById('errorBoxWrapper').style.display == 'block') {
+        closeErrorBox()
+    }
+    if(document.getElementById('infoBoxWrapper').style.display == 'block') {
+        closeInfoBox()
+    }
+    document.getElementById('successBox').innerHTML = message;
+    $('#successBoxWrapper').fadeIn(500);
+}
+
+function closeSuccessBox() {
+    $('#successBoxWrapper').fadeOut(500);
+    $('#successBox').delay(500, "clear").queue("clear", function(next) {
+        $(this).html('');
+        next();
+    });
+}
+
+function showInfoBox(message) {
+    if(document.getElementById('errorBoxWrapper').style.display == 'block') {
+        closeErrorBox()
+    }
+    if(document.getElementById('successBoxWrapper').style.display == 'block') {
+        closeSuccessBox()
+    }
+    document.getElementById('infoBox').innerHTML = message;
+    $('#infoBoxWrapper').fadeIn(500);
+}
+
+function closeInfoBox() {
+    $('#infoBoxWrapper').fadeOut(500);
+    $('#infoBox').delay(500, "clear").queue("clear", function(next) {
+        $(this).html('');
+        next();
+    });
+}
+
+function showUserDeleteBox() {
+    $('#userDeleteBoxWrapper').fadeIn(500);
+}
+
+function closeUserDeleteBox() {
+    $('#userDeleteBoxWrapper').fadeOut(500);
+    $('#userDeleteBox').delay(500, "clear").queue("clear", function(next) {
+        $(this).html('');
+        next();
+    });
+}
+
+function deleteUser() {
+    result = doRequest('deleteUser', null);
+    logout();
+    showSuccessBox('Benutzer erfolgreich gelöscht');
 }

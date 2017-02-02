@@ -228,11 +228,19 @@ class database {
         $this->db_close($conn);
         return true;
     }
-    
+
     public function logout() {
         session_start();
         session_unset();
         session_destroy();
     }
 
+    public function deleteUser() {
+        session_start();
+        $uId = $_SESSION['uId'];
+        $conn = $this->db_connect();
+        $q1 = 'DELETE FROM user WHERE uId = "' . $uId . '";';
+        mysqli_query($conn, $q1);
+        $this->db_close($conn);
+    }
 }

@@ -1,6 +1,6 @@
 <div id="userEditViewWrapper" >
     <h1>Benutzer bearbeiten</h1>
-    <form id="userEditViewForm" method="POST">
+    <form onsubmit="editUser('userEditViewForm');event.preventDefault()" style="padding-bottom: 30px;" novalidate id="userEditViewForm" method="POST">
         <table>
             <tr>
                 <td>Email:</td><td colspan="3"><input id="editEmail" type="email" name="email" size="50" required /></td>
@@ -39,7 +39,24 @@
                 </td>
             </tr>
         </table>
-        <input type="button" onclick="" value="Account löschen" />
-        <input style="float: right;" type="button" onclick="editUser('userEditViewForm')" value="Speichern" />
+        <input style="float: left;" type="button" onclick="showUserDeleteBox()" value="Account löschen" />
+        <input style="float: right;" type="submit" onclick="editUser('userEditViewForm')" value="Speichern" />
     </form>
+    <div id="userDeleteBoxWrapper">
+        <div id="userDeleteBox">
+            Wirklich löschen?
+        </div>
+        <div>
+            <table>
+                <tr>
+                    <td>
+                        <input type="button" value="Ja" onclick="deleteUser()" />
+                    </td>
+                    <td>
+                        <input type="button" value="Nein" onclick="closeUserDeleteBox(); showInfoBox('Benutzer wurde nicht gelöscht')" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </div>

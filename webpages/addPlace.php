@@ -1,6 +1,6 @@
 <div id="addPlaceWrapper">
     <h1>Ort hinzufügen</h1>
-    <form id="addPlaceForm" method="POST">
+    <form onsubmit="addPlace('addPlaceForm');event.preventDefault()" novalidate id="addPlaceForm" method="POST">
         <table>
             <tr>
                 <td>Plz: </td><td><input id="plz" type="text" name="plz" required="true" pattern="[0-9]{5}" title="Muss aus genau 5 Zahlen bestehen" /></td>
@@ -11,7 +11,7 @@
             </tr>
             <tr><td colspan="2"><div class="errorMessage" id="placeError"></div></td></tr>
             <tr>
-                <td></td><td colspan="2"><input type="button" onclick="addPlace('addPlaceForm')" value="Ort anlegen" /></td>
+                <td></td><td colspan="2"><input type="submit" onclick="addPlace('addPlaceForm')" value="Ort anlegen" /></td>
             </tr>
         </table>
     </form>
