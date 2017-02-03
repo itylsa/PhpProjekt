@@ -36,6 +36,9 @@ if(isset($_POST['functionname']) && isset($_POST['arguments'])) {
         case 'deleteUser':
             $aResult = $db->deleteUser();
             break;
+        case 'checkUserExists':
+            $aResult = $db->checkUserExists();
+            break;
     }
 }
 echo json_encode($aResult);

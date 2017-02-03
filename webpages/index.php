@@ -16,6 +16,7 @@ and open the template in the editor.
         <script src="../js/scripts.js"></script>
     </head>
     <body>
+        <input type="button" onclick="checkUserExists()" value="click" />
         <div id="pageWrapper">
             <div id="navBar">
             </div>

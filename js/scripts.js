@@ -508,3 +508,8 @@ function deleteUser() {
     logout();
     showSuccessBox('Benutzer erfolgreich gelöscht');
 }
+
+function checkUserExists() {
+    result = doRequest('checkUserExists', null);
+    alert(result);
+}

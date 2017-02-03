@@ -243,4 +243,24 @@ class database {
         mysqli_query($conn, $q1);
         $this->db_close($conn);
     }
+
+    public function checkUserExists() {
+        session_start();
+        $uId = null;
+        if(isset($_SESSION['uId'])) {
+            $uId = $_SESSION['uId'];
+        }
+        if($uId != null && $uId != '') {
+            $conn = $this->db_connect();
+            $q = "SELECT uId FROM user WHERE uId = '" . $uId . "';";
+            $data = mysqli_query($conn, $q);
+            $this->db_close($conn);
+            if($data->num_rows > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
 }
