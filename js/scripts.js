@@ -351,8 +351,7 @@ function getUserData() {
     document.getElementById('editStreet').value = streetNr[0];
     document.getElementById('editNr').value = streetNr[1];
     document.getElementById('editPlace').value = place;
-    document.getElementById('editPlz').value = plz;
-    e.options[e.selectedIndex].text
+    document.getElementById('editPlz').value = place;
 }
 
 function getPlaces() {
