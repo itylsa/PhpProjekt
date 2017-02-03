@@ -1,4 +1,5 @@
 window.onload = function() {
+    getPageContent();
     var field = document.getElementById('registerPlz');
     if(field != null) {
         getPlaces();
@@ -325,6 +326,7 @@ function getPlaces() {
 function getPageContent() {
     closeErrorBox();
     closeSuccessBox();
+    closeInfoBox();
     var page;
     jQuery.ajax({
         type: "POST",
@@ -339,6 +341,10 @@ function getPageContent() {
     $('#content').slideToggle(300, function() {
         $(this).html(page).slideToggle(300, function() {
             $('form').find(':input').filter(':visible:first').select();
+            var field = document.getElementById('registerPlz');
+            if(field != null) {
+                getPlaces();
+            }
         });
     });
 
@@ -354,10 +360,6 @@ function getPageContent() {
         }
     });
     document.getElementById('navBar').innerHTML = nav;
-    var field = document.getElementById('registerPlz');
-    if(field != null) {
-        getPlaces();
-    }
 }
 
 function showLogin() {
@@ -398,40 +400,43 @@ function menu() {
 function showPage(page) {
     closeErrorBox();
     closeSuccessBox();
-    var loginPage = document.getElementById('loginWrapper');
-    var overviewPage = document.getElementById('overviewWrapper');
-    var addPlacePage = document.getElementById('addPlaceWrapper');
-    var forgotPasswordPage = document.getElementById('forgotPasswordWrapper');
-    var userEditViewPage = document.getElementById('userEditViewWrapper');
-    var notLogged = [
-        loginPage,
-        addPlacePage,
-        forgotPasswordPage
-    ]
-    var logged = [
-        addPlacePage,
-        userEditViewPage,
-        overviewPage
-    ]
-    if(loginPage != null) {
-        for(var i = 0; i < notLogged.length; i++) {
-            if(notLogged[i].style.display == 'block') {
-                $('#' + notLogged[i].id).slideToggle(300);
+    closeInfoBox();
+    if(checkUserExists()) {
+        var loginPage = document.getElementById('loginWrapper');
+        var overviewPage = document.getElementById('overviewWrapper');
+        var addPlacePage = document.getElementById('addPlaceWrapper');
+        var forgotPasswordPage = document.getElementById('forgotPasswordWrapper');
+        var userEditViewPage = document.getElementById('userEditViewWrapper');
+        var notLogged = [
+            loginPage,
+            addPlacePage,
+            forgotPasswordPage
+        ]
+        var logged = [
+            addPlacePage,
+            userEditViewPage,
+            overviewPage
+        ]
+        if(loginPage != null) {
+            for(var i = 0; i < notLogged.length; i++) {
+                if(notLogged[i].style.display == 'block') {
+                    $('#' + notLogged[i].id).slideToggle(300);
+                }
+            }
+        } else {
+            for(var i = 0; i < logged.length; i++) {
+                if(logged[i].style.display == 'block') {
+                    $('#' + logged[i].id).slideToggle(300);
+                }
             }
         }
-    } else {
-        for(var i = 0; i < logged.length; i++) {
-            if(logged[i].style.display == 'block') {
-                $('#' + logged[i].id).slideToggle(300);
-            }
+        if(page == 'userEditViewWrapper') {
+            getUserData();
         }
+        $('#' + page).delay(300).slideToggle(300, function() {
+            $('form').find(':input').filter(':visible:first').select();
+        });
     }
-    if(page == 'userEditViewWrapper') {
-        getUserData();
-    }
-    $('#' + page).delay(300).slideToggle(300, function() {
-        $('form').find(':input').filter(':visible:first').select();
-    });
 }
 
 function showErrorBox(message) {
@@ -511,5 +516,10 @@ function deleteUser() {
 
 function checkUserExists() {
     result = doRequest('checkUserExists', null);
-    alert(result);
+    if(result) {
+        return true;
+    } else {
+        logout();
+        return false;
+    }
 }

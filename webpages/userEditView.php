@@ -40,7 +40,7 @@
             </tr>
         </table>
         <input style="float: left;" type="button" onclick="showUserDeleteBox()" value="Account löschen" />
-        <input style="float: right;" type="submit" onclick="editUser('userEditViewForm')" value="Speichern" />
+        <input style="float: right;" type="submit" value="Speichern" />
     </form>
     <div id="userDeleteBoxWrapper">
         <div id="userDeleteBox">
