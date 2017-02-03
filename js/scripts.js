@@ -355,7 +355,10 @@ function getUserData() {
     document.getElementById('editLastName').value = user[2];
     document.getElementById('editStreet').value = streetNr[0];
     document.getElementById('editNr').value = streetNr[1];
+    document.getElementById('editPlace').value = place;
     document.getElementById('editPlz').value = plz;
+
+    e.options[e.selectedIndex].text
 }
 
 function getPlaces() {
@@ -432,8 +435,14 @@ function showRegister() {
 }
 
 function selectPlz(val) {
-    document.getElementById('registerPlace').value = val.value;
-    var e = document.getElementById('registerPlz');
+    var e
+    if(val.id == 'registerPlz') {
+        document.getElementById('registerPlace').value = val.value;
+        e = document.getElementById('registerPlz');
+    } else {
+        document.getElementById('editPlace').value = val.value;
+        e = document.getElementById('editPlz');
+    }
     document.getElementById('plzHidden').value = e.options[e.selectedIndex].text;
 }
 
