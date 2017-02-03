@@ -263,4 +263,19 @@ class database {
         }
         return true;
     }
+
+    public function getAnnonces() {
+        session_start();
+        $uId = $_SESSION['uId'];
+        $conn = $this->db_connect();
+        $q = "SELECT * FROM annonce WHERE fsUser = '" . $uId . "'";
+        $data = mysqli_query($conn, $q);
+        $this->db_close($conn);
+        if($data->num_rows > 0) {
+            return mysqli_fetch_all($data, MYSQLI_NUM);
+        } else {
+            return false;
+        }
+    }
+
 }

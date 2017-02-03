@@ -39,6 +39,9 @@ if(isset($_POST['functionname']) && isset($_POST['arguments'])) {
         case 'checkUserExists':
             $aResult = $db->checkUserExists();
             break;
+        case 'getAnnonces':
+            $aResult = $db->getAnnonces();
+            break;
     }
 }
 echo json_encode($aResult);

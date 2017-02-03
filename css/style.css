@@ -362,3 +362,12 @@ CRUD BUTTONS
     transform: rotate(-360deg);
     transition: .4s;
 }
+
+#annonceTable tr, #annonceTable td, #annonceTable th, #annonceTable {
+    border: 1px solid;
+}
+
+#annonceTable {
+    min-width: 400px;
+    text-align: center;
+}

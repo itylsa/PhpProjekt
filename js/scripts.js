@@ -45,7 +45,6 @@ $(document).ready(function() {
         event.stopPropagation();
     });
 });
-
 function closeAllBoxes() {
     if(document.getElementById('errorBoxWrapper').style.display == 'block') {
         closeErrorBox();
@@ -74,7 +73,6 @@ function doRequest(functionname, arguments) {
         dataType: 'json',
         async: false,
         data: {functionname: functionname, arguments: arguments},
-
         success: function(obj, textstatus) {
             result = obj;
         }
@@ -195,7 +193,6 @@ function login(formName) {
     if(valid) {
         var email = document.getElementById('loginEmail').value;
         var pw = document.getElementById('loginPassword').value;
-
         arguments = {
             email: email,
             pw: pw
@@ -228,7 +225,6 @@ function register(formName) {
         var place = document.getElementById('registerPlace').value;
         e = document.getElementById('registerPlz');
         var plz = e.options[e.selectedIndex].text;
-
         street = street + ' ' + nr;
         arguments = {
             email: email,
@@ -303,7 +299,6 @@ function editUser(formName) {
         var place = document.getElementById('editPlace').value;
         e = document.getElementById('editPlz');
         var plz = e.options[e.selectedIndex].text;
-
         street = street + ' ' + nr;
         arguments = {
             email: email,
@@ -357,7 +352,6 @@ function getUserData() {
     document.getElementById('editNr').value = streetNr[1];
     document.getElementById('editPlace').value = place;
     document.getElementById('editPlz').value = plz;
-
     e.options[e.selectedIndex].text
 }
 
@@ -387,7 +381,6 @@ function getPageContent() {
         url: '../request/page.php',
         dataType: 'json',
         async: false,
-
         success: function(obj, textstatus) {
             page = obj;
         }
@@ -395,20 +388,22 @@ function getPageContent() {
     $('#content').slideToggle(300, function() {
         $(this).html(page).slideToggle(300, function() {
             $('form').find(':input').filter(':visible:first').select();
-            var field = document.getElementById('registerPlz');
-            if(field != null) {
+            var registerPlz = document.getElementById('registerPlz');
+            if(registerPlz != null) {
                 getPlaces();
+            }
+            var overview = document.getElementById('overviewWrapper');
+            if(overview != null) {
+                getAnnonces();
             }
         });
     });
-
     var nav;
     jQuery.ajax({
         type: "POST",
         url: '../request/nav.php',
         dataType: 'json',
         async: false,
-
         success: function(obj, textstatus) {
             nav = obj;
         }
@@ -592,4 +587,16 @@ function toggleMenu() {
         $('#navBar').delay(100).animate({width: 'toggle'}, 350);
         $('#nav').animate({width: 'toggle'}, 350);
     }
+}
+
+function getAnnonces() {
+    var data = doRequest('getAnnonces', null);
+    var pageContent = '';
+    for(var i = 0; i < data.length; i++) {
+        pageContent = pageContent + '<table id="annonceTable">';
+        pageContent = pageContent + '<tr><th>Kategorie</th><th>Beschreibung</th></tr>';
+        pageContent = pageContent + '<tr><td>asd</td><td style="float: none;">asd asd11111</td><td>asd</td><td style="float: none;">asd asd</td></tr>';
+        pageContent = pageContent + '</table>';
+    }
+    document.getElementById('overviewWrapper').innerHTML = pageContent;
 }
