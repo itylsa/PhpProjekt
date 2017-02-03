@@ -36,6 +36,7 @@ input[type="button"],input[type="submit"] {
     border: solid 1px grey;
     border-radius: 5px;
     cursor: pointer;
+    text-align: center;
 }
 
 input[type="button"]:hover,input[type="submit"]:hover {
@@ -207,6 +208,7 @@ CRUD BUTTONS
     height: 100%;
     width: 150px;
     background-color: lightgrey;
+    z-index: 9999;
 }
 
 #headerBar {
@@ -216,14 +218,14 @@ CRUD BUTTONS
     height: 80px;
     background-color: lightgrey;
     text-align: center;
-    padding-left: 150px;
+    /*padding-left: 150px;*/
     box-sizing: border-box;
     z-index: 9999;
 }
 
 #contentWrapper {
     position: absolute;
-    padding-left: 150px;
+    /*padding-left: 150px;*/
     padding-top: 80px;
     margin: 0;
     width: 100%;
@@ -234,7 +236,25 @@ CRUD BUTTONS
 }
 
 #menuButton {
-    display: none;
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+    background: #959595;
+    opacity: 0.7;
+    padding: 0.2em;
+    color: black;
+    border: solid 1px grey;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    position: absolute;
+    float: left;
+    top: 40px;
+    width: 30px;
+}
+
+#menuButton:hover {
+    opacity: 1.0;
 }
 
 #addPlaceWrapper {
@@ -282,7 +302,7 @@ CRUD BUTTONS
     opacity: 0.2;
 }
 
-#errorBoxCloser:hover, #successBoxCloser:hover, #userDeleteBoxCloser:hover, #infoBoxCloser {
+#errorBoxCloser:hover, #successBoxCloser:hover, #userDeleteBoxCloser:hover, #infoBoxCloser:hover {
     opacity: 0.6;
 }
 
@@ -332,4 +352,13 @@ CRUD BUTTONS
 #addPlaceForm {
     width: 190px;
     margin: auto;
+}
+
+.rotate {
+    transform: rotate(-180deg);
+    transition: .4s;
+}
+.rotate-reset {
+    transform: rotate(-360deg);
+    transition: .4s;
 }

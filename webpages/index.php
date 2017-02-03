@@ -10,16 +10,15 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../css/style.css">
-        <link rel="stylesheet" href="../css/styleLess600px.css">
-        <link rel="stylesheet" href="../css/styleMore600px.css">
         <script src="../js/core.js"></script>
         <script src="../js/scripts.js"></script>
     </head>
     <body>
         <div id="pageWrapper">
-            <div id="navBar">
+            <div id="navBar" style="display: none">
             </div>
             <div id="headerBar">
+                <input class="rotate" type="image" src="../pictures/2000px-Chevron_right_font_awesome.svg.png" id="menuButton" value="Menü" />
                 <h1 id="header"> ANNONCIATOR </h1>
             </div>
             <div id="contentWrapper">

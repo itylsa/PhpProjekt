@@ -1,6 +1,6 @@
 # PhpProjekt
 
-Sandro ist der größte Lappen
+# Sandro ist der größte Lappen
 
 
 ## Was das Programm alles können soll

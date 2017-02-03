@@ -9,16 +9,62 @@ window.onload = function() {
 $(document).keypress(function(e) {
     if(e.keyCode == 27) {
         if(document.getElementById('errorBoxWrapper').style.display == 'block') {
-            closeErrorBox()
+            closeErrorBox();
         }
         if(document.getElementById('successBoxWrapper').style.display == 'block') {
-            closeSuccessBox()
+            closeSuccessBox();
         }
         if(document.getElementById('infoBoxWrapper').style.display == 'block') {
-            closeInfoBox()
+            closeInfoBox();
         }
     }
 })
+
+$(document).ready(function() {
+    $(document).keypress(function(e) {
+        if(e.keyCode == 27) {
+            closeAllBoxes();
+            closeMenuIfOpen();
+        }
+        if(e.keyCode == 113) {
+            toggleMenu();
+            $('#menuButton').toggleClass('rotate');
+            $('#menuButton').toggleClass('rotate-reset');
+        }
+    });
+    $('#menuButton').click(function(event) {
+        toggleMenu();
+        $(this).toggleClass('rotate');
+        $(this).toggleClass('rotate-reset');
+        event.stopPropagation();
+    });
+    $('html').click(function() {
+        closeMenuIfOpen();
+    });
+    $('#navBar').click(function(event) {
+        event.stopPropagation();
+    });
+});
+
+function closeAllBoxes() {
+    if(document.getElementById('errorBoxWrapper').style.display == 'block') {
+        closeErrorBox();
+    }
+    if(document.getElementById('successBoxWrapper').style.display == 'block') {
+        closeSuccessBox();
+    }
+    if(document.getElementById('infoBoxWrapper').style.display == 'block') {
+        closeInfoBox();
+    }
+}
+
+function closeMenuIfOpen() {
+    if($('#menuButton').hasClass('rotate-reset')) {
+        toggleMenu();
+        $('#menuButton').toggleClass('rotate');
+        $('#menuButton').toggleClass('rotate-reset');
+    }
+}
 
 function doRequest(functionname, arguments) {
     var result;
@@ -327,6 +373,11 @@ function getPageContent() {
     closeErrorBox();
     closeSuccessBox();
     closeInfoBox();
+    if($('#menuButton').hasClass('rotate-reset')) {
+        toggleMenu();
+        $('#menuButton').toggleClass('rotate');
+        $('#menuButton').toggleClass('rotate-reset');
+    }
     var page;
     jQuery.ajax({
         type: "POST",
@@ -521,5 +572,15 @@ function checkUserExists() {
     } else {
         logout();
         return false;
+    }
+}
+
+function toggleMenu() {
+    if(document.getElementById('nav').style.display == 'none') {
+        $('#navBar').animate({width: 'toggle'}, 350);
+        $('#nav').delay(100).animate({width: 'toggle'}, 350);
+    } else {
+        $('#navBar').delay(100).animate({width: 'toggle'}, 350);
+        $('#nav').animate({width: 'toggle'}, 350);
     }
 }
