@@ -60,6 +60,11 @@
                             <input id="plzHidden" type="hidden" name="plz" />
                         </td>
                     </tr>
+                    <tr>
+                        <td>Ort:</td><td><input id="ort" readonly="true" type="text" name="" class="deactivated" /></td>
+                        <td>Plz:</td><td><input list="list" id="" type="text" name="" /></td>
+                    <datalist id="list"></datalist>
+                    </tr>
                 </table>
                 <input style="float: right;" type="submit" value="Erstellen" />
             </form>

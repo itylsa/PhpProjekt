@@ -359,11 +359,20 @@ function getUserData() {
 function getPlaces() {
     var result = doRequest('getPlaces', null);
     var select = document.getElementById('registerPlz');
+    select.options.length = 0;
     for(var i = 0; i < result.length; i++) {
         opt = document.createElement('option');
         opt.value = result[i][2];
         opt.textContent = result[i][1];
         select.appendChild(opt);
+    }
+    var datalist = document.getElementById('list');
+    $('#list').empty();
+    for(var i = 0; i < result.length; i++) {
+        opt = document.createElement('option');
+        opt.value = result[i][1];
+        opt.textContent = result[i][1];
+        datalist.appendChild(opt);
     }
 }
 
@@ -491,6 +500,9 @@ function showPage(page) {
         }
         if(page == 'userEditViewWrapper') {
             getUserData();
+        }
+        if(page == 'loginWrapper') {
+            getPlaces();
         }
         $('#' + page).delay(300).slideToggle(300, function() {
             $('form').find(':input').filter(':visible:first').select();

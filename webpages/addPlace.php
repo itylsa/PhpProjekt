@@ -11,7 +11,7 @@
             </tr>
             <tr><td colspan="2"><div class="errorMessage" id="placeError"></div></td></tr>
             <tr>
-                <td></td><td colspan="2"><input type="submit" onclick="addPlace('addPlaceForm')" value="Ort anlegen" /></td>
+                <td></td><td colspan="2"><input type="submit" value="Ort anlegen" /></td>
             </tr>
         </table>
     </form>
