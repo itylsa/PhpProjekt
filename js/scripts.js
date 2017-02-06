@@ -579,23 +579,39 @@ function checkUserExists() {
 }
 
 function toggleMenu() {
-    if(document.getElementById('nav').style.display == 'none') {
-        $('#navBar').animate({width: 'toggle'}, 350);
-        $('#nav').delay(100).animate({width: 'toggle'}, 350);
+    $('#navBar').stop();
+    $('#nav').stop();
+    $('#menuButton').stop();
+    if($('#navBar').hasClass('menuOpened')) {
+        $('#navBar').removeClass('menuOpened');
+        $('#navBar').addClass('menuClosed');
+        $('#navBar').animate({left: '-150px'}, 300);
+        $('#nav').animate({left: '-150px'}, 300);
+        $('#menuButton').removeClass('rotate');
+        $('#menuButton').addClass('rotate-reset');
     } else {
-        $('#navBar').delay(100).animate({width: 'toggle'}, 350);
-        $('#nav').animate({width: 'toggle'}, 350);
+        $('#navBar').removeClass('menuClosed');
+        $('#navBar').addClass('menuOpened');
+        $('#navBar').animate({left: '0px'}, 300);
+        $('#nav').animate({left: '0px'}, 300);
+        $('#menuButton').addClass('rotate');
+        $('#menuButton').removeClass('rotate-reset');
     }
 }
 
 function getAnnonces() {
     var data = doRequest('getAnnonces', null);
     var pageContent = '';
-    for(var i = 0; i < data.length; i++) {
-        pageContent = pageContent + '<table id="annonceTable">';
+    if(data.length > 0) {
+        pageContent = '<h1>Annoncen</h1>';
+        pageContent = pageContent + '<table rules="all" frame="void" id="annonceTable">';
         pageContent = pageContent + '<tr><th>Kategorie</th><th>Beschreibung</th></tr>';
-        pageContent = pageContent + '<tr><td>asd</td><td style="float: none;">asd asd11111</td><td>asd</td><td style="float: none;">asd asd</td></tr>';
+        for(var i = 0; i < data.length; i++) {
+            pageContent = pageContent + '<tr><td>asd</td><td style="float: none;">asd asd11111</td><td style="float: none;"><input style="margin: auto" type="button" value="Details"</td></tr>';
+        }
         pageContent = pageContent + '</table>';
+    } else {
+        pageContent = '<h1>Keine Annoncen gefunden</h1>';
     }
     document.getElementById('overviewWrapper').innerHTML = pageContent;
 }

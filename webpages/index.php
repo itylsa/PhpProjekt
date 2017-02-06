@@ -15,10 +15,12 @@ and open the template in the editor.
     </head>
     <body>
         <div id="pageWrapper">
-            <div id="navBar" style="display: none">
+            <div id="navBar" style="display: block; left: -150px;">
             </div>
             <div id="headerBar">
-                <input class="rotate" type="image" src="../pictures/2000px-Chevron_right_font_awesome.svg.png" id="menuButton" value="Menü" />
+                <span>
+                    <image id="menuButton" class="rotate" src="../pictures/2000px-Chevron_right_font_awesome.svg.png" />
+                </span>
                 <h1 id="header"> ANNONCIATOR </h1>
             </div>
             <div id="contentWrapper">

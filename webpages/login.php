@@ -9,7 +9,7 @@
             <form onsubmit="login('loginForm');event.preventDefault()" novalidate id="loginForm" method="POST">
                 <table>
                     <tr>
-                        <td>Email:</td><td><input id="loginEmail" type="email" name="loginEmail" required /></td>
+                        <td onmouseenter="$(this).html('Emaul:')" onmouseout="$(this).html('Email:')">Email:</td><td><input id="loginEmail" type="email" name="loginEmail" required /></td>
                     </tr>
                     <tr><td colspan="2"><div class="errorMessage" id="loginEmailError"></div></td></tr>
                     <tr>
@@ -25,7 +25,7 @@
             <form onsubmit="register('registerForm'); event.preventDefault()" novalidate id="registerForm" method="POST">
                 <table>
                     <tr>
-                        <td>Email:</td><td colspan="3"><input id="registerEmail" type="email" name="email" size="50" required /></td>
+                        <td onmouseenter="$(this).html('Emaul:')" onmouseout="$(this).html('Email:')">Email:</td><td colspan="3"><input id="registerEmail" type="email" name="email" size="50" required /></td>
                     </tr>
                     <tr><td colspan="4"><div class="errorMessage" id="registerEmailError"></div></td></tr>
                     <tr>
