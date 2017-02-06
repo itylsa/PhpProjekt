@@ -370,8 +370,8 @@ function getPlaces() {
     $('#list').empty();
     for(var i = 0; i < result.length; i++) {
         opt = document.createElement('option');
-        opt.value = result[i][1];
-        opt.textContent = result[i][1];
+        opt.value = result[i][1] + ' ' + result[i][2];
+        opt.textContent = result[i][1] + ' ' + result[i][2];
         datalist.appendChild(opt);
     }
 }
