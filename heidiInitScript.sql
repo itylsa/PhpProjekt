@@ -13,18 +13,21 @@
 
 
 -- Exportiere Datenbank Struktur für phpproject
-CREATE DATABASE IF NOT EXISTS `phpproject` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_german2_ci */;
-USE `phpproject`;
+CREATE DATABASE IF NOT EXISTS `phpproject1` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_german2_ci */;
+USE `phpproject1`;
 
 -- Exportiere Struktur von Tabelle phpproject.annonce
 CREATE TABLE IF NOT EXISTS `annonce` (
-  `aId` bigint(20) NOT NULL AUTO_INCREMENT,
-  `category` varchar(50) COLLATE utf8_german2_ci NOT NULL DEFAULT '0',
-  `text` varchar(50) COLLATE utf8_german2_ci NOT NULL DEFAULT '0',
-  `fsUser` bigint(20) DEFAULT NULL,
+    `aId` BIGINT(20) NOT NULL AUTO_INCREMENT,
+    `category` BIGINT(20) NOT NULL DEFAULT '0',
+    `title` VARCHAR(50) NOT NULL DEFAULT '0' COLLATE 'utf8_german2_ci',
+    `text` TEXT NOT NULL COLLATE 'utf8_german2_ci',
+    `fsUser` BIGINT(20) NULL DEFAULT NULL,
   PRIMARY KEY (`aId`),
-  KEY `FK_annonce_user` (`fsUser`),
-  CONSTRAINT `FK_annonce_user` FOREIGN KEY (`fsUser`) REFERENCES `user` (`uId`)
+    INDEX `FK_annonce_user` (`fsUser`),
+    INDEX `Schlüssel 3` (`category`),
+    CONSTRAINT `FK_annonce_label` FOREIGN KEY (`category`) REFERENCES `label` (`lId`),
+    CONSTRAINT `FK_annonce_user` FOREIGN KEY (`fsUser`) REFERENCES `user` (`uId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
 
 -- Daten Export vom Benutzer nicht ausgewählt

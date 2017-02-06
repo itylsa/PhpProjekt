@@ -200,6 +200,7 @@ function login(formName) {
         var result = doRequest('login', arguments);
         if(result) {
             getPageContent();
+            getLoggedStatus();
         } else {
             showErrorBox('Email oder Passwort falsch')
         }
@@ -211,6 +212,7 @@ function login(formName) {
 function logout() {
     doRequest('logout', null);
     getPageContent();
+    getLoggedStatus();
 }
 
 function register(formName) {
@@ -369,45 +371,48 @@ function getPageContent() {
     closeErrorBox();
     closeSuccessBox();
     closeInfoBox();
-    if($('#menuButton').hasClass('rotate-reset')) {
-        toggleMenu();
-        $('#menuButton').toggleClass('rotate');
-        $('#menuButton').toggleClass('rotate-reset');
-    }
-    var page;
-    jQuery.ajax({
-        type: "POST",
-        url: '../request/page.php',
-        dataType: 'json',
-        async: false,
-        success: function(obj, textstatus) {
-            page = obj;
+    if(checkUserLogged() != 'doesntExist') {
+        if($('#menuButton').hasClass('rotate-reset')) {
+            toggleMenu();
+            $('#menuButton').toggleClass('rotate');
+            $('#menuButton').toggleClass('rotate-reset');
         }
-    });
-    $('#content').slideToggle(300, function() {
-        $(this).html(page).slideToggle(300, function() {
-            $('form').find(':input').filter(':visible:first').select();
-            var registerPlz = document.getElementById('registerPlz');
-            if(registerPlz != null) {
-                getPlaces();
-            }
-            var overview = document.getElementById('overviewWrapper');
-            if(overview != null) {
-                getAnnonces();
+        var page;
+        jQuery.ajax({
+            type: "POST",
+            url: '../request/page.php',
+            dataType: 'json',
+            async: false,
+            success: function(obj, textstatus) {
+                page = obj;
             }
         });
-    });
-    var nav;
-    jQuery.ajax({
-        type: "POST",
-        url: '../request/nav.php',
-        dataType: 'json',
-        async: false,
-        success: function(obj, textstatus) {
-            nav = obj;
-        }
-    });
-    document.getElementById('navBar').innerHTML = nav;
+        $('#content').slideToggle(300, function() {
+            $(this).html(page).slideToggle(300, function() {
+                $('form').find(':input').filter(':visible:first').select();
+                var registerPlz = document.getElementById('registerPlz');
+                if(registerPlz != null) {
+                    getPlaces();
+                }
+                var overview = document.getElementById('overviewWrapper');
+                if(overview != null) {
+                    getAnnonces();
+                }
+            });
+        });
+        var nav;
+        jQuery.ajax({
+            type: "POST",
+            url: '../request/nav.php',
+            dataType: 'json',
+            async: false,
+            success: function(obj, textstatus) {
+                nav = obj;
+            }
+        });
+        document.getElementById('navBar').innerHTML = nav;
+    }
+    getLoggedStatus();
 }
 
 function showLogin() {
@@ -455,7 +460,7 @@ function showPage(page) {
     closeErrorBox();
     closeSuccessBox();
     closeInfoBox();
-    if(checkUserExists()) {
+    if(checkUserLogged() != 'doesntExist') {
         var loginPage = document.getElementById('loginWrapper');
         var overviewPage = document.getElementById('overviewWrapper');
         var addPlacePage = document.getElementById('addPlaceWrapper');
@@ -491,6 +496,7 @@ function showPage(page) {
             $('form').find(':input').filter(':visible:first').select();
         });
     }
+    getLoggedStatus();
 }
 
 function showErrorBox(message) {
@@ -568,16 +574,6 @@ function deleteUser() {
     showSuccessBox('Benutzer erfolgreich gelöscht');
 }
 
-function checkUserExists() {
-    result = doRequest('checkUserExists', null);
-    if(result) {
-        return true;
-    } else {
-        logout();
-        return false;
-    }
-}
-
 function toggleMenu() {
     $('#navBar').stop();
     $('#nav').stop();
@@ -614,4 +610,28 @@ function getAnnonces() {
         pageContent = '<h1>Keine Annoncen gefunden</h1>';
     }
     document.getElementById('overviewWrapper').innerHTML = pageContent;
+}
+
+function getLoggedStatus() {
+    var status = checkUserLogged();
+    if(status == 'logged') {
+        var userName = doRequest('getUsername', null);
+        $('#loggedInfo').html('Logged in as ' + userName[3]);
+        $('#loggedInfo').css('color', 'blue');
+    } else {
+        $('#loggedInfo').html('Not logged in');
+        $('#loggedInfo').css('color', 'red');
+    }
+}
+
+function checkUserLogged() {
+    var status = doRequest('checkUserLogged', null);
+    if(status == 'doesntExist') {
+        logout();
+        return 'doesntExist';
+    } else if(status == 'logged') {
+        return 'logged';
+    } else {
+        return 'notLogged';
+    }
 }

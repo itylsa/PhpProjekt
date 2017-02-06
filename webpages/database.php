@@ -244,6 +244,24 @@ class database {
         $this->db_close($conn);
     }
 
+    public function checkUserLogged() {
+        session_start();
+        if(isset($_SESSION['uId']) && $_SESSION['uId'] != null && $_SESSION['uId'] != '') {
+            $uId = $_SESSION['uId'];
+            $conn = $this->db_connect();
+            $q = "SELECT uId FROM user WHERE uId = '" . $uId . "';";
+            $data = mysqli_query($conn, $q);
+            $this->db_close($conn);
+            if($data->num_rows > 0) {
+                return 'logged';
+            } else {
+                return 'doesntExist';
+            }
+        } else {
+            return 'notLogged';
+        }
+    }
+
     public function checkUserExists() {
         session_start();
         $uId = null;
@@ -276,6 +294,11 @@ class database {
         } else {
             return false;
         }
+    }
+
+    public function getUserName() {
+        $userName = $this->loadUserById();
+        return $userName;
     }
 
 }

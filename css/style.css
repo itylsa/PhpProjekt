@@ -366,3 +366,10 @@ CRUD BUTTONS
     min-width: 400px;
     text-align: center;
 }
+
+#loggedInfo {
+    padding-right: 10px;
+    position: relative;
+    top: -80px;
+    float: right;
+}

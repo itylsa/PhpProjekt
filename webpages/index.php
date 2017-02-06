@@ -22,6 +22,7 @@ and open the template in the editor.
                     <image id="menuButton" class="rotate" src="../pictures/2000px-Chevron_right_font_awesome.svg.png" />
                 </span>
                 <h1 id="header"> ANNONCIATOR </h1>
+                <span id="loggedInfo">asd</span>
             </div>
             <div id="contentWrapper">
                 <div id="content">
