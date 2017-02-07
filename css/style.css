@@ -283,10 +283,10 @@ CRUD BUTTONS
 .errorMessage {
     color: red;
     display: none;
-    text-align: right;
+    text-align: left;
 }
 
-#errorBoxWrapper, #successBoxWrapper, #userDeleteBoxWrapper, #infoBoxWrapper {
+.boxWrapper {
     width: 400px;
     margin: auto;
     display: none;
@@ -294,17 +294,17 @@ CRUD BUTTONS
     min-height: 40px;
 }
 
-#errorBoxCloser, #successBoxCloser, #userDeleteBoxCloser, #infoBoxCloser {
+.boxCloser {
     width: 40px;
     float: right;
     opacity: 0.2;
 }
 
-#errorBoxCloser:hover, #successBoxCloser:hover, #userDeleteBoxCloser:hover, #infoBoxCloser:hover {
+.boxCloser:hover {
     opacity: 0.6;
 }
 
-#errorBox, #successBox, #userDeleteBox, #infoBox {
+.box {
     display: block;
     text-align: center;
     font-size: 20px;
@@ -343,6 +343,16 @@ CRUD BUTTONS
 }
 
 #infoBoxWrapper {
+    background-color: #d9edf7;
+    border: 1px solid #bce8f1;
+}
+
+#newPlaceBox {
+    color: #31708f;
+    font-size: unset;
+}
+
+#newPlaceBoxWrapper {
     background-color: #d9edf7;
     border: 1px solid #bce8f1;
 }

@@ -55,6 +55,9 @@ function closeAllBoxes() {
     if(document.getElementById('infoBoxWrapper').style.display == 'block') {
         closeInfoBox();
     }
+    if(document.getElementById('newPlaceBoxWrapper').style.display == 'block') {
+        closeNewPlaceBox();
+    }
 }
 
 function closeMenuIfOpen() {
@@ -106,6 +109,7 @@ function validateForm(formName) {
             maxlength = ff[i].max;
             pattern = ff[i].pattern;
             type = ff[i].type;
+            message = ff[i].title;
             if(document.getElementById(ff[i].id + 'Error') != null) {
                 document.getElementById(ff[i].id + 'Error').innerHTML = '';
                 document.getElementById(ff[i].id + 'Error').style.display = 'none';
@@ -135,7 +139,7 @@ function validateForm(formName) {
                         } else {
                             innerHTML = '';
                         }
-                        document.getElementById(ff[i].id + 'Error').innerHTML = innerHTML + 'dark maximal ' + maxlength + ' Zeichen lang sein';
+                        document.getElementById(ff[i].id + 'Error').innerHTML = innerHTML + 'Darf maximal ' + maxlength + ' Zeichen lang sein';
                         document.getElementById(ff[i].id + 'Error').style.display = 'block';
                     }
                 }
@@ -150,7 +154,7 @@ function validateForm(formName) {
                         } else {
                             innerHTML = '';
                         }
-                        document.getElementById(ff[i].id + 'Error').innerHTML = innerHTML + 'Muss der Regular Expression ' + pattern + ' entsprechen';
+                        document.getElementById(ff[i].id + 'Error').innerHTML = innerHTML + message;
                         document.getElementById(ff[i].id + 'Error').style.display = 'block';
                     }
                 }
@@ -173,9 +177,10 @@ function validateForm(formName) {
                     }
                 }
             }
+            if(ff[i].id == 'registerPlzNew' && value != '') {
+                valid = checkNewPlz(value);
+            }
         }
-
-
     }
     if(valid) {
         for(var i = 0; i < ff.length; i++) {
@@ -377,9 +382,7 @@ function getPlaces() {
 }
 
 function getPageContent() {
-    closeErrorBox();
-    closeSuccessBox();
-    closeInfoBox();
+    closeAllBoxes();
     if(checkUserLogged() != 'doesntExist') {
         if($('#menuButton').hasClass('rotate-reset')) {
             toggleMenu();
@@ -466,9 +469,7 @@ function menu() {
 }
 
 function showPage(page) {
-    closeErrorBox();
-    closeSuccessBox();
-    closeInfoBox();
+    closeAllBoxes();
     if(checkUserLogged() != 'doesntExist') {
         var loginPage = document.getElementById('loginWrapper');
         var overviewPage = document.getElementById('overviewWrapper');
@@ -518,6 +519,9 @@ function showErrorBox(message) {
     if(document.getElementById('infoBoxWrapper').style.display == 'block') {
         closeInfoBox()
     }
+    if(document.getElementById('newPlaceBoxWrapper').style.display == 'block') {
+        closeNewPlaceBox()
+    }
     document.getElementById('errorBox').innerHTML = message;
     $('#errorBoxWrapper').fadeIn(500);
 }
@@ -536,6 +540,9 @@ function showSuccessBox(message) {
     }
     if(document.getElementById('infoBoxWrapper').style.display == 'block') {
         closeInfoBox()
+    }
+    if(document.getElementById('newPlaceBoxWrapper').style.display == 'block') {
+        closeNewPlaceBox()
     }
     document.getElementById('successBox').innerHTML = message;
     $('#successBoxWrapper').fadeIn(500);
@@ -556,6 +563,9 @@ function showInfoBox(message) {
     if(document.getElementById('successBoxWrapper').style.display == 'block') {
         closeSuccessBox()
     }
+    if(document.getElementById('newPlaceBoxWrapper').style.display == 'block') {
+        closeNewPlaceBox()
+    }
     document.getElementById('infoBox').innerHTML = message;
     $('#infoBoxWrapper').fadeIn(500);
 }
@@ -566,6 +576,23 @@ function closeInfoBox() {
         $(this).html('');
         next();
     });
+}
+
+function showNewPlaceBox() {
+    if(document.getElementById('errorBoxWrapper').style.display == 'block') {
+        closeErrorBox()
+    }
+    if(document.getElementById('successBoxWrapper').style.display == 'block') {
+        closeSuccessBox()
+    }
+    if(document.getElementById('infoBoxWrapper').style.display == 'block') {
+        closeInfoBox()
+    }
+    $('#newPlaceBoxWrapper').fadeIn(500);
+}
+
+function closeNewPlaceBox() {
+    $('#newPlaceBoxWrapper').fadeOut(500);
 }
 
 function showUserDeleteBox() {
@@ -645,5 +672,29 @@ function checkUserLogged() {
         return 'logged';
     } else {
         return 'notLogged';
+    }
+}
+
+function checkNewPlz(value) {
+    v = value.split(" ");
+    if(v.length > 2) {
+        $('#registerPlzNewError').html('Entweder Plz, oder Plz und Ort eingeben');
+        $('#registerPlzNewError').css('display', 'block');
+        return false;
+    } else if(v.length == 1) {
+        plz = v[0];
+        if(plz.match('^[0-9]{5}$') == null) {
+            $('#registerPlzNewError').html('Entweder Plz, oder Plz und Ort eingeben');
+            $('#registerPlzNewError').css('display', 'block');
+        } else {
+            args = {
+                plz: plz
+            }
+            data = doRequest('plzExists', args);
+            alert(data.length);
+        }
+    } else if(v.length == 2) {
+        plz = v[0];
+        place = v[1];
     }
 }

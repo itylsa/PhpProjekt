@@ -156,7 +156,7 @@ class database {
     }
 
     public function editOrt() {
-        
+
     }
 
     /**
@@ -299,6 +299,25 @@ class database {
     public function getUserName() {
         $userName = $this->loadUserById();
         return $userName;
+    }
+
+    public function plzExists($args) {
+        $plz = $args['plz'];
+        $conn = $this->db_connect();
+        $q = "SELECT plz, ortName FROM ort WHERE plz = '$plz';";
+        $data = mysqli_query($conn, $q);
+        $this->db_close($conn);
+        return mysqli_fetch_all($data, MYSQLI_NUM);
+    }
+
+    public function plzPlaceExists($args) {
+        $plz = $args['plz'];
+        $place = $args['place'];
+        $conn = $this->db_connect();
+        $q = "SELECT plz, ortName FROM ort WHERE plz = '$plz' and ortName = '$place'";
+        $data = mysqli_query($conn, $data);
+        $this->db_close($conn);
+        return mysqli_fetch_all($data, MYSQLI_NUM);
     }
 
 }

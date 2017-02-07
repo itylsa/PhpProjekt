@@ -27,19 +27,43 @@ and open the template in the editor.
             <div id="contentWrapper">
                 <div id="content">
                 </div>
-                <div id="errorBoxWrapper">
-                    <input id="errorBoxCloser" type="image" onclick="closeErrorBox()" src="../pictures/disc_kpackage_cd_package_cd_disk_packaging.png" value=""/>
-                    <div id="errorBox">
+                <div id="errorBoxWrapper" class="boxWrapper">
+                    <input id="errorBoxCloser" class="boxCloser" type="image" onclick="closeErrorBox()" src="../pictures/disc_kpackage_cd_package_cd_disk_packaging.png" value=""/>
+                    <div id="errorBox" class="box">
                     </div>
                 </div>
-                <div id="successBoxWrapper">
-                    <input id="successBoxCloser" type="image" onclick="closeSuccessBox()" src="../pictures/disc_kpackage_cd_package_cd_disk_packaging.png" value=""/>
-                    <div id="successBox">
+                <div id="successBoxWrapper" class="boxWrapper">
+                    <input id="successBoxCloser" class="boxCloser" type="image" onclick="closeSuccessBox()" src="../pictures/disc_kpackage_cd_package_cd_disk_packaging.png" value=""/>
+                    <div id="successBox" class="box">
                     </div>
                 </div>
-                <div id="infoBoxWrapper">
-                    <input id="infoBoxCloser" type="image" onclick="closeInfoBox()" src="../pictures/disc_kpackage_cd_package_cd_disk_packaging.png" value=""/>
-                    <div id="infoBox">
+                <div id="infoBoxWrapper" class="boxWrapper">
+                    <input id="infoBoxCloser" class="boxCloser" type="image" onclick="closeInfoBox()" src="../pictures/disc_kpackage_cd_package_cd_disk_packaging.png" value=""/>
+                    <div id="infoBox" class="box">
+                    </div>
+                </div>
+                <div id="newPlaceBoxWrapper" class="boxWrapper">
+                    <input id="newPlaceBoxCloser" class="boxCloser" type="image" onclick="closeInfoBox()" src="../pictures/disc_kpackage_cd_package_cd_disk_packaging.png" value=""/>
+                    <div id="newPlaceBox" class="box">
+                        <form id="addPlaceForm" onsubmit="addPlace('addPlaceForm'); event.preventDefault()" novalidate method="POST">
+                            <table>
+                                <tr>
+                                    <td>Plz:</td><td><input type="text" id="plz" min="5" max="5" pattern="^[0-9]+$" title="Nur Zahlen" required /></td>
+                                </tr>
+                                <tr>
+                                    <td><td><div class="errorMessage" id="plzError"></div></td></td>
+                                </tr>
+                                <tr>
+                                    <td>Ort:</td><td><input type="text" id="place" min="2" max="40" pattern="^[A-Z][a-z]+$" title="Nur Buchstaben. Groß anfangen" required /></td>
+                                </tr>
+                                <tr>
+                                    <td><td><div class="errorMessage" id="placeError"></div></td></td>
+                                </tr>
+                                <tr>
+                                    <td></td><td><input type="submit" value="Anlegen" /></td>
+                                </tr>
+                            </table>
+                        </form>
                     </div>
                 </div>
             </div>

@@ -48,6 +48,12 @@ if(isset($_POST['functionname']) && isset($_POST['arguments'])) {
         case 'getUsername':
             $aResult = $db->getUserName();
             break;
+        case 'plzExists':
+            $aResult = $db->plzExists($_POST['arguments']);
+            break;
+        case 'plzPlaceExists':
+            $aResult = $db->plzPlaceExists($_POST['arguments']);
+            break;
     }
 }
 echo json_encode($aResult);
