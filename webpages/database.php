@@ -301,15 +301,6 @@ class database {
         return $userName;
     }
 
-    public function plzExists($args) {
-        $plz = $args['plz'];
-        $conn = $this->db_connect();
-        $q = "SELECT plz, ortName FROM ort WHERE plz = '$plz';";
-        $data = mysqli_query($conn, $q);
-        $this->db_close($conn);
-        return mysqli_fetch_all($data, MYSQLI_NUM);
-    }
-
     public function plzPlaceExists($args) {
         $plz = $args['plz'];
         $place = $args['place'];

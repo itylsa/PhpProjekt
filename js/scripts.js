@@ -166,10 +166,7 @@ function validateForm(formName) {
                     }
                 }
             }
-            if(ff[i].id == 'registerPlzNew' && value != '') {
-                valid = checkNewPlz(value);
-            }
-            }
+        }
     }
     if(valid) {
         for(var i = 0; i < ff.length; i++) {
