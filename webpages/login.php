@@ -51,7 +51,6 @@
                         <td><div class="errorMessage" id="registerNrError"></div></td>
                     </tr>
                     <tr>
-                        <td>Ort:</td><td><input id="registerPlace" readonly="true" type="text" name="ort" class="deactivated" /></td>
                         <td>Plz:</td>
                         <td>
                             <select id="registerPlz" onchange="selectPlz(this)">
@@ -59,17 +58,7 @@
                             </select>
                             <input id="plzHidden" type="hidden" name="plz" />
                         </td>
-                    </tr>
-                    <tr>
-                        <td>Plz:</td><td><input list="list" id="registerPlzNew" type="text" autocomplete="off" /></td>
-                        <td>Ort:</td><td><input id="ort" readonly="true" type="text" name="" class="deactivated" /></td>
-                    <datalist id="list"></datalist>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td><div class="errorMessage" id="registerPlzNewError"></div></td>
-                        <td></td>
-                        <td></td>
+                        <td>Ort:</td><td><input id="registerPlace" readonly="true" type="text" name="ort" class="deactivated" /></td>
                     </tr>
                 </table>
                 <input style="float: right;" type="submit" value="Erstellen" />

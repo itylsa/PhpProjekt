@@ -6,20 +6,6 @@ window.onload = function() {
     }
 }
 
-$(document).keypress(function(e) {
-    if(e.keyCode == 27) {
-        if(document.getElementById('errorBoxWrapper').style.display == 'block') {
-            closeErrorBox();
-        }
-        if(document.getElementById('successBoxWrapper').style.display == 'block') {
-            closeSuccessBox();
-        }
-        if(document.getElementById('infoBoxWrapper').style.display == 'block') {
-            closeInfoBox();
-        }
-    }
-})
-
 $(document).ready(function() {
     $(document).keypress(function(e) {
         if(e.keyCode == 27) {
@@ -57,6 +43,9 @@ function closeAllBoxes() {
     }
     if(document.getElementById('newPlaceBoxWrapper').style.display == 'block') {
         closeNewPlaceBox();
+    }
+    if(document.getElementById('userDeleteBoxWrapper') != null && document.getElementById('userDeleteBoxWrapper').style.display == 'block') {
+        closeUserDeleteBox();
     }
 }
 
@@ -180,7 +169,7 @@ function validateForm(formName) {
             if(ff[i].id == 'registerPlzNew' && value != '') {
                 valid = checkNewPlz(value);
             }
-        }
+            }
     }
     if(valid) {
         for(var i = 0; i < ff.length; i++) {
@@ -365,19 +354,15 @@ function getPlaces() {
     var result = doRequest('getPlaces', null);
     var select = document.getElementById('registerPlz');
     select.options.length = 0;
+    opt = document.createElement('option');
+    opt.value = '';
+    opt.textContent = '';
+    select.appendChild(opt);
     for(var i = 0; i < result.length; i++) {
         opt = document.createElement('option');
         opt.value = result[i][2];
         opt.textContent = result[i][1];
         select.appendChild(opt);
-    }
-    var datalist = document.getElementById('list');
-    $('#list').empty();
-    for(var i = 0; i < result.length; i++) {
-        opt = document.createElement('option');
-        opt.value = result[i][1] + ' ' + result[i][2];
-        opt.textContent = result[i][1] + ' ' + result[i][2];
-        datalist.appendChild(opt);
     }
 }
 
@@ -519,9 +504,6 @@ function showErrorBox(message) {
     if(document.getElementById('infoBoxWrapper').style.display == 'block') {
         closeInfoBox()
     }
-    if(document.getElementById('newPlaceBoxWrapper').style.display == 'block') {
-        closeNewPlaceBox()
-    }
     document.getElementById('errorBox').innerHTML = message;
     $('#errorBoxWrapper').fadeIn(500);
 }
@@ -540,9 +522,6 @@ function showSuccessBox(message) {
     }
     if(document.getElementById('infoBoxWrapper').style.display == 'block') {
         closeInfoBox()
-    }
-    if(document.getElementById('newPlaceBoxWrapper').style.display == 'block') {
-        closeNewPlaceBox()
     }
     document.getElementById('successBox').innerHTML = message;
     $('#successBoxWrapper').fadeIn(500);
@@ -563,9 +542,6 @@ function showInfoBox(message) {
     if(document.getElementById('successBoxWrapper').style.display == 'block') {
         closeSuccessBox()
     }
-    if(document.getElementById('newPlaceBoxWrapper').style.display == 'block') {
-        closeNewPlaceBox()
-    }
     document.getElementById('infoBox').innerHTML = message;
     $('#infoBoxWrapper').fadeIn(500);
 }
@@ -578,25 +554,10 @@ function closeInfoBox() {
     });
 }
 
-function showNewPlaceBox() {
-    if(document.getElementById('errorBoxWrapper').style.display == 'block') {
-        closeErrorBox()
-    }
-    if(document.getElementById('successBoxWrapper').style.display == 'block') {
-        closeSuccessBox()
-    }
-    if(document.getElementById('infoBoxWrapper').style.display == 'block') {
-        closeInfoBox()
-    }
-    $('#newPlaceBoxWrapper').fadeIn(500);
-}
-
-function closeNewPlaceBox() {
-    $('#newPlaceBoxWrapper').fadeOut(500);
-}
-
 function showUserDeleteBox() {
-    $('#userDeleteBoxWrapper').fadeIn(500);
+    $('#userDeleteBoxWrapper').fadeIn(500, function() {
+        $(this).css('display', 'block');
+    });
 }
 
 function closeUserDeleteBox() {
@@ -672,29 +633,5 @@ function checkUserLogged() {
         return 'logged';
     } else {
         return 'notLogged';
-    }
-}
-
-function checkNewPlz(value) {
-    v = value.split(" ");
-    if(v.length > 2) {
-        $('#registerPlzNewError').html('Entweder Plz, oder Plz und Ort eingeben');
-        $('#registerPlzNewError').css('display', 'block');
-        return false;
-    } else if(v.length == 1) {
-        plz = v[0];
-        if(plz.match('^[0-9]{5}$') == null) {
-            $('#registerPlzNewError').html('Entweder Plz, oder Plz und Ort eingeben');
-            $('#registerPlzNewError').css('display', 'block');
-        } else {
-            args = {
-                plz: plz
-            }
-            data = doRequest('plzExists', args);
-            alert(data.length);
-        }
-    } else if(v.length == 2) {
-        plz = v[0];
-        place = v[1];
     }
 }

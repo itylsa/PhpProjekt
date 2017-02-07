@@ -38,11 +38,17 @@
                     <input id="plzHidden" type="hidden" name="plz" />
                 </td>
             </tr>
+            <tr>
+                <td></td>
+                <td><div class="errorMessage" id="editPlzError"></div></td>
+                <td></td>
+                <td><div class="errorMessage" id="editPlaceError"></div></td>
+            </tr>
         </table>
         <input style="float: left;" type="button" onclick="showUserDeleteBox()" value="Account löschen" />
         <input style="float: right;" type="submit" value="Speichern" />
     </form>
-    <div id="userDeleteBoxWrapper">
+    <div id="userDeleteBoxWrapper" style="display: none">
         <div id="userDeleteBox">
             Wirklich löschen?
         </div>

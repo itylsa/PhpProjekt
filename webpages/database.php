@@ -319,5 +319,4 @@ class database {
         $this->db_close($conn);
         return mysqli_fetch_all($data, MYSQLI_NUM);
     }
-
 }
