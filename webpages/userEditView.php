@@ -3,7 +3,7 @@
     <form onsubmit="editUser('userEditViewForm');event.preventDefault()" style="padding-bottom: 30px;" novalidate id="userEditViewForm" method="POST">
         <table>
             <tr>
-                <td onmouseenter="$(this).html('Emaul:')" onmouseout="$(this).html('Email:')">Email:</td><td colspan="3"><input id="editEmail" type="email" name="email" size="50" required /></td>
+                <td>Email:</td><td colspan="3"><input id="editEmail" type="email" name="email" size="50" required /></td>
             </tr>
             <tr><td colspan="4"><div class="errorMessage" id="editEmailError"></div></td></tr>
             <tr>

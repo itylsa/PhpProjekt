@@ -30,7 +30,7 @@ input[type="button"],input[type="submit"] {
     display: block;
     background: #959595;
     opacity: 0.7;
-    min-width: 125px;
+    width: 125px;
     padding: 0.2em;
     color: black;
     border: solid 1px grey;
@@ -271,6 +271,13 @@ CRUD BUTTONS
     width: 100%;
     text-align: center;
     display: block;
+}
+
+#createAnnonceWrapper {
+    width: 400px;
+    text-align: center;
+    display: none;
+    margin: auto;
 }
 
 #userEditViewWrapper {

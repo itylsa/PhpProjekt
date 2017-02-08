@@ -506,17 +506,16 @@ function showPage(page) {
     if(checkUserLogged() != 'doesntExist') {
         var loginPage = document.getElementById('loginWrapper');
         var overviewPage = document.getElementById('overviewWrapper');
-        var addPlacePage = document.getElementById('addPlaceWrapper');
+        var createAnnoncePage = document.getElementById('createAnnonceWrapper');
         var forgotPasswordPage = document.getElementById('forgotPasswordWrapper');
         var userEditViewPage = document.getElementById('userEditViewWrapper');
         var notLogged = [
             loginPage,
-            addPlacePage,
             forgotPasswordPage
         ]
         var logged = [
-            addPlacePage,
             userEditViewPage,
+            createAnnoncePage,
             overviewPage
         ]
         if(loginPage != null) {
@@ -735,5 +734,21 @@ function updatePlaceList(list) {
         opt.value = place[i][0];
         opt.textContent = place[i][0];
         $('#' + list + 'PlaceList').append(opt);
+    }
+}
+
+function getFiles() {
+    fileList = document.getElementById('createFile').files;
+    filePreviews = '';
+    for(var i = 0; i < fileList.length; i++) {
+        file = URL.createObjectURL(fileList[i]);
+        if(filePreviews == '') {
+            filePreviews = "<img width='300' src='" + file + "' />";
+        } else {
+            filePreviews = filePreviews + "<img width='300' src='" + file + "' / > ";
+        }
+    }
+    if(filePreviews != '') {
+        $('#filePreview').html(filePreviews);
     }
 }
