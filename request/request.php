@@ -48,8 +48,11 @@ if(isset($_POST['functionname']) && isset($_POST['arguments'])) {
         case 'getUsername':
             $aResult = $db->getUserName();
             break;
-        case 'plzPlaceExists':
-            $aResult = $db->plzPlaceExists($_POST['arguments']);
+        case 'getAllPlz':
+            $aResult = $db->getPlz($_POST['arguments']);
+            break;
+        case 'getAllPlaces':
+            $aResult = $db->getPlaces($_POST['arguments']);
             break;
     }
 }

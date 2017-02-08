@@ -29,13 +29,15 @@
                 <td><div class="errorMessage" id="editNrError"></div></td>
             </tr>
             <tr>
-                <td>Ort:</td><td><input id="editPlace" readonly="true" type="text" name="ort" class="deactivated" /></td>
                 <td>Plz:</td>
                 <td>
-                    <select id="editPlz" onchange="selectPlz(this)">
-                        <option value=""></option>
-                    </select>
-                    <input id="plzHidden" type="hidden" name="plz" />
+                    <input type="text" list="editPlzList" id="editPlz" autocomplete="off" onblur="updatePlaceList('edit')" />
+                    <datalist id="editPlzList"></datalist>
+                </td>
+                <td>Ort:</td>
+                <td>
+                    <input type="text" list="editPlaceList" id="editPlace" autocomplete="off" onblur="updatePlzList('edit')" />
+                    <datalist id="editPlaceList"></datalist>
                 </td>
             </tr>
             <tr>

@@ -156,7 +156,7 @@ class database {
     }
 
     public function editOrt() {
-
+        
     }
 
     /**
@@ -310,4 +310,23 @@ class database {
         $this->db_close($conn);
         return mysqli_fetch_all($data, MYSQLI_NUM);
     }
+
+    public function getPlz($args) {
+        $place = $args['place'];
+        $conn = $this->db_connect();
+        $q = "SELECT DISTINCT plz FROM ort WHERE ortName LIKE '%$place%';";
+        $data = mysqli_query($conn, $q);
+        return mysqli_fetch_all($data, MYSQLI_NUM);
+        $this->db_close($conn);
+    }
+
+    public function getPlaces($args) {
+        $plz = $args['plz'];
+        $conn = $this->db_connect();
+        $q = "SELECT DISTINCT ortName FROM ort WHERE plz LIKE '%$plz%';";
+        $data = mysqli_query($conn, $q);
+        return mysqli_fetch_all($data, MYSQLI_NUM);
+        $this->db_close($conn);
+    }
+
 }

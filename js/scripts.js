@@ -83,7 +83,7 @@ function validateForm(formName) {
                 valid = false;
                 filled = false;
                 if(document.getElementById(ff[i].id + 'Error') != null) {
-                    document.getElementById(ff[i].id + 'Error').innerHTML = 'Muss ausgefüllt sein';
+                    document.getElementById(ff[i].id + 'Error').innerHTML = 'Muss ausgefüllt sein.';
                     document.getElementById(ff[i].id + 'Error').style.display = 'block';
                 }
             } else {
@@ -113,7 +113,7 @@ function validateForm(formName) {
                         } else {
                             innerHTML = '';
                         }
-                        document.getElementById(ff[i].id + 'Error').innerHTML = innerHTML + 'Muss mindestens ' + minlength + ' Zeichen lang sein';
+                        document.getElementById(ff[i].id + 'Error').innerHTML = innerHTML + 'Muss mindestens ' + minlength + ' Zeichen lang sein.';
                         document.getElementById(ff[i].id + 'Error').style.display = 'block';
                     }
                 }
@@ -128,7 +128,7 @@ function validateForm(formName) {
                         } else {
                             innerHTML = '';
                         }
-                        document.getElementById(ff[i].id + 'Error').innerHTML = innerHTML + 'Darf maximal ' + maxlength + ' Zeichen lang sein';
+                        document.getElementById(ff[i].id + 'Error').innerHTML = innerHTML + 'Darf maximal ' + maxlength + ' Zeichen lang sein.';
                         document.getElementById(ff[i].id + 'Error').style.display = 'block';
                     }
                 }
@@ -160,10 +160,70 @@ function validateForm(formName) {
                             } else {
                                 innerHTML = '';
                             }
-                            document.getElementById(ff[i].id + 'Error').innerHTML = innerHTML + 'Muss eine Email sein';
+                            document.getElementById(ff[i].id + 'Error').innerHTML = innerHTML + 'Muss eine Email sein.';
                             document.getElementById(ff[i].id + 'Error').style.display = 'block';
                         }
                     }
+                }
+            }
+        }
+        if(ff[i].id == 'registerPlz') {
+            if(ff[i].value == '') {
+                if($('#registerPlace').val() != '') {
+                    valid = false;
+                    innerHTML = $('#registerPlzError').html();
+                    if(innerHTML != null && innerHTML != '') {
+                        innerHTML = innerHTML + '<br>';
+                    } else {
+                        innerHTML = '';
+                    }
+                    $('#registerPlzError').html(innerHTML + 'Wenn Ort ausgefüllt ist muss auch die Plz ausgefüllt werden.');
+                    $('#registerPlzError').css('display', 'block');
+                }
+            }
+        }
+        if(ff[i].id == 'registerPlace') {
+            if(ff[i].value == '') {
+                if($('#registerPlz').val() != '') {
+                    valid = false;
+                    innerHTML = $('#registerPlaceError').html();
+                    if(innerHTML != null && innerHTML != '') {
+                        innerHTML = innerHTML + '<br>';
+                    } else {
+                        innerHTML = '';
+                    }
+                    $('#registerPlaceError').html(innerHTML + 'Wenn Plz ausgefüllt ist muss auch der Ort ausgefüllt werden.');
+                    $('#registerPlaceError').css('display', 'block');
+                }
+            }
+        }
+        if(ff[i].id == 'editPlz') {
+            if(ff[i].value == '') {
+                if($('#editPlace').val() != '') {
+                    valid = false;
+                    innerHTML = $('#editPlzError').html();
+                    if(innerHTML != null && innerHTML != '') {
+                        innerHTML = innerHTML + '<br>';
+                    } else {
+                        innerHTML = '';
+                    }
+                    $('#editPlzError').html(innerHTML + 'Wenn Ort ausgefüllt ist muss auch die Plz ausgefüllt werden.');
+                    $('#editPlzError').css('display', 'block');
+                }
+            }
+        }
+        if(ff[i].id == 'editPlace') {
+            if(ff[i].value == '') {
+                if($('#editPlz').val() != '') {
+                    valid = false;
+                    innerHTML = $('#editPlaceError').html();
+                    if(innerHTML != null && innerHTML != '') {
+                        innerHTML = innerHTML + '<br>';
+                    } else {
+                        innerHTML = '';
+                    }
+                    $('#editPlaceError').html(innerHTML + 'Wenn Plz ausgefüllt ist muss auch der Ort ausgefüllt werden');
+                    $('#editPlaceError').css('display', 'block');
                 }
             }
         }
@@ -315,14 +375,6 @@ function editUser(formName) {
 }
 
 function getUserData() {
-    var result = doRequest('getPlaces', null);
-    var select = document.getElementById('editPlz');
-    for(var i = 0; i < result.length; i++) {
-        opt = document.createElement('option');
-        opt.value = result[i][2];
-        opt.textContent = result[i][1];
-        select.appendChild(opt);
-    }
     user = doRequest('loadUser', null);
     placeId = user[4];
     plz = '';
@@ -386,11 +438,12 @@ function getPageContent() {
                 $('form').find(':input').filter(':visible:first').select();
                 var registerPlz = document.getElementById('registerPlz');
                 if(registerPlz != null) {
-                    getPlaces();
+                    fillPlzPlaceList('register');
                 }
                 var overview = document.getElementById('overviewWrapper');
                 if(overview != null) {
                     getAnnonces();
+                    fillPlzPlaceList('edit');
                 }
             });
         });
@@ -483,9 +536,10 @@ function showPage(page) {
         }
         if(page == 'userEditViewWrapper') {
             getUserData();
+            fillPlzPlaceList('edit');
         }
         if(page == 'loginWrapper') {
-            getPlaces();
+            fillPlzPlaceList('register');
         }
         $('#' + page).delay(300).slideToggle(300, function() {
             $('form').find(':input').filter(':visible:first').select();
@@ -630,5 +684,58 @@ function checkUserLogged() {
         return 'logged';
     } else {
         return 'notLogged';
+    }
+}
+
+function fillPlzPlaceList(list) {
+    arguments = {
+        plz: '',
+        place: ''
+    }
+    plz = doRequest('getAllPlz', arguments);
+    place = doRequest('getAllPlaces', arguments);
+    $('#' + list + 'PlzList').empty();
+    $('#' + list + 'PlaceList').empty();
+    for(var i = 0; i < plz.length; i++) {
+        opt = document.createElement('option');
+        opt.value = plz[i][0];
+        opt.textContent = plz[i][0];
+        $('#' + list + 'PlzList').append(opt);
+    }
+    for(var i = 0; i < place.length; i++) {
+        opt = document.createElement('option');
+        opt.value = place[i][0];
+        opt.textContent = place[i][0];
+        $('#' + list + 'PlaceList').append(opt);
+    }
+}
+
+function updatePlzList(list) {
+    val = $('#' + list + 'Place').val();
+    arguments = {
+        place: val
+    }
+    plz = doRequest('getAllPlz', arguments);
+    $('#' + list + 'PlzList').empty();
+    for(var i = 0; i < plz.length; i++) {
+        opt = document.createElement('option');
+        opt.value = plz[i][0];
+        opt.textContent = plz[i][0];
+        $('#' + list + 'PlzList').append(opt);
+    }
+}
+
+function updatePlaceList(list) {
+    val = $('#' + list + 'Plz').val();
+    arguments = {
+        plz: val
+    }
+    place = doRequest('getAllPlaces', arguments);
+    $('#' + list + 'PlaceList').empty();
+    for(var i = 0; i < place.length; i++) {
+        opt = document.createElement('option');
+        opt.value = place[i][0];
+        opt.textContent = place[i][0];
+        $('#' + list + 'PlaceList').append(opt);
     }
 }
