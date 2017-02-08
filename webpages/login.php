@@ -53,12 +53,12 @@
                     <tr>
                         <td>Plz:</td>
                         <td>
-                            <input type="text" list="registerPlzList" min="5" max="5" pattern="^[0-9]$" id="registerPlz" title="Nur Zahlen." autocomplete="off" onblur="updatePlaceList('register')" />
+                            <input type="text" list="registerPlzList" min="5" max="5" pattern="^[0-9]+$" id="registerPlz" title="Nur Zahlen." autocomplete="off" onblur="updatePlaceList('register')" />
                             <datalist id="registerPlzList"></datalist>
                         </td>
                         <td>Ort:</td>
                         <td>
-                            <input type="text" list="registerPlaceList" min="2" max="50" pattern="^[A-Z].[a-z]$" title="Nur Buchstaben. Groß anfangen." id="registerPlace" autocomplete="off" onblur="updatePlzList('register')" />
+                            <input type="text" list="registerPlaceList" min="2" max="50" pattern="^[A-Z].[a-z]+$" title="Nur Buchstaben. Groß anfangen." id="registerPlace" autocomplete="off" onblur="updatePlzList('register')" />
                             <datalist id="registerPlaceList"></datalist>
                         </td>
                     </tr>

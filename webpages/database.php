@@ -175,6 +175,7 @@ class database {
 
     public function loadOrtByPlzOrt($plz, $ort) {
         $conn = $this->db_connect();
+        $this->plzPlaceExists($plz, $ort);
         $q = "SELECT oId FROM ort WHERE plz = '" . $plz . "' and ortName = '" . $ort . "';";
         $data = mysqli_query($conn, $q);
         return mysqli_fetch_assoc($data)['oId'];
@@ -193,14 +194,6 @@ class database {
         } else {
             return false;
         }
-    }
-
-    public function getAllPlaces() {
-        $conn = $this->db_connect();
-        $q = "SELECT * FROM ort";
-        $data = mysqli_query($conn, $q);
-        $this->db_close($conn);
-        return mysqli_fetch_all($data, MYSQLI_NUM);
     }
 
     public function checkIfEmailExists($email) {
@@ -301,14 +294,15 @@ class database {
         return $userName;
     }
 
-    public function plzPlaceExists($args) {
-        $plz = $args['plz'];
-        $place = $args['place'];
+    public function plzPlaceExists($plz, $place) {
         $conn = $this->db_connect();
         $q = "SELECT plz, ortName FROM ort WHERE plz = '$plz' and ortName = '$place'";
-        $data = mysqli_query($conn, $data);
+        $data = mysqli_query($conn, $q);
+        if($data->num_rows == 0) {
+            $q = "INSERT INTO ort (plz, ortName) VALUES ('$plz', '$place');";
+            $data = mysqli_query($conn, $q);
+        }
         $this->db_close($conn);
-        return mysqli_fetch_all($data, MYSQLI_NUM);
     }
 
     public function getPlz($args) {

@@ -276,8 +276,7 @@ function register(formName) {
         var street = document.getElementById('registerStreet').value;
         var nr = document.getElementById('registerNr').value;
         var place = document.getElementById('registerPlace').value;
-        e = document.getElementById('registerPlz');
-        var plz = e.options[e.selectedIndex].text;
+        var plz = document.getElementById('registerPlz').value;
         street = street + ' ' + nr;
         arguments = {
             email: email,
@@ -350,8 +349,7 @@ function editUser(formName) {
         var street = document.getElementById('editStreet').value;
         var nr = document.getElementById('editNr').value;
         var place = document.getElementById('editPlace').value;
-        e = document.getElementById('editPlz');
-        var plz = e.options[e.selectedIndex].text;
+        var plz = document.getElementById('editPlz').value;
         street = street + ' ' + nr;
         arguments = {
             email: email,
@@ -396,7 +394,7 @@ function getUserData() {
     document.getElementById('editStreet').value = streetNr[0];
     document.getElementById('editNr').value = streetNr[1];
     document.getElementById('editPlace').value = place;
-    document.getElementById('editPlz').value = place;
+    document.getElementById('editPlz').value = plz;
 }
 
 function getPlaces() {
