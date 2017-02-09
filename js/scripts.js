@@ -756,22 +756,20 @@ function getFiles() {
     fileList = document.getElementById('createFile').files;
     $('#fileList').empty();
     for(var i = 0; i < fileList.length; i++) {
-        file = fileList[i];
-        picture = URL.createObjectURL(fileList[i]);
-        d = document.createElement('div');
+        var picture = URL.createObjectURL(fileList[i]);
+        var d = document.createElement('div');
         d.className = "previewImgWrapper";
         d.onclick = function() {
-            showImagePreview(picture);
+            showImagePreview(this);
             return false;
         };
-        b = document.createElement('input');
+        d.id = (i + 1);
+        var b = document.createElement('input');
         b.onclick = function() {
-            showImagePreview(picture);
             return false;
         };
         b.className = "previewImg";
-//        b.value = file.name;
-//        b.type = "button";
+        b.id = "img" + (i + 1);
         b.src = picture;
         b.type = "image";
         $('#fileList').append(d);
@@ -779,8 +777,11 @@ function getFiles() {
     }
 }
 
-function showImagePreview(picture) {
-    $('#imgPreviewBox').prop('src', picture);
+function showImagePreview(div) {
+    img = $('#img' + div.id).prop('src');
+    $('#imgPreviewBox').css('max-width', (screen.width - 100));
+    $('#imgPreviewBox').css('max-height', (screen.width - 100));
+    $('#imgPreviewBox').prop('src', img);
     $('#imgPreviewBoxWrapper').fadeIn(500);
     $('#pageBlocker').fadeIn(500);
 }
