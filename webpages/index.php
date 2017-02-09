@@ -14,6 +14,7 @@ and open the template in the editor.
         <script src="../js/scripts.js"></script>
     </head>
     <body>
+        <div id="pageBlocker"></div>
         <div id="pageWrapper">
             <div id="navBar" style="display: block; left: -150px;">
             </div>
@@ -65,6 +66,9 @@ and open the template in the editor.
                             </table>
                         </form>
                     </div>
+                </div>
+                <div id="imgPreviewBoxWrapper">
+                    <img id="imgPreviewBox" src="">
                 </div>
             </div>
         </div>

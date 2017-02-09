@@ -27,6 +27,12 @@ $(document).ready(function() {
     $('html').click(function() {
         closeMenuIfOpen();
     });
+    $('#pageBlocker').click(function() {
+        closeImgPreviewBox();
+    })
+    $('#imgPreviewBoxWrapper').click(function() {
+        closeImgPreviewBox();
+    })
     $('#navBar').click(function(event) {
         event.stopPropagation();
     });
@@ -46,6 +52,9 @@ function closeAllBoxes() {
     }
     if(document.getElementById('userDeleteBoxWrapper') != null && document.getElementById('userDeleteBoxWrapper').style.display == 'block') {
         closeUserDeleteBox();
+    }
+    if(document.getElementById('imgPreviewBoxWrapper') != null && document.getElementById('imgPreviewBoxWrapper').style.display == 'block') {
+        closeImgPreviewBox();
     }
 }
 
@@ -370,6 +379,12 @@ function editUser(formName) {
     } else {
         return false;
     }
+}
+
+
+function createAnnonce(formName) {
+    alert('create function');
+    return false;
 }
 
 function getUserData() {
@@ -739,16 +754,40 @@ function updatePlaceList(list) {
 
 function getFiles() {
     fileList = document.getElementById('createFile').files;
-    filePreviews = '';
+    $('#fileList').empty();
     for(var i = 0; i < fileList.length; i++) {
-        file = URL.createObjectURL(fileList[i]);
-        if(filePreviews == '') {
-            filePreviews = "<img width='300' src='" + file + "' />";
-        } else {
-            filePreviews = filePreviews + "<img width='300' src='" + file + "' / > ";
-        }
+        file = fileList[i];
+        picture = URL.createObjectURL(fileList[i]);
+        d = document.createElement('div');
+        d.className = "previewImgWrapper";
+        d.onclick = function() {
+            showImagePreview(picture);
+            return false;
+        };
+        b = document.createElement('input');
+        b.onclick = function() {
+            showImagePreview(picture);
+            return false;
+        };
+        b.className = "previewImg";
+//        b.value = file.name;
+//        b.type = "button";
+        b.src = picture;
+        b.type = "image";
+        $('#fileList').append(d);
+        d.appendChild(b);
     }
-    if(filePreviews != '') {
-        $('#filePreview').html(filePreviews);
+}
+
+function showImagePreview(picture) {
+    $('#imgPreviewBox').prop('src', picture);
+    $('#imgPreviewBoxWrapper').fadeIn(500);
+    $('#pageBlocker').fadeIn(500);
+}
+
+function closeImgPreviewBox() {
+    if(document.getElementById('imgPreviewBoxWrapper').style.display == 'block') {
+        $('#imgPreviewBoxWrapper').fadeOut(500);
+        $('#pageBlocker').fadeOut(500);
     }
 }

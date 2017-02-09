@@ -144,7 +144,7 @@ nav {
     position: fixed;
     top: 100px;
     padding: 9px;
-    z-index: 9999;
+    z-index: 9998;
 }
 
 
@@ -208,7 +208,7 @@ CRUD BUTTONS
     height: 100%;
     width: 150px;
     background-color: lightgrey;
-    z-index: 9999;
+    z-index: 9998;
     left: 0px;
 }
 
@@ -221,7 +221,7 @@ CRUD BUTTONS
     text-align: center;
     /*padding-left: 150px;*/
     box-sizing: border-box;
-    z-index: 9999;
+    z-index: 9998;
 }
 
 #contentWrapper {
@@ -354,6 +354,15 @@ CRUD BUTTONS
     border: 1px solid #bce8f1;
 }
 
+#imgPreviewBoxWrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10000;
+    display: none;
+}
+
 #newPlaceBox {
     color: #31708f;
     font-size: unset;
@@ -389,4 +398,38 @@ CRUD BUTTONS
     position: relative;
     top: -80px;
     float: right;
+}
+
+#pageBlocker {
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.5;
+    z-index: 9999;
+    position: fixed;
+    display: none;
+}
+
+#createFile {
+    display: none;
+}
+
+.previewImg {
+    max-width: 80px;
+    max-height: 80px;
+}
+
+.previewImgWrapper {
+    width: 80px;
+    height: 80px;
+    float: left;
+    padding: 10px;
+    background-color: grey;
+    opacity: 0.7;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.previewImgWrapper:hover {
+    opacity: 1.0;
 }

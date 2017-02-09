@@ -28,11 +28,14 @@
             </tr>
             <tr>
                 <td>Bilder:</td>
-                <td><input type="file" id="createFile" onchange="getFiles()" style="width: 327px" multiple="true" /></td>
+                <td>
+                    <input type="file" id="createFile" onchange="getFiles()" style="width: 327px" multiple="true" />
+                    <input type="button" id="createFileButton" onclick="$('#createFile').click()" value="Durchsuchen..." />
+                </td>
             </tr>
             <tr>
                 <td></td>
-                <td style="left: 0px; position: absolute;"><div id="filePreview" style="width: 100%;"></div></td>
+                <td><div id="fileList" style="width: 320px; max-height: 400px; overflow: auto;"></div></td>
             </tr>
             <tr>
                 <td></td>
