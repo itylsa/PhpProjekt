@@ -818,12 +818,17 @@ function removeFiles() {
 
 function fillCategoryList(type) {
     var cats = doRequest('getAllCategories', null);
-    if(cats.length > 0) {
+    if(cats != null && cats.length > 0) {
         for(var i = 0; i < cats.length; i++) {
             opt = document.createElement('option');
             opt.value = cats[i][0];
             opt.textContent = cats[i][0];
             $('#createCategory').append(opt);
         }
+    } else {
+        opt = document.createElement('option');
+        opt.value = "Keine Kategorie";
+        opt.textContent = "Keine Kategorie";
+        $('#createCategory').append(opt);
     }
 }
