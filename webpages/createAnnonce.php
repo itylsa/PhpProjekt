@@ -4,7 +4,7 @@
         <table>
             <tr>
                 <td>Titel:</td>
-                <td><input type="text" id="createTitle" min="4" max="50" size="50" /></td>
+                <td><input type="text" id="createTitle" min="4" max="50" size="50" required /></td>
             </tr>
             <tr>
                 <td></td>
@@ -12,7 +12,7 @@
             </tr>
             <tr>
                 <td>Text:</td>
-                <td><textarea id="createText" style="resize: none" rows="13" cols="38" draggable="false"></textarea></td>
+                <td><textarea id="createText" style="resize: none" rows="13" cols="38" maxlength="1000" draggable="false"></textarea></td>
             </tr>
             <tr>
                 <td></td>
@@ -30,7 +30,8 @@
                 <td>Bilder:</td>
                 <td>
                     <input type="file" id="createFile" onchange="getFiles()" style="width: 327px" multiple="true" />
-                    <input type="button" id="createFileButton" onclick="$('#createFile').click()" value="Durchsuchen..." />
+                    <input type="button" style="float: left" id="createFileButton" onclick="$('#createFile').click()" value="Durchsuchen..." />
+                    <input type="button" style="float: left; display: none;" id="deleteFiles" onclick="removeFiles()" value="Alle entfernen" />
                 </td>
             </tr>
             <tr>

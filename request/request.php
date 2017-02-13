@@ -54,6 +54,9 @@ if(isset($_POST['functionname']) && isset($_POST['arguments'])) {
         case 'getAllPlaces':
             $aResult = $db->getPlaces($_POST['arguments']);
             break;
+        case 'getAllCategories':
+            $aResult = $db->getAllCategories();
+            break;
     }
 }
 echo json_encode($aResult);

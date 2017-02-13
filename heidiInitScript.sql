@@ -13,8 +13,8 @@
 
 
 -- Exportiere Datenbank Struktur für phpproject
-CREATE DATABASE IF NOT EXISTS `phpproject1` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_german2_ci */;
-USE `phpproject1`;
+CREATE DATABASE IF NOT EXISTS `phpproject` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_german2_ci */;
+USE `phpproject`;
 
 -- Exportiere Struktur von Tabelle phpproject.annonce
 CREATE TABLE IF NOT EXISTS `annonce` (
@@ -34,9 +34,7 @@ CREATE TABLE IF NOT EXISTS `annonce` (
 -- Exportiere Struktur von Tabelle phpproject.label
 CREATE TABLE IF NOT EXISTS `label` (
   `lId` bigint(20) NOT NULL AUTO_INCREMENT,
-  `type` varchar(50) COLLATE utf8_german2_ci NOT NULL DEFAULT '0',
-  `text` varchar(50) COLLATE utf8_german2_ci NOT NULL DEFAULT '0',
-  `language` varchar(50) COLLATE utf8_german2_ci NOT NULL DEFAULT '0',
+  `name` VARCHAR(50) NOT NULL DEFAULT '0' COLLATE 'utf8_german2_ci',
   PRIMARY KEY (`lId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
 

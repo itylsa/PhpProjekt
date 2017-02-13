@@ -156,7 +156,7 @@ class database {
     }
 
     public function editOrt() {
-        
+
     }
 
     /**
@@ -321,6 +321,14 @@ class database {
         $data = mysqli_query($conn, $q);
         return mysqli_fetch_all($data, MYSQLI_NUM);
         $this->db_close($conn);
+    }
+
+    public function getAllCategories() {
+        $conn = $this->db_connect();
+        $q = "SELECT name FROM label;";
+        $data = mysqli_query($conn, $q);
+        $this->db_close($conn);
+        return mysqli_fetch_all($data, MYSQLI_NUM);
     }
 
 }

@@ -383,8 +383,10 @@ function editUser(formName) {
 
 
 function createAnnonce(formName) {
-    alert('create function');
-    return false;
+    if(validateForm(formName)) {
+        alert('create function');
+        return false;
+    }
 }
 
 function getUserData() {
@@ -553,6 +555,9 @@ function showPage(page) {
         if(page == 'loginWrapper') {
             fillPlzPlaceList('register');
         }
+        if(page == 'createAnnonceWrapper') {
+            fillCategoryList('create');
+        }
         $('#' + page).delay(300).slideToggle(300, function() {
             $('form').find(':input').filter(':visible:first').select();
         });
@@ -562,10 +567,10 @@ function showPage(page) {
 
 function showErrorBox(message) {
     if(document.getElementById('successBoxWrapper').style.display == 'block') {
-        closeSuccessBox()
+        closeSuccessBox();
     }
     if(document.getElementById('infoBoxWrapper').style.display == 'block') {
-        closeInfoBox()
+        closeInfoBox();
     }
     document.getElementById('errorBox').innerHTML = message;
     $('#errorBoxWrapper').fadeIn(500);
@@ -775,6 +780,7 @@ function getFiles() {
         $('#fileList').append(d);
         d.appendChild(b);
     }
+    $('#deleteFiles').fadeIn(500);
 }
 
 function showImagePreview(div) {
@@ -790,5 +796,23 @@ function closeImgPreviewBox() {
     if(document.getElementById('imgPreviewBoxWrapper').style.display == 'block') {
         $('#imgPreviewBoxWrapper').fadeOut(500);
         $('#pageBlocker').fadeOut(500);
+    }
+}
+
+function removeFiles() {
+    $('#fileList').empty();
+    $('#createFile').val('');
+    $('#deleteFiles').fadeOut(500);
+}
+
+function fillCategoryList(type) {
+    var cats = doRequest('getAllCategories', null);
+    if(cats.length > 0) {
+        for(var i = 0; i < cats.length; i++) {
+            opt = document.createElement('option');
+            opt.value = cats[i][0];
+            opt.textContent = cats[i][0];
+            $('#createCategory').append(opt);
+        }
     }
 }
