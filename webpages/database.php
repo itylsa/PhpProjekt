@@ -289,6 +289,14 @@ class database {
         }
     }
 
+    public function createAnnonce($args) {
+        $uId = $_SESSION['uId'];
+        $title = $args['title'];
+        $text = $args['text'];
+        $category = $args['category'];
+        $pics = $args['pics'];
+    }
+
     public function getUserName() {
         $userName = $this->loadUserById();
         return $userName;

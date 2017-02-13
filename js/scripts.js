@@ -384,7 +384,18 @@ function editUser(formName) {
 
 function createAnnonce(formName) {
     if(validateForm(formName)) {
-        alert('create function');
+        var title = $('#createTitle').val();
+        var text = $('#createText').val();
+        var category = $('#createCategory').val();
+        var pics = $('#createFile')[0].files;
+        arguments = {
+            title: title,
+            text: text,
+            category: category,
+            pics: pics
+        }
+        doRequest('createAnnonce', arguments);
+    } else {
         return false;
     }
 }
