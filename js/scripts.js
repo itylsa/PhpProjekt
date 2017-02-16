@@ -393,8 +393,8 @@ function createAnnonce(formName) {
             text: text,
             category: category,
             pics: pics
-        }
-        doRequest('createAnnonce', arguments);
+        };
+        test = doRequest('createAnnonce', arguments);
     } else {
         return false;
     }
@@ -408,7 +408,7 @@ function getUserData() {
     if(placeId != null && placeId != '') {
         arguments = {
             placeId: placeId
-        }
+        };
         pp = doRequest('loadPlace', arguments);
         plz = pp[0];
         place = pp[1];

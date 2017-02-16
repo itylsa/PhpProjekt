@@ -46,7 +46,7 @@ if(isset($_POST['functionname']) && isset($_POST['arguments'])) {
             $aResult = $db->getAnnonces();
             break;
         case 'createAnnonce':
-            $aResult = $db->getAnnonces();
+            $aResult = $db->createAnnonce($_POST['arguments']);
             break;
         case 'getUsername':
             $aResult = $db->getUserName();
