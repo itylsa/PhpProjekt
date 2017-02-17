@@ -76,6 +76,35 @@ function doRequest(functionname, arguments) {
         data: {functionname: functionname, arguments: arguments},
         success: function(obj, textstatus) {
             result = obj;
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(textStatus);
+            alert(errorThrown);
+        },
+        complete: function(jqXHR, textStatus) {
+
+        }
+    });
+    return result;
+}
+
+function doFileRequest(formData) {
+    var result;
+    jQuery.ajax({
+        type: "POST",
+        url: '../request/fileRequest.php',
+        dataType: 'json',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(obj, textstatus) {
+            result = obj;
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+//            alert(errorThrown);
+        },
+        complete: function(jqXHR, textStatus) {
+
         }
     });
     return result;
@@ -387,14 +416,17 @@ function createAnnonce(formName) {
         var title = $('#createTitle').val();
         var text = $('#createText').val();
         var category = $('#createCategory').val();
-        var pics = $('#createFile')[0].files;
-        arguments = {
-            title: title,
-            text: text,
-            category: category,
-            pics: pics
-        };
-        test = doRequest('createAnnonce', arguments);
+        var pics = $('#createFile').prop('files');
+        var formData = new FormData();
+        formData.append('functionname', 'createAnnonce');
+        formData.append('title', title);
+        formData.append('text', text);
+        formData.append('category', category);
+        for(var i = 0; i < pics.length; i++) {
+            formData.append('pics[]', pics[i], pics[i].name);
+        }
+        var result = doFileRequest(formData);
+//        alert('requestEnd: ' + result);
     } else {
         return false;
     }

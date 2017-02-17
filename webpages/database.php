@@ -289,9 +289,20 @@ class database {
         }
     }
 
-    public function createAnnonce($args) {
-        mkdir($args[pics]);
-        return true;
+    public function createAnnonce($title, $text, $category, $files) {
+        $path = '..\\uploadedFiles';
+        $files = $this->reArrayFiles($files);
+//        var_dump($files);
+//        var_dump($title);
+//        var_dump($text);
+//        var_dump($category);
+        if(!file_exists($path)) {
+            mkdir($path);
+        }
+        foreach($files as $key => $file) {
+            $name = $file['name'];
+            move_uploaded_file($file['tmp_name'], "$path\\$name");
+        }
     }
 
     public function getUserName() {
@@ -334,6 +345,20 @@ class database {
         $data = mysqli_query($conn, $q);
         $this->db_close($conn);
         return mysqli_fetch_all($data, MYSQLI_NUM);
+    }
+
+    function reArrayFiles($file_post) {
+        $file_ary = array();
+        $file_count = count($file_post['name']);
+        $file_keys = array_keys($file_post);
+
+        for($i = 0; $i < $file_count; $i++) {
+            foreach($file_keys as $key) {
+                $file_ary[$i][$key] = $file_post[$key][$i];
+            }
+        }
+
+        return $file_ary;
     }
 
 }
