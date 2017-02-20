@@ -156,7 +156,7 @@ class database {
     }
 
     public function editOrt() {
-        
+
     }
 
     /**
@@ -292,10 +292,6 @@ class database {
     public function createAnnonce($title, $text, $category, $files) {
         $path = '..\\uploadedFiles';
         $files = $this->reArrayFiles($files);
-//        var_dump($files);
-//        var_dump($title);
-//        var_dump($text);
-//        var_dump($category);
         if(!file_exists($path)) {
             mkdir($path);
         }
