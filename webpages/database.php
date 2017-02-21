@@ -296,10 +296,13 @@ class database {
             $conn = $this->db_connect();
             session_start();
             $uId = $_SESSION['uId'];
-            $q = "INSERT INTO annonce (title, text, category, fsUser) VALUES ('$title', '$text', '$category', '$uId');";
+            var_export($category);
+            $q = "INSERT INTO annonce (title, text, category, fsUser) VALUES ('$title', '$text', $category, '$uId');";
             mysqli_query($conn, $q);
             $aId = mysqli_insert_id($conn);
+            var_export($aId);
             $path = '..\\uploadedFiles';
+            $path1 = '..\uploadedFiles';
             $files = $this->reArrayFiles($files);
             if(!file_exists($path)) {
                 mkdir($path);
@@ -307,12 +310,12 @@ class database {
             foreach($files as $key => $file) {
                 $name = $file['name'];
                 move_uploaded_file($file['tmp_name'], "$path\\$name");
-                $q = "SELECT * FROM pictures WHERE fileName = '$path\\$name' and fsAnnocne = '$aId';";
+                $q = "SELECT * FROM pictures WHERE fileName = '$path1\$name' and fsAnnocne = '$aId';";
                 $result = mysqli_query($conn, $q);
                 if(mysqli_num_rows($result) > 0) {
-                    $q = "DELETE FROM pictures WHERE fileName = '$path\\$name' and fsAnnocne = '$aId';";
+                    $q = "DELETE FROM pictures WHERE fileName = '$path1\$name' and fsAnnocne = '$aId';";
                 }
-                $q = "INSERT INTO pictures (fileName, label, fsAnnocne) VALUES ('$path\\$name', '$name', '$aId');";
+                $q = "INSERT INTO pictures (fileName, label, fsAnnocne) VALUES ('$path1\$name', '$name', '$aId');";
                 mysqli_query($conn, $q);
                 $this->db_close($conn);
                 return true;
@@ -358,7 +361,7 @@ class database {
 
     public function getAllCategories() {
         $conn = $this->db_connect();
-        $q = "SELECT name FROM label;";
+        $q = "SELECT lId, name FROM label;";
         $data = mysqli_query($conn, $q);
         $this->db_close($conn);
         return mysqli_fetch_all($data, MYSQLI_NUM);

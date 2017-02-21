@@ -852,7 +852,7 @@ function fillCategoryList(type) {
         for(var i = 0; i < cats.length; i++) {
             opt = document.createElement('option');
             opt.value = cats[i][0];
-            opt.textContent = cats[i][0];
+            opt.textContent = cats[i][1];
             $('#createCategory').append(opt);
         }
     } else {
