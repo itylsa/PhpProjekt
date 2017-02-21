@@ -425,6 +425,7 @@ function createAnnonce(formName) {
             formData.append('pics[]', pics[i], pics[i].name);
         }
         var result = doFileRequest(formData);
+        alert(result);
     } else {
         return false;
     }
@@ -709,10 +710,19 @@ function getAnnonces() {
     var pageContent = '';
     if(data.length > 0) {
         pageContent = '<h1>Annoncen</h1>';
-        pageContent = pageContent + '<table rules="all" frame="void" id="annonceTable">';
-        pageContent = pageContent + '<tr><th>Kategorie</th><th>Beschreibung</th></tr>';
+        pageContent = pageContent + "<table rules='all' frame='void' id='annonceTable'>";
+        pageContent = pageContent + "<tr><th>ID</th><th>Kategorie</th><th>Titel</th><th>Text</th><th>Anzahl Bilder</th></tr>";
         for(var i = 0; i < data.length; i++) {
-            pageContent = pageContent + '<tr><td>asd</td><td style="float: none;">asd asd11111</td><td style="float: none;"><input style="margin: auto" type="button" value="Details"</td></tr>';
+            var arguments = {
+                aId: data[i][0]
+            }
+            var files = doRequest('getFilesOfAnnonces', arguments);
+            pageContent = pageContent + "<tr><td>" + data[i][0] + "</td>\n\
+                                        <td style='float: none;'>" + data[i][1] + "</td>\n\
+                                        <td style='float: none;'>" + data[i][2] + "</td>\n\
+                                        <td style='float: none;'>" + data[i][3] + "</td>\n\
+                                        <td style='float: none;'>" + files.length + "</td>\n\
+                                        <td style='float: none;'><input style='margin: auto' type='button' value='Details'</td></tr>";
         }
         pageContent = pageContent + '</table>';
     } else {

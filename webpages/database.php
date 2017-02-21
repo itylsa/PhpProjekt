@@ -156,7 +156,7 @@ class database {
     }
 
     public function editOrt() {
-
+        
     }
 
     /**
@@ -288,7 +288,15 @@ class database {
             return false;
         }
     }
-
+    
+    public function getFilesOfAnnonces($args) {
+        $aId = $args['aId'];
+        $conn = $this->db_connect();
+        $q = "SELECT * FROM pictures WHERE fsAnnocne = '$aId';";
+        $data = mysqli_query($conn, $q);
+        return mysqli_fetch_all($data, MYSQLI_NUM);
+    }
+    
     public function createAnnonce($title, $text, $category, $files) {
         if($title != null && $title != '' &&
                 $category != null && $category != '' &&
@@ -296,30 +304,36 @@ class database {
             $conn = $this->db_connect();
             session_start();
             $uId = $_SESSION['uId'];
-            var_export($category);
             $q = "INSERT INTO annonce (title, text, category, fsUser) VALUES ('$title', '$text', $category, '$uId');";
             mysqli_query($conn, $q);
             $aId = mysqli_insert_id($conn);
-            var_export($aId);
-            $path = '..\\uploadedFiles';
-            $path1 = '..\uploadedFiles';
+            $rootPath = "..\\uploadedFiles";
+            $userPath = "..\\uploadedFiles\\uId-$uId";
+            $path = "..\\uploadedFiles\\uId-$uId\\aId-$aId";
+            $sqlPath = "..\\\\uploadedFiles\\\\uId-$uId\\\\aId-$aId";
             $files = $this->reArrayFiles($files);
             if(!file_exists($path)) {
+                if(!file_exists($userPath)) {
+                    if(!file_exists($rootPath)) {
+                        mkdir($rootPath);
+                    }
+                    mkdir($userPath);
+                }
                 mkdir($path);
             }
             foreach($files as $key => $file) {
                 $name = $file['name'];
                 move_uploaded_file($file['tmp_name'], "$path\\$name");
-                $q = "SELECT * FROM pictures WHERE fileName = '$path1\$name' and fsAnnocne = '$aId';";
+                $q = "SELECT * FROM pictures WHERE fileName = '$sqlPath\\\\$name';";
                 $result = mysqli_query($conn, $q);
                 if(mysqli_num_rows($result) > 0) {
-                    $q = "DELETE FROM pictures WHERE fileName = '$path1\$name' and fsAnnocne = '$aId';";
+                    $q = "DELETE FROM pictures WHERE fileName = '$sqlPath\\\\$name';";
                 }
-                $q = "INSERT INTO pictures (fileName, label, fsAnnocne) VALUES ('$path1\$name', '$name', '$aId');";
+                $q = "INSERT INTO pictures (fileName, label, fsAnnocne) VALUES ('$sqlPath\\\\$name', '$name', '$aId');";
                 mysqli_query($conn, $q);
-                $this->db_close($conn);
-                return true;
             }
+            $this->db_close($conn);
+            return true;
         } else {
             return false;
         }
