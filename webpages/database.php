@@ -290,14 +290,35 @@ class database {
     }
 
     public function createAnnonce($title, $text, $category, $files) {
-        $path = '..\\uploadedFiles';
-        $files = $this->reArrayFiles($files);
-        if(!file_exists($path)) {
-            mkdir($path);
-        }
-        foreach($files as $key => $file) {
-            $name = $file['name'];
-            move_uploaded_file($file['tmp_name'], "$path\\$name");
+        if($title != null && $title != '' &&
+                $category != null && $category != '' &&
+                $files != null && $files != '') {
+            $conn = $this->db_connect();
+            session_start();
+            $uId = $_SESSION['uId'];
+            $q = "INSERT INTO annonce (title, text, category, fsUser) VALUES ('$title', '$text', '$category', '$uId');";
+            mysqli_query($conn, $q);
+            $aId = mysqli_insert_id($conn);
+            $path = '..\\uploadedFiles';
+            $files = $this->reArrayFiles($files);
+            if(!file_exists($path)) {
+                mkdir($path);
+            }
+            foreach($files as $key => $file) {
+                $name = $file['name'];
+                move_uploaded_file($file['tmp_name'], "$path\\$name");
+                $q = "SELECT * FROM pictures WHERE fileName = '$path\\$name' and fsAnnocne = '$aId';";
+                $result = mysqli_query($conn, $q);
+                if(mysqli_num_rows($result) > 0) {
+                    $q = "DELETE FROM pictures WHERE fileName = '$path\\$name' and fsAnnocne = '$aId';";
+                }
+                $q = "INSERT INTO pictures (fileName, label, fsAnnocne) VALUES ('$path\\$name', '$name', '$aId');";
+                mysqli_query($conn, $q);
+                $this->db_close($conn);
+                return true;
+            }
+        } else {
+            return false;
         }
     }
 

@@ -78,7 +78,6 @@ function doRequest(functionname, arguments) {
             result = obj;
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            alert(textStatus);
             alert(errorThrown);
         },
         complete: function(jqXHR, textStatus) {
@@ -101,7 +100,7 @@ function doFileRequest(formData) {
             result = obj;
         },
         error: function(jqXHR, textStatus, errorThrown) {
-//            alert(errorThrown);
+            alert('Error: ' + errorThrown);
         },
         complete: function(jqXHR, textStatus) {
 
@@ -426,7 +425,6 @@ function createAnnonce(formName) {
             formData.append('pics[]', pics[i], pics[i].name);
         }
         var result = doFileRequest(formData);
-//        alert('requestEnd: ' + result);
     } else {
         return false;
     }
