@@ -1,0 +1,71 @@
+<style type="text/css">
+
+body {
+
+}
+
+* {
+  margin:0;
+  padding:0;
+  font: 100% Verdana, Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+h2 {
+	font-size: 25px;
+	font-weight: bold;
+}
+
+footer {
+	position:fixed;
+	left:0px;
+  bottom:0px;
+  height:50px;
+  width:100%;
+}
+
+#seite {
+  width: 90%;
+  margin: 0 auto;
+}
+
+#kopfbereich {
+
+  background-color:lightblue;
+
+}
+
+
+#inhalt {
+
+  background-color: #D8D8D8;
+
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
+#spaltelinks {
+  float: left;
+  width:15%;
+  background-color: #95a5a6;
+  text-align: center;
+}
+
+#spalterechts {
+  float: right;
+  width:15%;
+  background-color: #95a5a6;
+	text-align: center;
+}
+
+#fussbereich {
+  clear: both;
+  background-color:lightblue;
+	text-align: center;
+}
+
+</style>
