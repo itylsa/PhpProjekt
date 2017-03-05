@@ -5,7 +5,7 @@ $connection = mysqli_connect("localhost", "root", "goliath", "pinnwand") or die(
 include "checkcookie.php";
 
 if ($uid == ''){
-    header('Location: http://dakochmachine.goip.de/schule/');
+    header('Location: http://sandroiv.goip.de/schule/');
 }
 
 ?>
@@ -13,8 +13,8 @@ if ($uid == ''){
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<title>Car&Bike Kleinanzeigen</title>
-<link rel="icon" href="motorcycle-side-view.png">
+<title>Kleinanzeigen</title>
+
 <link rel="stylesheet" type="text/css" href="./style.css">
 </head>
 
@@ -24,7 +24,7 @@ if ($uid == ''){
   <div id="kopfbereich">
     <center>
 			<br>
-			<a href="index.php"><img src="./carandbike.png" width="900px"/></a>
+			<a href="index.php" style="text-decoration: none; color: black;"><h1>Kleinanzeigen</h1></a>
 			<br>
        <br>
     </center>
@@ -90,23 +90,23 @@ if ($uid == ''){
 										$aid = $ad['aid'];
 										$titel = $ad['titel'];
 										$kategorie = $ad['kategorie'];
-										$kilometer = $ad['kilometer'];
-										$ezmonat = $ad['ezmonat'];
-										$ezjahr = $ad['ezjahr'];
-										$vorbesitzer = $ad['vorbesitzer'];
-										$leistung = $ad['leistung'];
-										$getriebe = $ad['getriebe'];
-										$tueren = $ad['tueren'];
 										$preistyp = $ad['preistyp'];
 										$preis = $ad['preis'];
 										$plz = $ad['plz'];
+										
+										$beobachtungsabfrage = mysqli_query($connection, "SELECT count(bid) AS anzahl FROM beobachtungen WHERE `aid`='$aid'");
+										$beobachtungen = mysqli_fetch_assoc($beobachtungsabfrage);
+										$beobachter = $beobachtungen['anzahl'];
+										if ($beobachter == ""){
+											$beobachter = "0";
+										}
 										
 										$ortsabfrage = mysqli_query($connection, "SELECT * FROM orte WHERE `plz`='$plz'");
 										$resultortsabfrage = mysqli_fetch_assoc($ortsabfrage);
 										$adort = $resultortsabfrage['ort'];
 							
 							
-										if($kategorie == "Auto"){
+
 												echo "<br>
 															<table width='80%'>
 																<tr>
@@ -116,8 +116,8 @@ if ($uid == ''){
 																</tr>
 																<tr>
 																	<td><a href='./anzeige.php?id=$aid'><img src='adphotos/$aid/1.jpg' width='300px'/></a><p>$plz $adort</p></td>
-																	<td><b><p>KM</p><p>EZ</p><p>Leistung</p><p>Getriebe</p><p>Türen</p><p>Vorbesitzer</p><p>Beobachter</p></b></td>
-																	<td><p>$kilometer</p><p>$ezmonat/$ezjahr</p><p>$leistung</p><p>$getriebe</p><p>$tueren</p><p>$vorbesitzer</p><p>xy</p></td>
+																	<td><b><p>Beobachter:</p></b></td>
+																	<td><p>$beobachter</p></td>
 																</tr>
 															</table>
 															<table width='80%'>
@@ -130,31 +130,6 @@ if ($uid == ''){
 															</table>
 															<br>
 															<hr>";
-										} else {
-											echo "<br>
-															<table width='80%'>
-																<tr>
-																	<td align='left'><a href='./anzeige.php?id=$aid' style='text-decoration: none; font-weight: bold; color: black;'>$titel</a></td>
-																	<td width='120px'></td>
-																	<td align='right' width='150px' style='font-weight: bold;'>$preis € $preistyp</td>
-																</tr>
-																<tr>
-																	<td><a href='./anzeige.php?id=$aid'><img src='adphotos/$aid/1.jpg' width='300px'/></a><p>$plz $adort</p></td>
-																	<td><b><p>KM</p><p>EZ</p><p>Leistung</p><p>Getriebe</p><p>Vorbesitzer</p><p>Beobachter</p></b></td>
-																	<td><p>$kilometer</p><p>$ezmonat/$ezjahr</p><p>$leistung</p><p>$getriebe</p><p>$vorbesitzer</p><p>xy</p></td>
-																</tr>
-															</table>
-															<table width='80%'>
-																<tr>
-																	<td align='right';><a href='./anzeigebearbeiten.php?id=$aid'>Bearbeiten</a></td>
-																</tr>
-																<tr>
-																	<td align='right'><a href='./anzeigeloeschen.php?id=$aid'>Löschen</a></td>
-																</tr>
-															</table>
-															<br>
-															<hr>";	
-										}
 									}
 			?>
 		
@@ -167,7 +142,7 @@ if ($uid == ''){
 <footer>
   <div id="fussbereich">
     <br>
-		<p>Copyright &copy; <?php $copyrightyear = date("Y"); echo "$copyrightyear";?> Car&Bike Kleinanzeigen. Alle Rechte vorbehalten.<p>
+		<p>Copyright &copy; <?php $copyrightyear = date("Y"); echo "$copyrightyear";?> Kleinanzeigen. Alle Rechte vorbehalten.<p>
 		<br>
   </div>
 </footer>
