@@ -1,6 +1,6 @@
 <?php
 
-$connection = mysqli_connect("localhost", "root", "goliath", "pinnwand") or die("Couldn't connect to database!");
+$connection = mysqli_connect("localhost", "root", "goliath", "kleinanzeigen") or die("Couldn't connect to database!");
 
 include "checkcookie.php";
 
@@ -23,29 +23,29 @@ if ($_POST['speichern']){
 	$salt = hash("sha512", rand() . rand() . rand());
 	
 	if (!empty($name)){
-		mysqli_query($connection, "UPDATE `pinnwand` SET `name`='$name' WHERE `id`='$uid'");
+		mysqli_query($connection, "UPDATE `benutzer` SET `name`='$name' WHERE `id`='$uid'");
 	}
 	if (!empty($lname)){
-		mysqli_query($connection, "UPDATE `pinnwand` SET `lname`='$lname' WHERE `id`='$uid'");
+		mysqli_query($connection, "UPDATE `benutzer` SET `lname`='$lname' WHERE `id`='$uid'");
 	}
 	if (!empty($email)){
-		mysqli_query($connection, "UPDATE `pinnwand` SET `email`='$email' WHERE `id`='$uid'");
+		mysqli_query($connection, "UPDATE `benutzer` SET `email`='$email' WHERE `id`='$uid'");
 	}
 	if (!empty($strundhn)){
-		mysqli_query($connection, "UPDATE `pinnwand` SET `strundhn`='$strundhn' WHERE `id`='$uid'");
+		mysqli_query($connection, "UPDATE `benutzer` SET `strundhn`='$strundhn' WHERE `id`='$uid'");
 	}
 	if (!empty($plz)){
 		$arrayresult = mysqli_query($connection, "SELECT * FROM `orte` WHERE `plz`='$plz'");
 		$fetcharray = mysqli_fetch_assoc($arrayresult);
 		$check = $fetcharray['plz'];
-		mysqli_query($connection, "UPDATE `pinnwand` SET `plz`='$plz' WHERE `id`='$uid'");
+		mysqli_query($connection, "UPDATE `benutzer` SET `plz`='$plz' WHERE `id`='$uid'");
 		if ($check == $plz){
 		} else {
 			mysqli_query($connection, "INSERT INTO `orte` (`plz`, `ort`) VALUES ('$plz', '$ort')");
 		}
 	}
 	if (!empty($passwort)){
-	mysqli_query($connection, "UPDATE `pinnwand` SET `password`='$passwort' WHERE `id`='$uid'");
+	mysqli_query($connection, "UPDATE `benutzer` SET `password`='$passwort' WHERE `id`='$uid'");
 	}
 	
 	header('Location: http://sandroiv.goip.de/schule/login.php');

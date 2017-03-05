@@ -1,6 +1,6 @@
 <?php
 
-$connection = mysqli_connect("localhost", "root", "goliath", "pinnwand") or die("Couldn't connect to database!");
+$connection = mysqli_connect("localhost", "root", "goliath", "kleinanzeigen") or die("Couldn't connect to database!");
 
 include "checkcookie.php";
 

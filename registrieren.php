@@ -1,6 +1,6 @@
 <?php
 
-$connection = mysqli_connect("localhost", "root", "goliath", "pinnwand") or die("Couldn't connect to database!");
+$connection = mysqli_connect("localhost", "root", "goliath", "kleinanzeigen") or die("Couldn't connect to database!");
 
 include "checkcookie.php";
 
@@ -28,7 +28,7 @@ if ($_POST['email'] && $_POST['passwort']){
 	} else {
 		mysqli_query($connection, "INSERT INTO `orte` (`plz`, `ort`) VALUES ('$plz', '$ort')");
 	}
-	$arrayresult = mysqli_query($connection, "SELECT * FROM `pinnwand` WHERE `email`='$email'");
+	$arrayresult = mysqli_query($connection, "SELECT * FROM `benutzer` WHERE `email`='$email'");
 	$fetcharray = mysqli_fetch_assoc($arrayresult);
 	$check = $fetcharray['id'];
 	if ($check != ''){
@@ -36,9 +36,9 @@ if ($_POST['email'] && $_POST['passwort']){
 		header("Location: http://sandroiv.goip.de/schule/login.php");
 	}
 	$salt = hash("sha512", rand() . rand() . rand());
-	mysqli_query($connection, "INSERT INTO `pinnwand` (`email`, `password`, `name`, `lname`, `strundhn`, `plz`, `salt`) VALUES ('$email', '$password', '$name', '$lname', '$strundhn', '$plz', '$salt')") or die("Error");
+	mysqli_query($connection, "INSERT INTO `benutzer` (`email`, `password`, `name`, `lname`, `strundhn`, `plz`, `salt`) VALUES ('$email', '$password', '$name', '$lname', '$strundhn', '$plz', '$salt')") or die("Error");
 	sleep(1);
-	$arrayresult = mysqli_query($connection, "SELECT * FROM `pinnwand` WHERE `email`='$email'");
+	$arrayresult = mysqli_query($connection, "SELECT * FROM `benutzer` WHERE `email`='$email'");
 	$fetcharray = mysqli_fetch_assoc($arrayresult);
 	$uid = $fetcharray['id'];
 	setcookie("c_user", hash("sha512", $email), time() + 24 * 60 * 60, "/");

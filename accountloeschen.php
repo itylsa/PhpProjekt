@@ -1,6 +1,6 @@
 <?php
 
-$connection = mysqli_connect("localhost", "root", "goliath", "pinnwand") or die("Couldn't connect to database!");
+$connection = mysqli_connect("localhost", "root", "goliath", "kleinanzeigen") or die("Couldn't connect to database!");
 
 include "checkcookie.php";
 
@@ -17,7 +17,7 @@ if ($_POST['loeschen']){
         exec("rm -rf /var/www/html/schule/adphotos/$aid/");
     }
     
-    mysqli_query($connection, "DELETE FROM `pinnwand` WHERE `id`='$uid'");
+    mysqli_query($connection, "DELETE FROM `benutzer` WHERE `id`='$uid'");
     header("Location: index.php");
 }
 
