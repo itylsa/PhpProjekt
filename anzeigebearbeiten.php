@@ -12,35 +12,17 @@ $fetcharray = mysqli_fetch_assoc($arrayresult);
 $titel = $fetcharray['titel'];
 $kategorie = $fetcharray['kategorie'];
 $pbname = $fetcharray['name'];
-$fahrzeugtyp = $fetcharray['fahrzeugtyp'];
-$kilometer = $fetcharray['kilometer'];
-$ezmonat = $fetcharray['ezmonat'];
-$ezjahr = $fetcharray['ezjahr'];
-$vorbesitzer = $fetcharray['vorbesitzer'];
-$leistung = $fetcharray['leistung'];
-$getriebe = $fetcharray['getriebe'];
-$kraftstoff = $fetcharray['kraftstoff'];
-$tueren = $fetcharray['tueren'];
 $beschreibung = $fetcharray['beschreibung'];
 $preis = $fetcharray['preis'];
 $preistyp = $fetcharray['preistyp'];
 $datum = $fetcharray['datum'];
-# Alle restlichen Daten auslesen und in Datenbank speichern
+
 
 if ($_POST['update']){
 	
 	$titel = $_POST['titel'];
 	$kategorie = $_POST['kategorie'];
 	$pbname = $_POST['pbname'];
-	$fahrzeugtyp = $_POST['fahrzeugtyp'];
-	$kilometer = $_POST['kilometer'];
-	$ezmonat = $_POST['ezmonat'];
-	$ezjahr = $_POST['ezjahr'];
-	$vorbesitzer = $_POST['vorbesitzer'];
-	$leistung = $_POST['leistung'];
-	$getriebe = $_POST['getriebe'];
-	$kraftstoff = $_POST['kraftstoff'];
-	$tueren = $_POST['tueren'];
 	$beschreibung = $_POST['beschreibung'];
 	$preis = $_POST['preis'];
 	$preistyp = $_POST['preistyp'];
@@ -50,12 +32,9 @@ if ($_POST['update']){
 		move_uploaded_file($_FILES['titelfoto']['tmp_name'], "/var/www/html/schule/adphotos/$uaid/1.jpg");
 	}
 	
-	#die("$titel | $kategorie | $pbname | $fahrzeugtyp | $kilometer | $erstzulassung | $leistung | $getriebe | $kraftstoff | $tueren | <br> $beschreibung <br> $preis | $preistyp | $datum");
-	if($kategorie == "Auto"){
-		mysqli_query($connection, "UPDATE `anzeigen` SET `titel`='$titel',`kategorie`='$kategorie',`name`='$pbname',`fahrzeugtyp`='$fahrzeugtyp',`kilometer`='$kilometer',`ezmonat`='$ezmonat',`ezjahr`='$ezjahr',`vorbesitzer`='$vorbesitzer',`leistung`='$leistung',`getriebe`='$getriebe',`kraftstoff`='$kraftstoff',`tueren`='$tueren',`beschreibung`='$beschreibung',`plz`='$plz',`preis`='$preis',`preistyp`='$preistyp',`datum`='$datum' WHERE `aid`='$uaid'");
-	} else {
-		mysqli_query($connection, "UPDATE `anzeigen` SET `titel`='$titel',`kategorie`='$kategorie',`name`='$pbname',`kilometer`='$kilometer',`ezmonat`='$ezmonat',`ezjahr`='$ezjahr',`vorbesitzer`='$vorbesitzer',`leistung`='$leistung',`getriebe`='$getriebe',`kraftstoff`='$kraftstoff',`beschreibung`='$beschreibung',`plz`='$plz',`preis`='$preis',`preistyp`='$preistyp',`datum`='$datum' WHERE `aid`='$uaid'");	
-	}
+
+	mysqli_query($connection, "UPDATE `anzeigen` SET `titel`='$titel',`kategorie`='$kategorie',`name`='$pbname',`beschreibung`='$beschreibung',`plz`='$plz',`preis`='$preis',`preistyp`='$preistyp',`datum`='$datum' WHERE `aid`='$uaid'");
+
 	
 	header("Location: anzeigen.php");
 }
@@ -67,8 +46,8 @@ if ($_POST['update']){
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<title>Car&Bike Kleinanzeigen</title>
-<link rel="icon" href="motorcycle-side-view.png">
+<title>Kleinanzeigen</title>
+
 <link rel="stylesheet" type="text/css" href="./style.css">
 </head>
 
@@ -77,7 +56,7 @@ if ($_POST['update']){
   <div id="kopfbereich">
     <center>
 			<br>
-			<a href="index.php"><img src="./carandbike.png" width="900px"/></a>
+			<a href="index.php" style="text-decoration: none; color: black;"><h1>Kleinanzeigen</h1></a>
 			<br>
        <br>
     </center>
@@ -137,31 +116,57 @@ if ($_POST['update']){
 										</tr>
 										<tr>
 											<td>Kategorie </td>
-											<td><select name='kategorie' required>
-													<option>Auto</option>
-												</select></td>
+											<td><select name='kategorie' required>";
+											if ($kategorie == "Fahrzeug"){
+													echo "<option selected>Fahrzeug</option>
+														  <option>Immobilien</option>
+														  <option>Tiermarkt</option>
+														  <option>Haushalt</option>
+														  <option>Elektronik</option>
+														  <option>Sonstiges</option>";
+											}		  
+											if ($kategorie == "Immobilien"){
+													echo "<option>Fahrzeug</option>
+														  <option selected>Immobilien</option>
+														  <option>Tiermarkt</option>
+														  <option>Haushalt</option>
+														  <option>Elektronik</option>
+														  <option>Sonstiges</option>";
+											}
+											if ($kategorie == "Tiermarkt"){
+													echo "<option>Fahrzeug</option>
+														  <option>Immobilien</option>
+														  <option selected>Tiermarkt</option>
+														  <option>Haushalt</option>
+														  <option>Elektronik</option>
+														  <option>Sonstiges</option>";
+											}
+											if ($kategorie == "Haushalt"){
+													echo "<option>Fahrzeug</option>
+														  <option>Immobilien</option>
+														  <option>Tiermarkt</option>
+														  <option selected>Haushalt</option>
+														  <option>Elektronik</option>
+														  <option>Sonstiges</option>";
+											}
+											if ($kategorie == "Elektronik"){
+													echo "<option>Fahrzeug</option>
+														  <option>Immobilien</option>
+														  <option>Tiermarkt</option>
+														  <option>Haushalt</option>
+														  <option selected>Elektronik</option>
+														  <option>Sonstiges</option>";
+											}
+											if ($kategorie == "Sonstiges"){
+													echo "<option>Fahrzeug</option>
+														  <option>Immobilien</option>
+														  <option>Tiermarkt</option>
+														  <option>Haushalt</option>
+														  <option>Elektronik</option>
+														  <option selected>Sonstiges</option>";
+											}		
+												echo "</select></td>
 										</tr>";
-													
-													
-													
-													echo "<tr>
-																	<td>Fahrzeugtyp</td>
-																	<td><select name='fahrzeugtyp'>";
-																	
-																	$getftyp = mysqli_query($connection, "SELECT typ FROM `fahrzeugtyp`");
-																	while ($ftypen = mysqli_fetch_assoc($getftyp)){
-																		$ftyp = $ftypen['typ'];
-																		
-																		if ($fahrzeugtyp == $ftyp){
-																			echo "<option selected>$fahrzeugtyp</option>";
-																		} else {
-																			echo "<option>$ftyp</option>";
-																		}
-																		
-																	}
-																	
-																	
-													echo "</select></td></tr>";
 																
 
 										echo "<tr>
@@ -176,115 +181,6 @@ if ($_POST['update']){
 												echo "<option selected>$vorname $nachname</option>";
 										}
 										
-										echo "<tr>
-														<td>Kilometer </td>
-														<td><input type='text' name='kilometer' value='$kilometer' size='25%' pattern='[0-9]{1,6}' required /></td>
-													</tr>
-													<tr>
-														<td>Erstzulassung </td>
-														<td><select name='ezmonat'>";
-														
-										for($i = 1; $i <= 12; $i++){
-											
-											if($ezmonat < $i){
-												if($i >= 10){
-													echo "<option>$i</option>";
-												} else {
-													echo "<option>0$i</option>";
-												}		
-											} elseif($ezmonat > $i){
-												if($i >= 10){
-													echo "<option>$i</option>";
-												} else {
-													echo "<option>0$i</option>";
-												}
-											} else {
-												if($ezmonat >= 10){
-													echo "<option selected>$i</option>";
-												} else {
-													echo "<option selected>0$i</option>";
-												}
-											}
-											
-											
-										}
-														
-										echo "</select><select name='ezjahr'>";
-										
-										for($i = date("Y"); $i >= 1900; $i--){
-											if($ezjahr == $i){
-												echo "<option selected>$i</option>";
-											} else {
-												echo "<option>$i</option>";
-											}
-										}
-														
-										echo "</select></td>
-													</tr>
-													<tr>
-														<td>Vorbesitzer</td>
-														<td><input type='text' name='vorbesitzer' value='$vorbesitzer' size='25%' pattern='[0-9]{1}' required /></td>
-													</tr>
-													<tr>
-														<td>Leistung (in PS) </td>
-														<td><input type='text' name='leistung' value='$leistung' size='25%' pattern='[0-9]{1,4}' required /></td>
-													</tr>
-													<tr>
-														<td>Getriebe </td>
-														<td><select name='getriebe' required>";
-														
-														if ($getriebe == "Manuell"){
-															echo "<option selected>Manuell</option>";
-															echo "<option>Automatik</option>";
-														} else {
-															echo "<option>Manuell</option>";
-															echo "<option selected>Automatik</option>";
-														}
-										
-										echo "</select></td>
-													</tr>
-													<tr>
-														<td>Kraftstoff </td>
-														<td><select name='kraftstoff' required>";
-														
-														if ($kraftstoff == "Benzin"){
-															echo "<option selected>Benzin</option>";
-															echo "<option>Diesel</option>";
-															echo "<option>Gas</option>";
-															echo "<option>Strom</option>";
-														} elseif ($kraftstoff == "Diesel") {
-															echo "<option>Benzin</option>";
-															echo "<option selected>Diesel</option>";
-															echo "<option>Gas</option>";
-															echo "<option>Strom</option>";
-														} elseif ($kraftstoff == "Gas") {
-															echo "<option>Benzin</option>";
-															echo "<option>Diesel</option>";
-															echo "<option selected>Gas</option>";
-															echo "<option>Strom</option>";
-														} else {
-															echo "<option>Benzin</option>";
-															echo "<option>Diesel</option>";
-															echo "<option>Gas</option>";
-															echo "<option selected>Strom</option>";
-														}
-														
-										echo "</select></td>";
-										
-													if ($kategorie == "Auto"){
-														
-														echo "<tr>
-														<td>Türen </td>
-														<td><select name='tueren' required>";
-																	
-														if ($tueren == 3){
-															echo "<option selected>3</option>";
-															echo "<option>5</option>";
-														} else {
-															echo "<option>3</option>";
-															echo "<option selected>5</option>";
-														}
-													}
 													
 										echo "</select></td></tr><tr>
 														<td style='vertical-align: top;'>Beschreibung </td>
@@ -328,7 +224,7 @@ if ($_POST['update']){
 <footer>
   <div id="fussbereich">
     <br>
-		<p>Copyright &copy; <?php $copyrightyear = date("Y"); echo "$copyrightyear";?> Car&Bike Kleinanzeigen. Alle Rechte vorbehalten.<p>
+		<p>Copyright &copy; <?php $copyrightyear = date("Y"); echo "$copyrightyear";?> Kleinanzeigen. Alle Rechte vorbehalten.<p>
 		<br>
   </div>
 </footer>
