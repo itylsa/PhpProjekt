@@ -12,15 +12,6 @@ $fetcharray = mysqli_fetch_assoc($arrayresult);
 $titel = $fetcharray['titel'];
 $kategorie = $fetcharray['kategorie'];
 $pbname = $fetcharray['name'];
-$fahrzeugtyp = $fetcharray['fahrzeugtyp'];
-$kilometer = $fetcharray['kilometer'];
-$ezmonat = $fetcharray['ezmonat'];
-$ezjahr = $fetcharray['ezjahr'];
-$vorbesitzer = $fetcharray['vorbesitzer'];
-$leistung = $fetcharray['leistung'];
-$getriebe = $fetcharray['getriebe'];
-$kraftstoff = $fetcharray['kraftstoff'];
-$tueren = $fetcharray['tueren'];
 $beschreibung = $fetcharray['beschreibung'];
 $preis = $fetcharray['preis'];
 $preistyp = $fetcharray['preistyp'];
@@ -45,8 +36,8 @@ if ($_POST['loeschen']){
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<title>Car&Bike Kleinanzeigen</title>
-<link rel="icon" href="motorcycle-side-view.png">
+<title>Kleinanzeigen</title>
+
 <link rel="stylesheet" type="text/css" href="./style.css">
 </head>
 
@@ -55,7 +46,7 @@ if ($_POST['loeschen']){
   <div id="kopfbereich">
     <center>
 			<br>
-			<a href="index.php"><img src="./carandbike.png" width="900px"/></a>
+			<a href="index.php" style="text-decoration: none; color: black;"><h1>Kleinanzeigen</h1></a>
 			<br>
        <br>
     </center>
@@ -121,48 +112,6 @@ if ($_POST['loeschen']){
 										</tr>";
 													
 													
-										if ($kategorie == "Auto"){			
-										echo "<tr>
-												<td>Fahrzeugtyp</td>
-												<td>$fahrzeugtyp</td>
-                                            </tr>";
-                                        }
-    
-										
-										echo "<tr>
-														<td>Kilometer </td>
-														<td>$kilometer</td>
-													</tr>
-													<tr>
-														<td>Erstzulassung </td>
-														<td>$ezmonat/$ezjahr</td>
-                                            </tr>";
-										
-														
-										echo "
-													<tr>
-														<td>Leistung (in PS) </td>
-														<td>$leistung</td>
-													</tr>
-													<tr>
-														<td>Getriebe </td>
-														<td>$getriebe</td>
-                                                    </tr>";
-														
-														
-										echo "
-													<tr>
-														<td>Kraftstoff </td>
-														<td>$kraftstoff</td>
-                                                    </tr>";
-										
-													if ($kategorie == "Auto"){
-														
-														echo "<tr>
-														<td>Türen </td>
-														<td>$tueren</td>
-                                                        </tr>";
-													}
 													
 										echo "<tr>
 														<td style='vertical-align: top;'>Beschreibung </td>
@@ -202,7 +151,7 @@ if ($_POST['loeschen']){
 <footer>
   <div id="fussbereich">
     <br>
-		<p>Copyright &copy; <?php $copyrightyear = date("Y"); echo "$copyrightyear";?> Car&Bike Kleinanzeigen. Alle Rechte vorbehalten.<p>
+		<p>Copyright &copy; <?php $copyrightyear = date("Y"); echo "$copyrightyear";?> Kleinanzeigen. Alle Rechte vorbehalten.<p>
 		<br>
   </div>
 </footer>
