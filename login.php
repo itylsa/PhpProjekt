@@ -5,7 +5,7 @@ $connection = mysqli_connect("localhost", "root", "goliath", "pinnwand") or die(
 
 if ($_POST['email'] && $_POST['password']){
 	$email = mysqli_real_escape_string($connection, $_POST['email']);
-	$password = mysqli_real_escape_string($connection, hash("sha512", $_POST['password']));
+	$password = mysqli_real_escape_string($connection, $_POST['password']);
 	$result = mysqli_query($connection, "SELECT * FROM `pinnwand` WHERE `email`='$email'");
 	$fetcharray = mysqli_fetch_assoc($result);
 	$dbemail = $fetcharray['email'];
@@ -17,9 +17,9 @@ if ($_POST['email'] && $_POST['password']){
 			setcookie("c_salt", $salt, time() + 24 * 60 * 60, "/");
 			$userID = $fetcharray['id'];
 			mysqli_query($connection, "UPDATE `pinnwand` SET `salt`='$salt' WHERE `id`='$userID'");
-			header("Location: http://dakochmachine.goip.de/schule/");
+			header("Location: http://sandroiv.goip.de/schule/");
 		} else {
-			die("Passwort inkorrekt!");
+			die("Passwort inkorrekt! $password $dbpassword");
 		}
 	} else {
 	die("Es existiert kein Account mit der Email: " . $email);
@@ -32,7 +32,7 @@ if ($_POST['email'] && $_POST['password']){
 include "checkcookie.php";
 
 if ($uid != ''){
-    header('Location: http://dakochmachine.goip.de/schule/');
+    header('Location: http://sandroiv.goip.de/schule/');
 }
 
 
@@ -42,8 +42,8 @@ if ($uid != ''){
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<title>Car&Bike Kleinanzeigen</title>
-<link rel="icon" href="motorcycle-side-view.png">
+<title>Kleinanzeigen</title>
+
 <link rel="stylesheet" type="text/css" href="./style.css">
 </head>
 
@@ -52,7 +52,7 @@ if ($uid != ''){
   <div id="kopfbereich">
     <center>
 			<br>
-			<a href="index.php"><img src="./carandbike.png" width="900px"/></a>
+			<a href="index.php" style="text-decoration: none; color: black;"><h1>Kleinanzeigen</h1></a>
 			<br>
        <br>
     </center>
@@ -83,7 +83,7 @@ if ($uid != ''){
 		
 		<?php
 		if($uid != ''){
-			header("Location: http://dakochmachine.goip.de/schule/");
+			header("Location: http://sandroiv.goip.de/schule/");
 		} else {
 			echo '<a href="./registrieren.php" style="text-decoration: none; color: black;">Registrieren</a>';
 		}
@@ -117,7 +117,7 @@ if ($uid != ''){
 <footer>
   <div id="fussbereich">
     <br>
-		<p>Copyright &copy; <?php $copyrightyear = date("Y"); echo "$copyrightyear";?> Car&Bike Kleinanzeigen. Alle Rechte vorbehalten.<p>
+		<p>Copyright &copy; <?php $copyrightyear = date("Y"); echo "$copyrightyear";?> Kleinanzeigen. Alle Rechte vorbehalten.<p>
 		<br>
   </div>
 </footer>

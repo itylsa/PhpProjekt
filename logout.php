@@ -5,6 +5,6 @@ $connection = mysqli_connect("localhost", "root", "goliath", "pinnwand") or die(
 include "checkcookie.php";
 
 mysqli_query($connection, "UPDATE `pinnwand` SET `salt`='offline' WHERE `id`='$uid'");
-header('Location: http://dakochmachine.goip.de/schule/');
+header('Location: http://sandroiv.goip.de/schule/');
 
 ?>
