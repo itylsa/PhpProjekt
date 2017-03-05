@@ -5,14 +5,14 @@ $connection = mysqli_connect("localhost", "root", "goliath", "pinnwand") or die(
 include "checkcookie.php";
 
 if ($uid != ''){
-        header('Location: http://dakochmachine.goip.de/schule/');
+        header('Location: http://sandroiv.goip.de/schule/');
 }
 
 
 if ($_POST['email'] && $_POST['passwort']){
 	$email = mysqli_real_escape_string($connection, $_POST['email']);
-	$password = mysqli_real_escape_string($connection, hash("sha512", $_POST['password']));
-	$passwordbes = mysqli_real_escape_string($connection, hash("sha512", $_POST['passwordbes']));
+	$password = mysqli_real_escape_string($connection, $_POST['passwort']);
+	$passwordbes = mysqli_real_escape_string($connection, $_POST['passwortbes']);
 	if ($password != $passwordbes){
 		die("Passwörter stimmen nicht überein!");
 	}
@@ -33,7 +33,7 @@ if ($_POST['email'] && $_POST['passwort']){
 	$check = $fetcharray['id'];
 	if ($check != ''){
 		die("Account existiert bereits!");
-		header("Location: http://dakochmachine.goip.de/schule/login.php");
+		header("Location: http://sandroiv.goip.de/schule/login.php");
 	}
 	$salt = hash("sha512", rand() . rand() . rand());
 	mysqli_query($connection, "INSERT INTO `pinnwand` (`email`, `password`, `name`, `lname`, `strundhn`, `plz`, `salt`) VALUES ('$email', '$password', '$name', '$lname', '$strundhn', '$plz', '$salt')") or die("Error");
@@ -43,7 +43,7 @@ if ($_POST['email'] && $_POST['passwort']){
 	$uid = $fetcharray['id'];
 	setcookie("c_user", hash("sha512", $email), time() + 24 * 60 * 60, "/");
 	setcookie("c_salt", $salt, time() + 24 * 60 * 60, "/");
-	header("Location: http://dakochmachine.goip.de/schule/");
+	header("Location: http://sandroiv.goip.de/schule/");
 }
 
 ?>
@@ -52,8 +52,8 @@ if ($_POST['email'] && $_POST['passwort']){
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<title>Car&Bike Kleinanzeigen</title>
-<link rel="icon" href="motorcycle-side-view.png">
+<title>Kleinanzeigen</title>
+
 <link rel="stylesheet" type="text/css" href="./style.css">
 </head>
 
@@ -62,7 +62,7 @@ if ($_POST['email'] && $_POST['passwort']){
   <div id="kopfbereich">
     <center>
 			<br>
-			<a href="index.php"><img src="./carandbike.png" width="900px"/></a>
+			<a href="index.php" style="text-decoration: none; color: black;"><h1>Kleinanzeigen</h1></a>
 			<br>
        <br>
     </center>
@@ -155,7 +155,7 @@ if ($_POST['email'] && $_POST['passwort']){
 <footer>
   <div id="fussbereich">
     <br>
-		<p>Copyright &copy; <?php $copyrightyear = date("Y"); echo "$copyrightyear";?> Car&Bike Kleinanzeigen. Alle Rechte vorbehalten.<p>
+		<p>Copyright &copy; <?php $copyrightyear = date("Y"); echo "$copyrightyear";?> Kleinanzeigen. Alle Rechte vorbehalten.<p>
 		<br>
   </div>
 </footer>
