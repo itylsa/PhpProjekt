@@ -5,7 +5,7 @@ $connection = mysqli_connect("localhost", "root", "goliath", "pinnwand") or die(
 include "checkcookie.php";
 
 if ($uid == ''){
-    header('Location: http://dakochmachine.goip.de/schule/');
+    header('Location: http://sandroiv.goip.de/schule/');
 }
 
 
@@ -21,8 +21,8 @@ if ($_POST['entfernen']){
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<title>Car&Bike Kleinanzeigen</title>
-<link rel="icon" href="motorcycle-side-view.png">
+<title>Kleinanzeigen</title>
+
 <link rel="stylesheet" type="text/css" href="./style.css">
 </head>
 
@@ -32,7 +32,7 @@ if ($_POST['entfernen']){
   <div id="kopfbereich">
     <center>
 			<br>
-			<a href="index.php"><img src="./carandbike.png" width="900px"/></a>
+			<a href="index.php" style="text-decoration: none; color: black;"><h1>Kleinanzeigen</h1></a>
 			<br>
        <br>
     </center>
@@ -101,13 +101,6 @@ if ($_POST['entfernen']){
 										$aid = $ad['aid'];
 										$titel = $ad['titel'];
 										$kategorie = $ad['kategorie'];
-										$kilometer = $ad['kilometer'];
-										$ezmonat = $ad['ezmonat'];
-										$ezjahr = $ad['ezjahr'];
-										$vorbesitzer = $ad['vorbesitzer'];
-										$leistung = $ad['leistung'];
-										$getriebe = $ad['getriebe'];
-										$tueren = $ad['tueren'];
 										$preistyp = $ad['preistyp'];
 										$preis = $ad['preis'];
 										$plz = $ad['plz'];
@@ -122,19 +115,16 @@ if ($_POST['entfernen']){
 										$resultortsabfrage = mysqli_fetch_assoc($ortsabfrage);
 										$adort = $resultortsabfrage['ort'];
 							
-							
-										if($kategorie == "Auto"){
+
 												echo "<br>
 															<table width='80%'>
 																<tr>
 																	<td align='left'><a href='./anzeige.php?id=$aid' style='text-decoration: none; font-weight: bold; color: black;'>$titel</a></td>
-																	<td width='120px'></td>
 																	<td align='right' width='150px' style='font-weight: bold;'>$preis € $preistyp</td>
 																</tr>
 																<tr>
 																	<td><a href='./anzeige.php?id=$aid'><img src='adphotos/$aid/1.jpg' width='300px'/></a><p>$plz $adort</p></td>
-																	<td><b><p>KM</p><p>EZ</p><p>Leistung</p><p>Getriebe</p><p>Türen</p><p>Vorbesitzer</p><p>Beobachter</p></b></td>
-																	<td><p>$kilometer</p><p>$ezmonat/$ezjahr</p><p>$leistung</p><p>$getriebe</p><p>$tueren</p><p>$vorbesitzer</p><p>$beobachter</p></td>
+																	<td></td>
 																</tr>
 															</table>
 															<table width='80%'>
@@ -144,29 +134,7 @@ if ($_POST['entfernen']){
 															</table>
 															<br>
 															<hr>";
-										} else {
-											echo "<br>
-															<table width='80%'>
-																<tr>
-																	<td align='left'><a href='./anzeige.php?id=$aid' style='text-decoration: none; font-weight: bold; color: black;'>$titel</a></td>
-																	<td width='120px'></td>
-																	<td align='right' width='150px' style='font-weight: bold;'>$preis € $preistyp</td>
-																</tr>
-																<tr>
-																	<td><a href='./anzeige.php?id=$aid'><img src='adphotos/$aid/1.jpg' width='300px'/></a><p>$plz $adort</p></td>
-																	<td><b><p>KM</p><p>EZ</p><p>Leistung</p><p>Getriebe</p><p>Vorbesitzer</p><p>Beobachter</p></b></td>
-																	<td><p>$kilometer</p><p>$ezmonat/$ezjahr</p><p>$leistung</p><p>$getriebe</p><p>$vorbesitzer</p><p>$beobachter</p></td>
-																</tr>
-															</table>
-															<table width='80%'>
-																<tr>
-																	<td align='right'><form action='' method='post'><input type='hidden' name='caid' value='$aid' /><input type='hidden' name='cuid' value='$uid' /><input type='submit' name='entfernen' value='Von Liste entfernen' /></form></td>
-																</tr>
-															</table>
-															<br>
-															<hr>";	
-										}
-									}
+						}
 			?>
 		
 		<br>
@@ -178,7 +146,7 @@ if ($_POST['entfernen']){
 <footer>
   <div id="fussbereich">
     <br>
-		<p>Copyright &copy; <?php $copyrightyear = date("Y"); echo "$copyrightyear";?> Car&Bike Kleinanzeigen. Alle Rechte vorbehalten.<p>
+		<p>Copyright &copy; <?php $copyrightyear = date("Y"); echo "$copyrightyear";?> Kleinanzeigen. Alle Rechte vorbehalten.<p>
 		<br>
   </div>
 </footer>
