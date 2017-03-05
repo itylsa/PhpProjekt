@@ -1,6 +1,6 @@
 #!/bin/bash
 
-API="o.UPOIdVHjWHKxgrYwSrpCgGhrOJ88dynn"
+API="o.KEDsgavxE0StXldVfqIFVqlWWsBS0nP9"
 MSG="Server Message:
 $1"
 if [ "$1" == "" ] ; then
