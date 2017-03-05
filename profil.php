@@ -19,7 +19,7 @@ if ($_POST['speichern']){
 		die("Passw&ouml;rter stimmen nicht &uuml;berein!");
 	}
 	
-	$passwort = mysqli_real_escape_string($connection, hash("sha512", $_POST['password']));
+	$passwort = mysqli_real_escape_string($connection, $_POST['passwort']);
 	$salt = hash("sha512", rand() . rand() . rand());
 	
 	if (!empty($name)){
@@ -48,7 +48,7 @@ if ($_POST['speichern']){
 	mysqli_query($connection, "UPDATE `pinnwand` SET `password`='$passwort' WHERE `id`='$uid'");
 	}
 	
-	header('Location: http://dakochmachine.goip.de/schule/login.php');
+	header('Location: http://sandroiv.goip.de/schule/login.php');
 }
 
 ?>
@@ -57,8 +57,8 @@ if ($_POST['speichern']){
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<title>Car&Bike Kleinanzeigen</title>
-<link rel="icon" href="motorcycle-side-view.png">
+<title>Kleinanzeigen</title>
+
 <link rel="stylesheet" type="text/css" href="./style.css">
 </head>
 
@@ -67,7 +67,7 @@ if ($_POST['speichern']){
   <div id="kopfbereich">
     <center>
 			<br>
-			<a href="index.php"><img src="./carandbike.png" width="900px"/></a>
+			<a href="index.php" style="text-decoration: none; color: black;"><h1>Kleinanzeigen</h1></a>
 			<br>
        <br>
     </center>
@@ -166,7 +166,7 @@ if ($_POST['speichern']){
 <footer>
   <div id="fussbereich">
     <br>
-		<p>Copyright &copy; <?php $copyrightyear = date("Y"); echo "$copyrightyear";?> Car&Bike Kleinanzeigen. Alle Rechte vorbehalten.<p>
+		<p>Copyright &copy; <?php $copyrightyear = date("Y"); echo "$copyrightyear";?> Kleinanzeigen. Alle Rechte vorbehalten.<p>
 		<br>
   </div>
 </footer>
