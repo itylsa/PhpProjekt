@@ -19,6 +19,7 @@ USE `phpproject`;
 -- Exportiere Struktur von Tabelle phpproject.annonce
 CREATE TABLE IF NOT EXISTS `annonce` (
   `aId` bigint(20) NOT NULL AUTO_INCREMENT,
+  `header` varchar(50) COLLATE utf8_german2_ci NOT NULL DEFAULT '0',
   `category` varchar(50) COLLATE utf8_german2_ci NOT NULL DEFAULT '0',
   `text` varchar(50) COLLATE utf8_german2_ci NOT NULL DEFAULT '0',
   `fsUser` bigint(20) DEFAULT NULL,
@@ -49,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `ort` (
 
 -- Daten Export vom Benutzer nicht ausgewählt
 -- Exportiere Struktur von Tabelle phpproject.picture
-CREATE TABLE IF NOT EXISTS `pictures` (
+CREATE TABLE IF NOT EXISTS `picture` (
   `pictureId` bigint(20) NOT NULL AUTO_INCREMENT,
   `fileName` varchar(50) COLLATE utf8_german2_ci NOT NULL DEFAULT '0',
   `label` varchar(50) COLLATE utf8_german2_ci NOT NULL DEFAULT '0',

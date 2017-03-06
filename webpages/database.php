@@ -24,14 +24,14 @@ class database {
         $connection;
 
         // Try and connect to the database, if a connection has not been established yet
-        if(!isset($connection)) {
+        if (!isset($connection)) {
             $config = parse_ini_file('../config.ini'); // Load configuration
             $connection = mysqli_connect($config['host'], $config['username'], $config['password'], $config['dbname']);
             mysqli_set_charset($connection, "UTF-8");
         }
 
         // If connection was not successful, return error
-        if($connection === false) {
+        if ($connection === false) {
             return mysqli_connect_error();
         }
         return $connection;
@@ -56,7 +56,7 @@ class database {
         $data = mysqli_query($conn, $q);
         $pass = '';
         $uId = '';
-        if($data->num_rows > 0) {
+        if ($data->num_rows > 0) {
             $row = mysqli_fetch_assoc($data);
             $pass = $row['password'];
             $uId = $row['uId'];
@@ -64,7 +64,7 @@ class database {
             $this->db_close($conn);
             return false;
         }
-        if($pwd == $pass) {
+        if ($pwd == $pass) {
             $_SESSION['uId'] = $uId;
             $this->db_close($conn);
             return true;
@@ -90,7 +90,7 @@ class database {
         $conn = $this->db_connect();
         $q = "SELECT * FROM user WHERE email = '" . $email . "';";
         $data = mysqli_query($conn, $q);
-        if($data->num_rows > 0) {
+        if ($data->num_rows > 0) {
             $this->db_close($conn);
             return false;
         } else {
@@ -118,13 +118,13 @@ class database {
     public function editUser($email, $pw, $fName, $lName, $street, $ort, $plz, $uId) {
         $conn = $this->db_connect();
         $oid = $this->loadOrtByPlzOrt($plz, $ort);
-        if(!isset($oid)){
-           $this->db_close($conn);
-           return "Fehler! Ort nicht gefunden";
+        if (!isset($oid)) {
+            $this->db_close($conn);
+            return "Fehler! Ort nicht gefunden";
         }
         $q = "SELECT uId FROM user WHERE email = '" . $email . "' AND uId != '" . $uId . "' ;";
         $data = mysqli_query($conn, $q);
-        if($data->num_rows > 0) {
+        if ($data->num_rows > 0) {
             $this->db_close($conn);
             return "Fehler! Mail schon vergeben";
         }
@@ -163,7 +163,7 @@ class database {
         $conn = $this->db_connect();
         $q = "SELECT * FROM user WHERE email = '" . $email . "';";
         $data = mysqli_query($conn, $q);
-        if($data->num_rows > 0) {
+        if ($data->num_rows > 0) {
             $q = "UPDATE user SET password = '" . $password . "' WHERE email = '" . $email . "'";
             return mysqli_query($conn, $q);
         } else {
@@ -183,7 +183,7 @@ class database {
         $conn = $this->db_connect();
         $q = "SELECT email FROM user WHERE email = '" . $email . "';";
         $data = mysqli_query($conn, $q);
-        if($data->num_rows > 0) {
+        if ($data->num_rows > 0) {
             return true;
         } else {
             return false;
@@ -194,7 +194,7 @@ class database {
         $conn = $this->db_connect();
         $q = "SELECT * FROM ort WHERE plz = '" . $plz . "' and ortName = '" . $ort . "';";
         $data = mysqli_query($conn, $q);
-        if($data->num_rows > 0) {
+        if ($data->num_rows > 0) {
             return false;
         }
         $q = "INSERT INTO ort (plz, ortName) VALUES ('" . $plz . "', '" . $ort . "');";
@@ -202,4 +202,69 @@ class database {
         $this->db_close($conn);
         return true;
     }
+
+    public function getAnnonceById($id) {
+        $conn = $this->db_connect();
+        $q = "SELECT * FROM annonce WHERE aId = '" . $id . "';";
+        $data = mysqli_query($conn, $q);
+        if ($data->num_rows > 0) {
+            return false;
+        }
+        return $row = mysqli_fetch_assoc($data);
+    }
+
+    public function getPicByAnnonceId($aId) {
+        $conn = $this->db_connect();
+        $q = "SELECT * FROM picture WHERE fsAnnonce = '" . $aId . "';";
+        $data = mysqli_query($conn, $q);
+        if ($data->num_rows > 0) {
+            return false;
+        }
+    }
+
+    public function getPicById($pId) {
+        $conn = $this->db_connect();
+   d     $q = "SELECT * FROM picture WHERE pictureId = '" . $pId . "';";
+        $data = mysqli_query($conn, $q);
+        if ($data->num_rows > 0) {
+            return false;
+        }
+    }
+
+    public function createAnnonce($header, $category, $text, $uId) {
+        $conn = $this->db_connect();
+        $q = "SELECT aId FROM annonce WHERE header = '" . $header . "';";
+        $data = mysqli_query($conn, $q);
+        if ($data->num_rows > 0) {
+            $this->db_close($conn);
+            return false;
+        } else {
+            $q = "INSERT INTO annonce (header, category, text, fsUser) "
+                    . "VALUES ('" . $header . "','" . $category . "','" . $text . "','" . $uId . "')";
+            mysqli_query($conn, $q);
+            $this->db_close($conn);
+            return true;
+        }
+    }
+
+    public function savePic($label , $aId, $_FILES) {
+        if (isset($_FILES['uploaded_file'])) {
+    // Example:
+    if(move_uploaded_file($_FILES['uploaded_file']['tmp_name'], "pictures/" . $_FILES['uploaded_file']['name'] . "_" . $aId)){
+         $conn = $this->db_connect();
+      $q = "INSERT INTO picture (filename, label, fsAnnonce) "
+                    . "VALUES ('" . $_FILES['uploaded_file']['name'] . "','" . $label . "','" . $aId . "',)";
+        mysqli_query($conn, $q);
+        echo $_FILES['uploaded_file']['name']. " uploaded ...";
+    } else {
+        echo $_FILES['uploaded_file']['name']. " NOT uploaded ...";
+    }
+
+    exit;
+} else {
+    echo "no";
+}
+        return true;
+    }
+
 }
