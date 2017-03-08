@@ -220,16 +220,29 @@ class database {
         if ($data->num_rows > 0) {
             return false;
         }
+         return $row = mysqli_fetch_assoc($data);
     }
 
-    public function getPicById($pId) {
+    public function getPicByAId($aId) {        
         $conn = $this->db_connect();
-   d     $q = "SELECT * FROM picture WHERE pictureId = '" . $pId . "';";
+        $q = "SELECT * FROM picture WHERE fsAnnonce = '" . $aId . "';";
         $data = mysqli_query($conn, $q);
         if ($data->num_rows > 0) {
             return false;
         }
+        return $data;
     }
+    
+//    public function loadPic($aId, $filename){
+//        $ordner = "pictures";
+//        $allebilder = scandir($ordner);
+//        foreach ($allebilder as $bild){
+//          $dateiinfo = pathinfo($ordner."/".$bild); 
+//            if ($dateiinfo['filename'] == "'". $filename . "'_'". $aId ."' " ) {
+//                
+//            }
+//        }
+//    }
 
     public function createAnnonce($header, $category, $text, $uId) {
         $conn = $this->db_connect();
@@ -247,7 +260,7 @@ class database {
         }
     }
 
-    public function savePic($label , $aId, $_FILES) {
+    public function savePic($label , $aId) {
         if (isset($_FILES['uploaded_file'])) {
     // Example:
     if(move_uploaded_file($_FILES['uploaded_file']['tmp_name'], "pictures/" . $_FILES['uploaded_file']['name'] . "_" . $aId)){

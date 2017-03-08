@@ -23,27 +23,26 @@ and open the template in the editor.
 
 
 <?php
-
-$connection = mysqli_connect("localhost","root","","phpproject") or die("blubb");
-
-if ($_POST['create']){
-	
-	$hersteller = $_POST['hersteller'];
-	$bezeichnung = $_POST['bezeichnung'];
-	$farbe = $_POST['farbe'];
-	$kapazitaet = $_POST['kapazitaet'];
-	$display = $_POST['display'];
-	$kamera = $_POST['kamera'];
-	$akku = $_POST['akku'];
-	$simkarte = $_POST['simkarte'];
-	$beschreibung = $_POST['beschreibung'];
-	$preis = $_POST['preis'];
-	$preistyp = $_POST['preistyp'];
-	
-	mysqli_query($connection, "INSERT INTO `annonce` (`hersteller`, `bezeichnung`, `farbe`, `kapazitaet`, `display`, `kamera`, `akku`, `simkarte`, `beschreibung`, `preis`, `preistyp`)
-                 VALUES ('$hersteller', '$bezeichnung', '$farbe', '$kapazitaet', '$display', '$kamera', '$akku', '$simkarte', '$beschreibung', '$preis', '$preistyp')");
-	
+   session_start();
+ if(isset($_SESSION['uId'])) {
+            require_once 'database.php';
+  
+            if (isset($_POST['create'])){
+	   $db = new database();
+           $valid = $db->createAnnonce($_POST['header'],$_POST['category'], $_POST['text'],$_SESSION['uId']);
+           if ($valid) {              
+               $valid = $db->savePic("test", $aId);
+               unset($_FILES);
+               header('Location: overview.php');
+           }
+           	
 }
+            
+ } else {
+  header('Location: login.php');    
+}
+
+
 
 ?>
 
